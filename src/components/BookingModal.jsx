@@ -12,7 +12,7 @@ export default function BookingModal({ isOpen, onClose, initialData = {} }) {
     roomType: initialData.roomType || roomCategories[0].id,
     checkIn: initialData.checkIn || new Date(Date.now() + 86400000).toISOString().split('T')[0],
     checkOut: initialData.checkOut || new Date(Date.now() + 86400000 * 3).toISOString().split('T')[0],
-    guests: initialData.guests || '2 Adults',
+    guests: initialData.guests || '2 Persons',
     specialRequests: ''
   });
 
@@ -144,7 +144,7 @@ export default function BookingModal({ isOpen, onClose, initialData = {} }) {
               </div>
             )}
 
-            {/* Live Room Summary Strip */}
+            {/* Live Room Summary Strip - Clean Stylish Rupee & Number Typography */}
             <div className="p-4 rounded-xl bg-hotel-ivory border border-hotel-border flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
               <div>
                 <span className="text-[10px] uppercase tracking-wider text-hotel-goldDark font-semibold block">
@@ -153,18 +153,24 @@ export default function BookingModal({ isOpen, onClose, initialData = {} }) {
                 <span className="font-serif text-lg text-hotel-forest font-semibold block">
                   {selectedRoomObj.name}
                 </span>
-                <span className="text-xs text-hotel-muted block">
+                <span className="text-xs text-hotel-muted block font-sans">
                   {selectedRoomObj.capacity} &bull; {selectedRoomObj.size}
                 </span>
               </div>
+              
+              {/* Stylish Rupee Sign & Crisp Modern Numbers */}
               <div className="text-left sm:text-right">
-                <span className="text-[11px] uppercase tracking-wider text-hotel-muted block">
+                <span className="text-[11px] uppercase tracking-wider text-hotel-muted block font-sans font-medium">
                   Estimated Tariff ({nights} Night{nights > 1 ? 's' : ''})
                 </span>
-                <span className="font-serif text-xl font-bold text-hotel-forest">
-                  ₹{estimatedTotal.toLocaleString('en-IN')}*
-                </span>
-                <span className="text-[10px] text-hotel-muted block">*Seasonal rates confirmed on call</span>
+                <div className="flex items-baseline justify-start sm:justify-end space-x-1 my-0.5">
+                  <span className="font-sans font-bold text-lg text-hotel-goldDark select-none">₹</span>
+                  <span className="font-sans text-2xl sm:text-3xl font-extrabold tracking-tight text-hotel-forest">
+                    {estimatedTotal.toLocaleString('en-IN')}
+                  </span>
+                  <span className="font-sans text-xs text-hotel-muted font-normal">*</span>
+                </div>
+                <span className="text-[10px] text-hotel-muted block font-sans">*Seasonal rates confirmed on call</span>
               </div>
             </div>
 
@@ -180,7 +186,7 @@ export default function BookingModal({ isOpen, onClose, initialData = {} }) {
                   placeholder="e.g. Maya Iyer"
                   value={formData.guestName}
                   onChange={(e) => setFormData({ ...formData, guestName: e.target.value })}
-                  className="w-full bg-white border border-hotel-border rounded-lg px-3 py-2 text-sm text-hotel-charcoal focus:outline-none focus:border-hotel-gold transition-colors"
+                  className="w-full bg-white border border-hotel-border rounded-lg px-3 py-2 text-sm text-hotel-charcoal focus:outline-none focus:border-hotel-gold transition-colors font-sans"
                 />
               </div>
 
@@ -194,7 +200,7 @@ export default function BookingModal({ isOpen, onClose, initialData = {} }) {
                   placeholder="e.g. 9764764359"
                   value={formData.mobileNumber}
                   onChange={(e) => setFormData({ ...formData, mobileNumber: e.target.value })}
-                  className="w-full bg-white border border-hotel-border rounded-lg px-3 py-2 text-sm text-hotel-charcoal focus:outline-none focus:border-hotel-gold transition-colors"
+                  className="w-full bg-white border border-hotel-border rounded-lg px-3 py-2 text-sm text-hotel-charcoal focus:outline-none focus:border-hotel-gold transition-colors font-sans"
                 />
               </div>
             </div>
@@ -210,7 +216,7 @@ export default function BookingModal({ isOpen, onClose, initialData = {} }) {
                   required
                   value={formData.checkIn}
                   onChange={(e) => setFormData({ ...formData, checkIn: e.target.value })}
-                  className="w-full bg-white border border-hotel-border rounded-lg px-3 py-2 text-sm text-hotel-charcoal focus:outline-none focus:border-hotel-gold transition-colors"
+                  className="w-full bg-white border border-hotel-border rounded-lg px-3 py-2 text-sm text-hotel-charcoal focus:outline-none focus:border-hotel-gold transition-colors font-sans"
                 />
               </div>
 
@@ -223,12 +229,12 @@ export default function BookingModal({ isOpen, onClose, initialData = {} }) {
                   required
                   value={formData.checkOut}
                   onChange={(e) => setFormData({ ...formData, checkOut: e.target.value })}
-                  className="w-full bg-white border border-hotel-border rounded-lg px-3 py-2 text-sm text-hotel-charcoal focus:outline-none focus:border-hotel-gold transition-colors"
+                  className="w-full bg-white border border-hotel-border rounded-lg px-3 py-2 text-sm text-hotel-charcoal focus:outline-none focus:border-hotel-gold transition-colors font-sans"
                 />
               </div>
             </div>
 
-            {/* Room Type & Guests */}
+            {/* Room Type & Persons/Guests */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-xs uppercase tracking-wider text-hotel-forest font-semibold mb-1">
@@ -237,7 +243,7 @@ export default function BookingModal({ isOpen, onClose, initialData = {} }) {
                 <select
                   value={formData.roomType}
                   onChange={(e) => setFormData({ ...formData, roomType: e.target.value })}
-                  className="w-full bg-white border border-hotel-border rounded-lg px-3 py-2 text-sm text-hotel-charcoal focus:outline-none focus:border-hotel-gold transition-colors"
+                  className="w-full bg-white border border-hotel-border rounded-lg px-3 py-2 text-sm text-hotel-charcoal focus:outline-none focus:border-hotel-gold transition-colors font-sans"
                 >
                   {roomCategories.map((r) => (
                     <option key={r.id} value={r.id}>
@@ -249,19 +255,18 @@ export default function BookingModal({ isOpen, onClose, initialData = {} }) {
 
               <div>
                 <label className="block text-xs uppercase tracking-wider text-hotel-forest font-semibold mb-1">
-                  Number of Guests *
+                  Persons / Guests *
                 </label>
                 <select
                   value={formData.guests}
                   onChange={(e) => setFormData({ ...formData, guests: e.target.value })}
-                  className="w-full bg-white border border-hotel-border rounded-lg px-3 py-2 text-sm text-hotel-charcoal focus:outline-none focus:border-hotel-gold transition-colors"
+                  className="w-full bg-white border border-hotel-border rounded-lg px-3 py-2 text-sm text-hotel-charcoal focus:outline-none focus:border-hotel-gold transition-colors font-sans"
                 >
-                  <option value="1 Adult">1 Adult</option>
-                  <option value="2 Adults">2 Adults</option>
-                  <option value="2 Adults + 1 Child">2 Adults + 1 Child</option>
-                  <option value="3 Adults">3 Adults</option>
-                  <option value="4 Adults / Family">4 Adults / Family</option>
-                  <option value="Group (5+ Guests)">Group (5+ Guests)</option>
+                  <option value="1 Person">1 Person</option>
+                  <option value="2 Persons">2 Persons</option>
+                  <option value="3 Persons">3 Persons</option>
+                  <option value="4 Persons">4 Persons</option>
+                  <option value="5+ Persons (Family)">5+ Persons (Family)</option>
                 </select>
               </div>
             </div>
@@ -276,7 +281,7 @@ export default function BookingModal({ isOpen, onClose, initialData = {} }) {
                 placeholder="e.g. Late night check-in, ground floor room, extra pillow..."
                 value={formData.specialRequests}
                 onChange={(e) => setFormData({ ...formData, specialRequests: e.target.value })}
-                className="w-full bg-white border border-hotel-border rounded-lg px-3 py-2 text-sm text-hotel-charcoal focus:outline-none focus:border-hotel-gold transition-colors"
+                className="w-full bg-white border border-hotel-border rounded-lg px-3 py-2 text-sm text-hotel-charcoal focus:outline-none focus:border-hotel-gold transition-colors font-sans"
               />
             </div>
 

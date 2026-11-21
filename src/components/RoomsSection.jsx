@@ -68,18 +68,21 @@ export default function RoomsSection({ onOpenBooking, onSelectRoomDetail }) {
                       {room.category}
                     </div>
 
-                    {/* Price Pill Box with Editable Indicator */}
+                    {/* Price Pill Box with Crisp Modern Rupee & Number Typography */}
                     <div className="absolute bottom-4 right-4 px-4 py-2.5 bg-hotel-forestDark/95 backdrop-blur-md rounded-xl text-white text-right border border-hotel-gold/30 shadow-lg">
                       <div className="flex items-center space-x-1 justify-end text-[10px] uppercase tracking-wider text-hotel-gold">
                         <span>Tariff Guidance</span>
-                        <span className="text-[9px] bg-hotel-gold/20 text-hotel-goldLight px-1.5 py-0.5 rounded border border-hotel-gold/30">
+                        <span className="text-[9px] bg-hotel-gold/20 text-hotel-goldLight px-1.5 py-0.5 rounded border border-hotel-gold/30 font-sans font-semibold">
                           Placeholder
                         </span>
                       </div>
-                      <span className="font-serif text-xl sm:text-2xl font-bold text-white block">
-                        ₹{room.price.toLocaleString('en-IN')}
-                      </span>
-                      <span className="text-[10px] text-hotel-ivory/80 block">
+                      <div className="flex items-baseline justify-end space-x-1 my-0.5">
+                        <span className="font-sans font-bold text-base sm:text-lg text-hotel-goldLight select-none">₹</span>
+                        <span className="font-sans text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
+                          {room.price.toLocaleString('en-IN')}
+                        </span>
+                      </div>
+                      <span className="text-[10px] text-hotel-ivory/80 block font-sans">
                         per night + taxes &bull; subject to seasonal confirmation
                       </span>
                     </div>

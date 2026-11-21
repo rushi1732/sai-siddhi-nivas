@@ -8,7 +8,7 @@ import {
 export default function Hero({ onOpenBooking }) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [selectedRoom, setSelectedRoom] = useState(roomCategories[0].id);
-  const [guests, setGuests] = useState("2 Adults");
+  const [guests, setGuests] = useState("2 Persons");
   const [dates, setDates] = useState({
     checkIn: new Date(Date.now() + 86400000).toISOString().split('T')[0],
     checkOut: new Date(Date.now() + 86400000 * 3).toISOString().split('T')[0]
@@ -40,8 +40,8 @@ export default function Hero({ onOpenBooking }) {
   };
 
   return (
-    <section className="relative min-h-[680px] md:min-h-[720px] md:max-h-[860px] flex items-center justify-center pt-24 pb-12 sm:pt-28 sm:pb-16 overflow-hidden bg-hotel-forestDark">
-      {/* Background Images Crossfade */}
+    <section className="relative min-h-screen flex flex-col justify-between pt-28 pb-10 sm:pt-32 sm:pb-12 overflow-hidden bg-hotel-forestDark">
+      {/* Background Images Crossfade - Full Screen Complete Coverage */}
       {heroSlides.map((slide, idx) => (
         <div
           key={idx}
@@ -54,9 +54,9 @@ export default function Hero({ onOpenBooking }) {
             alt={slide.title}
             className="w-full h-full object-cover object-center"
           />
-          {/* Subtle multi-layer luxury overlay for high legibility */}
-          <div className="absolute inset-0 bg-gradient-to-t from-hotel-forestDark via-hotel-forestDark/55 to-black/60" />
-          <div className="absolute inset-0 bg-hotel-forestDark/30 mix-blend-multiply" />
+          {/* Subtle multi-layer luxury overlay for high contrast & legibility */}
+          <div className="absolute inset-0 bg-gradient-to-t from-hotel-forestDark via-hotel-forestDark/50 to-black/60" />
+          <div className="absolute inset-0 bg-hotel-forestDark/25 mix-blend-multiply" />
         </div>
       ))}
 
@@ -77,8 +77,11 @@ export default function Hero({ onOpenBooking }) {
         <ChevronRight className="w-5 h-5" />
       </button>
 
-      {/* Hero Content */}
-      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white mt-4 sm:mt-8">
+      {/* Top Spacer for balanced flex centering */}
+      <div className="hidden sm:block"></div>
+
+      {/* Hero Central Content */}
+      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white my-auto">
         
         {/* Location & Trust Badge */}
         <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-hotel-forestDark/80 backdrop-blur-md border border-hotel-gold/40 text-hotel-goldLight text-xs tracking-[0.2em] uppercase font-medium mb-6 animate-fade-in shadow-lg">
@@ -97,10 +100,10 @@ export default function Hero({ onOpenBooking }) {
         </p>
 
         {/* 3 Required CTA Buttons */}
-        <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-4 mb-10">
+        <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-4 mb-8">
           <button
             onClick={() => onOpenBooking()}
-            className="px-6 sm:px-8 py-3.5 rounded-full bg-gradient-to-r from-hotel-gold to-hotel-goldDark hover:from-hotel-goldHover hover:to-hotel-gold text-hotel-forestDark text-xs sm:text-sm uppercase tracking-widest font-bold transition-all shadow-xl hover:shadow-2xl hover:scale-105 active:scale-95 border border-hotel-goldLight/40 flex items-center space-x-2"
+            className="px-7 sm:px-8 py-3.5 rounded-full bg-gradient-to-r from-hotel-gold to-hotel-goldDark hover:from-hotel-goldHover hover:to-hotel-gold text-hotel-forestDark text-xs sm:text-sm uppercase tracking-widest font-bold transition-all shadow-xl hover:shadow-2xl hover:scale-105 active:scale-95 border border-hotel-goldLight/40 flex items-center space-x-2"
           >
             <Calendar className="w-4 h-4" />
             <span>Book Your Stay</span>
@@ -126,7 +129,7 @@ export default function Hero({ onOpenBooking }) {
         </div>
 
         {/* Slide Indicators */}
-        <div className="flex justify-center items-center space-x-2 mb-8">
+        <div className="flex justify-center items-center space-x-2 mb-6">
           {heroSlides.map((_, idx) => (
             <button
               key={idx}
@@ -139,21 +142,25 @@ export default function Hero({ onOpenBooking }) {
           ))}
         </div>
 
-        {/* Quick Booking Engine Bar */}
-        <div className="bg-hotel-forestDark/95 backdrop-blur-xl border border-hotel-gold/30 rounded-2xl p-4 sm:p-6 shadow-2xl max-w-4xl mx-auto text-left">
-          <div className="mb-3 flex items-center justify-between border-b border-white/10 pb-2">
+      </div>
+
+      {/* Quick Booking Engine Bar at the Bottom of Hero */}
+      <div className="relative z-10 max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 mt-4">
+        <div className="bg-hotel-forestDark/95 backdrop-blur-xl border border-hotel-gold/35 rounded-2xl p-4 sm:p-5 shadow-2xl text-left">
+          <div className="mb-3 border-b border-white/10 pb-2 flex items-center justify-between">
             <span className="text-[11px] uppercase tracking-widest text-hotel-gold font-semibold flex items-center space-x-1.5">
               <Sparkles className="w-3.5 h-3.5" />
               <span>Direct Booking & Immediate Enquiry</span>
             </span>
-            <span className="text-[11px] text-hotel-ivory/70 hidden sm:inline">
-              Call Direct: <strong className="text-white">{hotelInfo.phone}</strong>
+            <span className="text-[10px] uppercase tracking-wider text-hotel-ivory/60 hidden sm:inline">
+              Best Tariffs Guaranteed &bull; Instant WhatsApp Confirmation
             </span>
           </div>
 
-          <form onSubmit={handleQuickSearch} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-end">
+          {/* 5-Column Grid including Person / Guest Selector */}
+          <form onSubmit={handleQuickSearch} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 items-end">
             
-            {/* Check-In */}
+            {/* 1. Check-In */}
             <div>
               <label className="block text-[11px] uppercase tracking-widest text-hotel-ivory/80 font-medium mb-1.5 flex items-center space-x-1.5">
                 <Calendar className="w-3 h-3 text-hotel-gold" />
@@ -163,12 +170,12 @@ export default function Hero({ onOpenBooking }) {
                 type="date"
                 value={dates.checkIn}
                 onChange={(e) => setDates({ ...dates, checkIn: e.target.value })}
-                className="w-full bg-hotel-forest/90 border border-white/20 rounded-lg px-3 py-2.5 text-sm text-hotel-ivory focus:outline-none focus:border-hotel-gold transition-colors"
+                className="w-full bg-hotel-forest/90 border border-white/20 rounded-lg px-3 py-2.5 text-xs sm:text-sm text-hotel-ivory focus:outline-none focus:border-hotel-gold transition-colors"
                 required
               />
             </div>
 
-            {/* Check-Out */}
+            {/* 2. Check-Out */}
             <div>
               <label className="block text-[11px] uppercase tracking-widest text-hotel-ivory/80 font-medium mb-1.5 flex items-center space-x-1.5">
                 <Calendar className="w-3 h-3 text-hotel-gold" />
@@ -178,12 +185,31 @@ export default function Hero({ onOpenBooking }) {
                 type="date"
                 value={dates.checkOut}
                 onChange={(e) => setDates({ ...dates, checkOut: e.target.value })}
-                className="w-full bg-hotel-forest/90 border border-white/20 rounded-lg px-3 py-2.5 text-sm text-hotel-ivory focus:outline-none focus:border-hotel-gold transition-colors"
+                className="w-full bg-hotel-forest/90 border border-white/20 rounded-lg px-3 py-2.5 text-xs sm:text-sm text-hotel-ivory focus:outline-none focus:border-hotel-gold transition-colors"
                 required
               />
             </div>
 
-            {/* Room Category */}
+            {/* 3. Persons / Guests (Newly Added as Requested) */}
+            <div>
+              <label className="block text-[11px] uppercase tracking-widest text-hotel-ivory/80 font-medium mb-1.5 flex items-center space-x-1.5">
+                <Users className="w-3 h-3 text-hotel-gold" />
+                <span>Persons / Guests</span>
+              </label>
+              <select
+                value={guests}
+                onChange={(e) => setGuests(e.target.value)}
+                className="w-full bg-hotel-forest/90 border border-white/20 rounded-lg px-3 py-2.5 text-xs sm:text-sm text-hotel-ivory focus:outline-none focus:border-hotel-gold transition-colors"
+              >
+                <option value="1 Person" className="bg-hotel-forestDark text-white">1 Person</option>
+                <option value="2 Persons" className="bg-hotel-forestDark text-white">2 Persons</option>
+                <option value="3 Persons" className="bg-hotel-forestDark text-white">3 Persons</option>
+                <option value="4 Persons" className="bg-hotel-forestDark text-white">4 Persons</option>
+                <option value="5+ Persons (Family)" className="bg-hotel-forestDark text-white">5+ Persons (Family)</option>
+              </select>
+            </div>
+
+            {/* 4. Room Category */}
             <div>
               <label className="block text-[11px] uppercase tracking-widest text-hotel-ivory/80 font-medium mb-1.5 flex items-center space-x-1.5">
                 <Home className="w-3 h-3 text-hotel-gold" />
@@ -192,7 +218,7 @@ export default function Hero({ onOpenBooking }) {
               <select
                 value={selectedRoom}
                 onChange={(e) => setSelectedRoom(e.target.value)}
-                className="w-full bg-hotel-forest/90 border border-white/20 rounded-lg px-3 py-2.5 text-sm text-hotel-ivory focus:outline-none focus:border-hotel-gold transition-colors"
+                className="w-full bg-hotel-forest/90 border border-white/20 rounded-lg px-3 py-2.5 text-xs sm:text-sm text-hotel-ivory focus:outline-none focus:border-hotel-gold transition-colors"
               >
                 {roomCategories.map((r) => (
                   <option key={r.id} value={r.id} className="bg-hotel-forestDark text-white">
@@ -202,11 +228,11 @@ export default function Hero({ onOpenBooking }) {
               </select>
             </div>
 
-            {/* Search / Inquire CTA Button */}
+            {/* 5. Search / Check Availability CTA */}
             <div>
               <button
                 type="submit"
-                className="w-full bg-gradient-to-r from-hotel-gold to-hotel-goldDark hover:from-hotel-goldHover hover:to-hotel-gold text-hotel-forestDark py-2.5 sm:py-3 px-4 rounded-lg text-xs uppercase tracking-widest font-bold transition-all shadow-md hover:shadow-lg flex items-center justify-center space-x-2"
+                className="w-full bg-gradient-to-r from-hotel-gold to-hotel-goldDark hover:from-hotel-goldHover hover:to-hotel-gold text-hotel-forestDark py-2.5 sm:py-3 px-3 rounded-lg text-xs uppercase tracking-widest font-bold transition-all shadow-md hover:shadow-lg flex items-center justify-center space-x-2"
               >
                 <Calendar className="w-3.5 h-3.5" />
                 <span>Check Availability</span>
@@ -215,8 +241,8 @@ export default function Hero({ onOpenBooking }) {
 
           </form>
         </div>
-
       </div>
+
     </section>
   );
 }

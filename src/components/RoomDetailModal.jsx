@@ -95,13 +95,17 @@ export default function RoomDetailModal({ room, onClose, onBookCategory }) {
               </h3>
             </div>
             <div className="text-left sm:text-right">
-              <span className="text-[10px] uppercase tracking-wider text-hotel-muted block">
+              <span className="text-[10px] uppercase tracking-wider text-hotel-muted block font-sans font-medium">
                 Seasonal Tariff Guidance
               </span>
-              <span className="font-serif text-2xl font-bold text-hotel-forest">
-                ₹{room.price.toLocaleString('en-IN')}*
-              </span>
-              <span className="text-[10px] text-hotel-muted block">
+              <div className="flex items-baseline justify-start sm:justify-end space-x-1 my-0.5">
+                <span className="font-sans font-bold text-lg text-hotel-goldDark select-none">₹</span>
+                <span className="font-sans text-3xl font-extrabold tracking-tight text-hotel-forest">
+                  {room.price.toLocaleString('en-IN')}
+                </span>
+                <span className="font-sans text-xs text-hotel-muted font-normal">*</span>
+              </div>
+              <span className="text-[10px] text-hotel-muted block font-sans">
                 / night + taxes &bull; editable placeholder
               </span>
             </div>
