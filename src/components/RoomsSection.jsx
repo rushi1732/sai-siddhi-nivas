@@ -1,25 +1,29 @@
 import React, { useState } from 'react';
-import { roomCategories } from '../data/cranganorData';
-import { Bed, Maximize2, Waves, Check, ChevronRight, Sparkles, ShieldAlert, Calendar } from 'lucide-react';
+import { roomCategories, hotelInfo } from '../data/hotelData';
+import { 
+  Bed, Maximize2, Users, Check, ChevronRight, 
+  Sparkles, Calendar, Info, Phone, ShieldCheck, Eye
+} from 'lucide-react';
 
 export default function RoomsSection({ onOpenBooking, onSelectRoomDetail }) {
   const [activeCategory, setActiveCategory] = useState(roomCategories[0].id);
 
   return (
-    <section id="rooms" className="py-20 lg:py-28 bg-white text-chateau-charcoal relative">
+    <section id="rooms" className="py-20 lg:py-28 bg-white text-hotel-charcoal relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-chateau-terracotta text-xs font-semibold tracking-[0.25em] uppercase mb-2 block">
-            Exclusive Accommodations
-          </span>
-          <h2 className="font-serif text-3xl sm:text-5xl text-chateau-river font-normal tracking-tight">
-            Ten Exquisite Rooms by the River
+          <div className="inline-flex items-center space-x-2 text-hotel-goldDark text-xs font-semibold tracking-[0.25em] uppercase mb-3">
+            <Bed className="w-3.5 h-3.5 text-hotel-gold" />
+            <span>Accommodations & Suites</span>
+          </div>
+          <h2 className="font-serif text-3xl sm:text-5xl text-hotel-forest font-normal tracking-tight">
+            Rooms Crafted for Rest & Comfort
           </h2>
-          <div className="w-20 h-0.5 bg-chateau-gold mx-auto mt-4 mb-6" />
-          <p className="text-chateau-muted font-light text-base sm:text-lg leading-relaxed">
-            Inspired by the Indo-Dutch heritage architecture of Cochin's royal palaces. Featuring soaring ceilings, colonnaded verandahs, antique teak furniture, and uninterrupted vistas of the tranquil Periyar River.
+          <div className="w-20 h-0.5 bg-hotel-gold mx-auto mt-4 mb-6" />
+          <p className="text-hotel-muted font-light text-base sm:text-lg leading-relaxed">
+            Thoughtfully appointed air-conditioned rooms and family suites featuring soothing ambiance, spotless linens, and round-the-clock hot water.
           </p>
         </div>
 
@@ -31,12 +35,11 @@ export default function RoomsSection({ onOpenBooking, onSelectRoomDetail }) {
               onClick={() => setActiveCategory(cat.id)}
               className={`px-5 py-3 rounded-full text-xs sm:text-sm tracking-wider uppercase font-medium transition-all duration-300 border ${
                 activeCategory === cat.id
-                  ? 'bg-chateau-river text-chateau-gold border-chateau-river shadow-md'
-                  : 'bg-chateau-sand text-chateau-muted border-chateau-border hover:border-chateau-gold/50'
+                  ? 'bg-hotel-forest text-hotel-goldLight border-hotel-forest shadow-md'
+                  : 'bg-hotel-ivory text-hotel-muted border-hotel-border hover:border-hotel-gold'
               }`}
             >
               <span>{cat.name}</span>
-              <span className="ml-2 text-[10px] opacity-80">({cat.count.split(' ')[0]})</span>
             </button>
           ))}
         </div>
@@ -45,7 +48,10 @@ export default function RoomsSection({ onOpenBooking, onSelectRoomDetail }) {
         {roomCategories
           .filter((cat) => cat.id === activeCategory)
           .map((room) => (
-            <div key={room.id} className="bg-chateau-sand rounded-2xl border border-chateau-border overflow-hidden shadow-xl animate-fade-in">
+            <div 
+              key={room.id} 
+              className="bg-hotel-ivory rounded-2xl border border-hotel-border overflow-hidden shadow-luxury animate-fade-in"
+            >
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-0">
                 
                 {/* Images Column */}
@@ -56,25 +62,43 @@ export default function RoomsSection({ onOpenBooking, onSelectRoomDetail }) {
                       alt={room.name}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                     />
-                    <div className="absolute top-4 left-4 px-3 py-1 bg-chateau-river/80 backdrop-blur-sm text-chateau-sand rounded text-xs tracking-widest uppercase border border-chateau-gold/30">
-                      {room.count}
+                    
+                    {/* Category Tag */}
+                    <div className="absolute top-4 left-4 px-3 py-1 bg-hotel-forestDark/85 backdrop-blur-sm text-hotel-ivory rounded text-xs tracking-widest uppercase border border-hotel-gold/30">
+                      {room.category}
                     </div>
-                    <div className="absolute bottom-4 right-4 px-4 py-2 bg-chateau-riverDark/90 backdrop-blur-md rounded text-white text-right">
-                      <span className="text-[10px] uppercase tracking-wider text-chateau-gold block">Nightly Rate</span>
-                      <span className="font-serif text-xl sm:text-2xl font-semibold text-white">₹{room.price.toLocaleString('en-IN')}</span>
-                      <span className="text-[10px] text-chateau-sand/70 block">+ taxes &bull; Breakfast included</span>
+
+                    {/* Price Pill Box with Editable Indicator */}
+                    <div className="absolute bottom-4 right-4 px-4 py-2.5 bg-hotel-forestDark/95 backdrop-blur-md rounded-xl text-white text-right border border-hotel-gold/30 shadow-lg">
+                      <div className="flex items-center space-x-1 justify-end text-[10px] uppercase tracking-wider text-hotel-gold">
+                        <span>Tariff Guidance</span>
+                        <span className="text-[9px] bg-hotel-gold/20 text-hotel-goldLight px-1.5 py-0.5 rounded border border-hotel-gold/30">
+                          Placeholder
+                        </span>
+                      </div>
+                      <span className="font-serif text-xl sm:text-2xl font-bold text-white block">
+                        ₹{room.price.toLocaleString('en-IN')}
+                      </span>
+                      <span className="text-[10px] text-hotel-ivory/80 block">
+                        per night + taxes &bull; subject to seasonal confirmation
+                      </span>
                     </div>
                   </div>
 
                   {/* Thumbnail Row */}
-                  <div className="grid grid-cols-3 gap-2 p-3 bg-chateau-riverDark/95">
+                  <div className="grid grid-cols-3 gap-2 p-3 bg-hotel-forestDark">
                     {room.images.map((img, i) => (
                       <div 
                         key={i} 
-                        className="h-20 sm:h-24 rounded overflow-hidden cursor-pointer border border-white/10 hover:border-chateau-gold transition-colors"
+                        className="h-20 sm:h-24 rounded-lg overflow-hidden cursor-pointer border border-white/10 hover:border-hotel-gold transition-colors relative group"
                         onClick={() => onSelectRoomDetail(room)}
                       >
-                        <img src={img} alt={`${room.name} preview ${i+1}`} className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" />
+                        <img 
+                          src={img} 
+                          alt={`${room.name} preview ${i+1}`} 
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" 
+                        />
+                        <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors" />
                       </div>
                     ))}
                   </div>
@@ -83,46 +107,55 @@ export default function RoomsSection({ onOpenBooking, onSelectRoomDetail }) {
                 {/* Details Column */}
                 <div className="lg:col-span-5 p-6 sm:p-8 lg:p-10 flex flex-col justify-between bg-white">
                   <div>
-                    <span className="text-xs uppercase tracking-widest text-chateau-terracotta font-semibold block mb-1">
+                    <span className="text-xs uppercase tracking-widest text-hotel-goldDark font-semibold block mb-1">
                       {room.subtitle}
                     </span>
-                    <h3 className="font-serif text-2xl sm:text-3xl text-chateau-river font-normal mb-3">
+                    <h3 className="font-serif text-2xl sm:text-3xl text-hotel-forest font-normal mb-3">
                       {room.name}
                     </h3>
                     
                     {/* Key Specs Pill Row */}
-                    <div className="flex flex-wrap gap-2 mb-6">
-                      <div className="inline-flex items-center space-x-1.5 px-3 py-1 bg-chateau-sand rounded-full text-xs text-chateau-charcoal border border-chateau-border">
-                        <Bed className="w-3.5 h-3.5 text-chateau-terracotta" />
+                    <div className="flex flex-wrap gap-2 mb-5">
+                      <div className="inline-flex items-center space-x-1.5 px-3 py-1 bg-hotel-ivory rounded-full text-xs text-hotel-charcoal border border-hotel-border">
+                        <Bed className="w-3.5 h-3.5 text-hotel-forest" />
                         <span>{room.bed}</span>
                       </div>
-                      <div className="inline-flex items-center space-x-1.5 px-3 py-1 bg-chateau-sand rounded-full text-xs text-chateau-charcoal border border-chateau-border">
-                        <Maximize2 className="w-3.5 h-3.5 text-chateau-gold" />
-                        <span>{room.size}</span>
+                      <div className="inline-flex items-center space-x-1.5 px-3 py-1 bg-hotel-ivory rounded-full text-xs text-hotel-charcoal border border-hotel-border">
+                        <Users className="w-3.5 h-3.5 text-hotel-goldDark" />
+                        <span>{room.capacity}</span>
                       </div>
-                      <div className="inline-flex items-center space-x-1.5 px-3 py-1 bg-chateau-sand rounded-full text-xs text-chateau-charcoal border border-chateau-border">
-                        <Waves className="w-3.5 h-3.5 text-teal-600" />
-                        <span>{room.view}</span>
+                      <div className="inline-flex items-center space-x-1.5 px-3 py-1 bg-hotel-ivory rounded-full text-xs text-hotel-charcoal border border-hotel-border">
+                        <Maximize2 className="w-3.5 h-3.5 text-hotel-forestMuted" />
+                        <span>{room.size}</span>
                       </div>
                     </div>
 
-                    <p className="text-xs sm:text-sm text-chateau-muted leading-relaxed font-light mb-6">
+                    <p className="text-xs sm:text-sm text-hotel-muted leading-relaxed font-light mb-6">
                       {room.description}
                     </p>
 
                     {/* Features checklist */}
-                    <div className="border-t border-b border-chateau-border/60 py-4 mb-6">
-                      <h4 className="text-[11px] uppercase tracking-widest text-chateau-river font-semibold mb-3">
-                        Room Inclusions & Amenities
+                    <div className="border-t border-b border-hotel-border/60 py-4 mb-6">
+                      <h4 className="text-[11px] uppercase tracking-widest text-hotel-forest font-semibold mb-3 flex items-center justify-between">
+                        <span>Room Amenities Included</span>
+                        <span className="text-[10px] text-hotel-muted font-normal">24/7 Service</span>
                       </h4>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                         {room.features.slice(0, 6).map((feat, idx) => (
-                          <div key={idx} className="flex items-center space-x-2 text-xs text-chateau-charcoal/80">
-                            <Check className="w-3.5 h-3.5 text-chateau-terracotta shrink-0" />
+                          <div key={idx} className="flex items-center space-x-2 text-xs text-hotel-charcoal/85">
+                            <Check className="w-3.5 h-3.5 text-hotel-forest shrink-0" />
                             <span className="line-clamp-1">{feat}</span>
                           </div>
                         ))}
                       </div>
+                    </div>
+
+                    {/* Editable rate notice banner */}
+                    <div className="p-3 bg-hotel-ivory border border-hotel-border rounded-lg mb-6 flex items-start space-x-2 text-[11px] text-hotel-muted">
+                      <Info className="w-3.5 h-3.5 text-hotel-goldDark shrink-0 mt-0.5" />
+                      <span>
+                        Note for Hotel Management: Rates are editable placeholders. Call hotel front desk at <strong className="text-hotel-charcoal">{hotelInfo.phone}</strong> to confirm official seasonal tariffs and special family packages.
+                      </span>
                     </div>
                   </div>
 
@@ -130,16 +163,17 @@ export default function RoomsSection({ onOpenBooking, onSelectRoomDetail }) {
                   <div className="pt-2 flex flex-col sm:flex-row gap-3">
                     <button
                       onClick={() => onOpenBooking({ roomType: room.id })}
-                      className="flex-1 bg-chateau-terracotta hover:bg-chateau-terracottaHover text-white py-3 px-5 rounded text-xs tracking-widest uppercase font-semibold text-center transition-all shadow-md flex items-center justify-center space-x-2"
+                      className="flex-1 bg-gradient-to-r from-hotel-gold to-hotel-goldDark hover:from-hotel-goldHover hover:to-hotel-gold text-hotel-forestDark py-3 px-5 rounded-lg text-xs tracking-widest uppercase font-bold text-center transition-all shadow-md flex items-center justify-center space-x-2"
                     >
-                      <Calendar className="w-4 h-4 text-amber-200" />
+                      <Calendar className="w-4 h-4" />
                       <span>Reserve {room.name}</span>
                     </button>
                     <button
                       onClick={() => onSelectRoomDetail(room)}
-                      className="py-3 px-4 border border-chateau-river text-chateau-river hover:bg-chateau-river hover:text-chateau-sand rounded text-xs tracking-widest uppercase font-medium transition-colors text-center"
+                      className="py-3 px-4 border border-hotel-forest text-hotel-forest hover:bg-hotel-forest hover:text-hotel-goldLight rounded-lg text-xs tracking-widest uppercase font-semibold transition-colors text-center flex items-center justify-center space-x-1.5"
                     >
-                      Full Details
+                      <Eye className="w-3.5 h-3.5" />
+                      <span>Full Details</span>
                     </button>
                   </div>
 
@@ -149,12 +183,21 @@ export default function RoomsSection({ onOpenBooking, onSelectRoomDetail }) {
             </div>
           ))}
 
-        {/* Mass Booking Transparency Policy */}
-        <div className="mt-12 p-4 sm:p-5 rounded-xl bg-chateau-sand border border-chateau-gold/30 flex items-start space-x-4 max-w-3xl mx-auto">
-          <ShieldAlert className="w-5 h-5 text-chateau-gold mt-0.5 shrink-0" />
-          <div className="text-xs text-chateau-muted leading-relaxed">
-            <span className="font-semibold text-chateau-river block mb-0.5">Tranquility & Mass Booking Policy</span>
-            To protect the peaceful atmosphere of our sanctuary, online multiple-room bookings are moderated. If your family or group requires two or more rooms, our concierge team will be delighted to coordinate your reservation directly.
+        {/* Bottom Booking Guarantee */}
+        <div className="mt-12 text-center">
+          <div className="inline-flex flex-wrap items-center justify-center gap-6 text-xs text-hotel-muted">
+            <span className="flex items-center space-x-1.5">
+              <ShieldCheck className="w-4 h-4 text-hotel-forest" />
+              <span>Direct WhatsApp & Call Confirmation</span>
+            </span>
+            <span className="flex items-center space-x-1.5">
+              <Check className="w-4 h-4 text-hotel-gold" />
+              <span>No Advance Surprise Charges</span>
+            </span>
+            <span className="flex items-center space-x-1.5">
+              <Sparkles className="w-4 h-4 text-hotel-forest" />
+              <span>Guaranteed Spotless Sanitized Rooms</span>
+            </span>
           </div>
         </div>
 

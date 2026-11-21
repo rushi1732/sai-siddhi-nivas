@@ -1,23 +1,32 @@
 import React, { useState } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import OurStory from './components/OurStory';
+import AboutSection from './components/AboutSection';
 import RoomsSection from './components/RoomsSection';
+import AmenitiesSection from './components/AmenitiesSection';
 import DiningSection from './components/DiningSection';
-import ExperiencesSection from './components/ExperiencesSection';
-import ArtsSocietySection from './components/ArtsSocietySection';
-import PoolSpaSection from './components/PoolSpaSection';
 import GallerySection from './components/GallerySection';
 import LocationSection from './components/LocationSection';
 import ReviewsSection from './components/ReviewsSection';
+import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
 import BookingModal from './components/BookingModal';
 import RoomDetailModal from './components/RoomDetailModal';
+import FloatingWhatsApp from './components/FloatingWhatsApp';
 
 export default function App() {
   const [bookingModalOpen, setBookingModalOpen] = useState(false);
   const [bookingInitialData, setBookingInitialData] = useState({});
   const [selectedRoomDetail, setSelectedRoomDetail] = useState(null);
+
+  React.useEffect(() => {
+    if (window.location.hash) {
+      setTimeout(() => {
+        const el = document.querySelector(window.location.hash);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 300);
+    }
+  }, []);
 
   const handleOpenBooking = (initialParams = {}) => {
     setBookingInitialData(initialParams);
@@ -38,29 +47,48 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-chateau-sand text-chateau-charcoal font-sans selection:bg-chateau-gold selection:text-white">
-      {/* Top Fixed Header */}
+    <div className="min-h-screen bg-hotel-ivory text-hotel-charcoal font-sans selection:bg-hotel-gold selection:text-white relative">
+      {/* Top Fixed Header with Luxury Monogram & Navigation */}
       <Navbar onOpenBooking={handleOpenBooking} />
 
       {/* Main Page Flow */}
       <main>
+        {/* Full-screen Hero Section with Required Heading & 3 CTA buttons */}
         <Hero onOpenBooking={handleOpenBooking} />
-        <OurStory />
+
+        {/* About Sai Siddhi Nivas */}
+        <AboutSection />
+
+        {/* Rooms & Accommodations with Large Photos & Category Tabs */}
         <RoomsSection 
           onOpenBooking={handleOpenBooking}
           onSelectRoomDetail={handleSelectRoomDetail}
         />
-        <DiningSection />
-        <ExperiencesSection />
-        <ArtsSocietySection />
-        <PoolSpaSection />
+
+        {/* Dedicated Hotel Amenities (Icon-based, confirmed on-site) */}
+        <AmenitiesSection onOpenBooking={handleOpenBooking} />
+
+        {/* Restaurant & Dining Section */}
+        <DiningSection onOpenBooking={handleOpenBooking} />
+
+        {/* Luxury Photo Gallery with Lightbox */}
         <GallerySection />
+
+        {/* Prime Location along MSH4 with Plus Code & Get Directions */}
         <LocationSection />
+
+        {/* Verified Guest Reviews & Rating Badges */}
         <ReviewsSection />
+
+        {/* Direct Contact & Reservation Enquiry Form */}
+        <ContactSection />
       </main>
 
-      {/* Heritage Footer */}
+      {/* Luxury Footer with Contact & Location */}
       <Footer onOpenBooking={handleOpenBooking} />
+
+      {/* Floating WhatsApp Concierge Button */}
+      <FloatingWhatsApp />
 
       {/* Interactive Booking Modal */}
       <BookingModal

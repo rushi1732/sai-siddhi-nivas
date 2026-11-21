@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://saisiddhinivas.com/sitemap.xml

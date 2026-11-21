@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
-import { resortInfo } from '../data/cranganorData';
-import { Phone, Mail, MapPin, Compass, ArrowUp, Send, Check, Heart } from 'lucide-react';
+import { hotelInfo } from '../data/hotelData';
+import { 
+  Phone, Mail, MapPin, Compass, ArrowUp, Send, 
+  Check, Heart, Navigation, ExternalLink, Calendar, MessageCircle 
+} from 'lucide-react';
 
 export default function Footer({ onOpenBooking }) {
   const [newsletterEmail, setNewsletterEmail] = useState('');
@@ -18,7 +21,7 @@ export default function Footer({ onOpenBooking }) {
   };
 
   return (
-    <footer className="bg-chateau-riverDark text-chateau-sand border-t border-chateau-gold/20 pt-16 pb-12 relative">
+    <footer className="bg-hotel-forestDark text-hotel-ivory border-t border-hotel-gold/20 pt-16 pb-12 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Top Grid */}
@@ -26,132 +29,141 @@ export default function Footer({ onOpenBooking }) {
           
           {/* Brand Col */}
           <div className="lg:col-span-4 space-y-4">
-            <div>
-              <span className="font-serif tracking-[0.25em] text-2xl sm:text-3xl font-light text-chateau-gold block">
-                CRANGANOR
-              </span>
-              <span className="font-sans text-[11px] tracking-[0.2em] uppercase text-chateau-sand/70 block mt-0.5">
-                History Café & Riverside Château
-              </span>
+            <div className="flex items-center space-x-3">
+              <div className="w-10 h-10 rounded-full bg-hotel-gold flex items-center justify-center p-0.5">
+                <div className="w-full h-full rounded-full bg-hotel-forestDark flex items-center justify-center">
+                  <span className="font-serif font-bold text-xs text-hotel-goldLight">SSN</span>
+                </div>
+              </div>
+              <div>
+                <span className="font-serif tracking-[0.2em] text-2xl font-light text-white block">
+                  SAI SIDDHI NIVAS
+                </span>
+                <span className="font-sans text-[10px] tracking-[0.2em] uppercase text-hotel-goldLight block -mt-0.5">
+                  Premium Hotel &bull; Kirtanwadi Tarf
+                </span>
+              </div>
             </div>
-            <p className="text-xs text-chateau-sand/70 font-light leading-relaxed">
-              A boutique riverside retreat on the banks of River Periyar, Kerala. Inspired by Indo-Dutch architecture and the 3,000-year seafaring heritage of ancient Muziris. Proudly led and run by a majority-woman crew.
+            
+            <p className="text-xs text-hotel-ivory/80 font-light leading-relaxed">
+              Experience comfort and genuine Konkan hospitality along Maharashtra State Highway 4. Featuring spotless air-conditioned rooms, family accommodation, delicious dining, ample parking, and 24/7 personalized care.
             </p>
-            <div className="pt-2 flex items-center space-x-2 text-[11px] text-chateau-gold">
-              <Compass className="w-3.5 h-3.5" />
-              <span>Ancient Muziris Port Heritage Sanctuary</span>
+
+            <div className="pt-2 flex items-center space-x-2 text-xs text-hotel-gold">
+              <MapPin className="w-3.5 h-3.5 shrink-0" />
+              <span>Near Modka Agar, MSH4, Maharashtra 415703</span>
             </div>
           </div>
 
           {/* Quick Links */}
           <div className="lg:col-span-2 space-y-3">
-            <h4 className="text-xs uppercase tracking-widest text-chateau-gold font-semibold">
-              The Château
+            <h4 className="text-xs uppercase tracking-widest text-hotel-gold font-semibold">
+              Explore Hotel
             </h4>
-            <ul className="space-y-2 text-xs text-chateau-sand/80 font-light">
-              <li><a href="#story" className="hover:text-chateau-gold transition-colors">Our Story & Crew</a></li>
-              <li><a href="#rooms" className="hover:text-chateau-gold transition-colors">Rooms & Suites</a></li>
-              <li><a href="#dining" className="hover:text-chateau-gold transition-colors">History Café Menu</a></li>
-              <li><a href="#activities" className="hover:text-chateau-gold transition-colors">Heritage & River Trails</a></li>
-              <li><a href="#arts" className="hover:text-chateau-gold transition-colors">Cranganor Arts Society</a></li>
-              <li><a href="#spa" className="hover:text-chateau-gold transition-colors">Pool & Ayurvedic Spa</a></li>
-              <li><a href="#gallery" className="hover:text-chateau-gold transition-colors">Visual Gallery</a></li>
+            <ul className="space-y-2 text-xs text-hotel-ivory/80 font-light">
+              <li><a href="#about" className="hover:text-hotel-gold transition-colors">About Us</a></li>
+              <li><a href="#rooms" className="hover:text-hotel-gold transition-colors">Rooms & Suites</a></li>
+              <li><a href="#amenities" className="hover:text-hotel-gold transition-colors">Hotel Amenities</a></li>
+              <li><a href="#dining" className="hover:text-hotel-gold transition-colors">Restaurant & Dining</a></li>
+              <li><a href="#gallery" className="hover:text-hotel-gold transition-colors">Photo Gallery</a></li>
+              <li><a href="#location" className="hover:text-hotel-gold transition-colors">Location & Route</a></li>
+              <li><a href="#reviews" className="hover:text-hotel-gold transition-colors">Guest Reviews</a></li>
+              <li><a href="#contact" className="hover:text-hotel-gold transition-colors">Contact & Booking</a></li>
             </ul>
           </div>
 
           {/* Contact Details */}
           <div className="lg:col-span-3 space-y-3">
-            <h4 className="text-xs uppercase tracking-widest text-chateau-gold font-semibold">
-              Contact & Concierge
+            <h4 className="text-xs uppercase tracking-widest text-hotel-gold font-semibold">
+              Contact & Reservations
             </h4>
-            <div className="space-y-2.5 text-xs text-chateau-sand/80 font-light">
+            <div className="space-y-2.5 text-xs text-hotel-ivory/80 font-light">
               <div className="flex items-start space-x-2.5">
-                <MapPin className="w-4 h-4 text-chateau-gold shrink-0 mt-0.5" />
-                <span>{resortInfo.location}</span>
+                <MapPin className="w-4 h-4 text-hotel-gold shrink-0 mt-0.5" />
+                <span>{hotelInfo.address}</span>
               </div>
               <div className="flex items-center space-x-2.5">
-                <Phone className="w-4 h-4 text-chateau-gold shrink-0" />
-                <a href={`tel:${resortInfo.phone}`} className="hover:text-chateau-gold transition-colors">
-                  {resortInfo.phone}
+                <span className="font-semibold text-white">Plus Code:</span>
+                <span className="font-mono text-hotel-goldLight">{hotelInfo.plusCode}</span>
+              </div>
+              <div className="flex items-center space-x-2.5">
+                <Phone className="w-4 h-4 text-hotel-gold shrink-0" />
+                <a href={`tel:${hotelInfo.phoneRaw}`} className="hover:text-hotel-gold transition-colors font-semibold text-white">
+                  {hotelInfo.phone}
                 </a>
               </div>
               <div className="flex items-center space-x-2.5">
-                <Mail className="w-4 h-4 text-chateau-gold shrink-0" />
-                <a href={`mailto:${resortInfo.email}`} className="hover:text-chateau-gold transition-colors">
-                  {resortInfo.email}
+                <MessageCircle className="w-4 h-4 text-emerald-400 shrink-0" />
+                <a 
+                  href={`https://wa.me/${hotelInfo.whatsapp.replace('+', '')}?text=Hello%20Sai%20Siddhi%20Nivas,%20I%20would%20like%20to%20enquire%20about%20booking.`} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="hover:text-hotel-gold transition-colors"
+                >
+                  WhatsApp: {hotelInfo.whatsappFormatted}
                 </a>
               </div>
-              <div className="pt-2 text-[11px] text-chateau-sand/60">
-                <span>Hosts: Vineeth Viswambharan & Rasmi Poduval</span>
+              <div className="pt-2">
+                <a
+                  href={hotelInfo.mapDirectionsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center space-x-1.5 text-[11px] text-hotel-goldLight hover:underline font-semibold"
+                >
+                  <Navigation className="w-3 h-3 text-hotel-gold" />
+                  <span>Open Directions in Google Maps &rarr;</span>
+                </a>
               </div>
             </div>
           </div>
 
-          {/* Newsletter / Direct Inquiry */}
+          {/* Quick Booking Assistance */}
           <div className="lg:col-span-3 space-y-3">
-            <h4 className="text-xs uppercase tracking-widest text-chateau-gold font-semibold">
-              Stay Connected
+            <h4 className="text-xs uppercase tracking-widest text-hotel-gold font-semibold">
+              Direct Reservation
             </h4>
-            <p className="text-xs text-chateau-sand/70 font-light leading-relaxed">
-              Receive seasonal reflections from the Periyar riverbanks, cultural festival schedules, and private retreat offerings.
+            <p className="text-xs text-hotel-ivory/70 font-light leading-relaxed">
+              Plan your travel through Kirtanwadi Tarf and reserve your room in advance for a restful stay.
             </p>
-            {subscribed ? (
-              <div className="p-3 bg-white/10 rounded-lg text-xs text-chateau-gold flex items-center space-x-2">
-                <Check className="w-4 h-4" />
-                <span>Thank you. We look forward to staying in touch.</span>
-              </div>
-            ) : (
-              <form onSubmit={handleSubscribe} className="space-y-2">
-                <div className="flex">
-                  <input
-                    type="email"
-                    required
-                    placeholder="Enter your email"
-                    value={newsletterEmail}
-                    onChange={(e) => setNewsletterEmail(e.target.value)}
-                    className="w-full bg-white/10 border border-white/20 rounded-l-lg px-3 py-2 text-xs text-white placeholder-chateau-sand/40 focus:outline-none focus:border-chateau-gold"
-                  />
-                  <button
-                    type="submit"
-                    className="bg-chateau-terracotta hover:bg-chateau-terracottaHover text-white px-3 py-2 rounded-r-lg text-xs transition-colors shrink-0"
-                    aria-label="Subscribe to Newsletter"
-                  >
-                    <Send className="w-3.5 h-3.5" />
-                  </button>
-                </div>
-              </form>
-            )}
 
-            <div className="pt-2">
-              <button
-                onClick={() => onOpenBooking()}
-                className="w-full py-2.5 px-4 rounded bg-chateau-gold/20 hover:bg-chateau-gold text-chateau-sand hover:text-chateau-riverDark border border-chateau-gold/40 text-xs uppercase tracking-widest font-semibold transition-all"
-              >
-                Booking Assistance Request
-              </button>
-            </div>
+            <button
+              onClick={() => onOpenBooking()}
+              className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-hotel-gold to-hotel-goldDark hover:from-hotel-goldHover hover:to-hotel-gold text-hotel-forestDark text-xs uppercase tracking-widest font-bold transition-all shadow-md flex items-center justify-center space-x-2"
+            >
+              <Calendar className="w-3.5 h-3.5" />
+              <span>Reserve Room Now</span>
+            </button>
+
+            <a
+              href={`tel:${hotelInfo.phoneRaw}`}
+              className="w-full py-2.5 px-4 rounded-xl border border-hotel-gold/40 text-hotel-gold hover:bg-hotel-gold/10 text-xs uppercase tracking-widest font-semibold transition-all text-center flex items-center justify-center space-x-2"
+            >
+              <Phone className="w-3.5 h-3.5" />
+              <span>Call: +91 9764764359</span>
+            </a>
           </div>
 
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-chateau-sand/60">
-          <div className="flex items-center space-x-2">
-            <span>&copy; {new Date().getFullYear()} Cranganor History Café & Riverside Château. All Rights Reserved.</span>
+        <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-hotel-ivory/60">
+          <div>
+            <span>&copy; {new Date().getFullYear()} Sai Siddhi Nivas. All Rights Reserved.</span>
+            <span className="block sm:inline sm:ml-2 text-hotel-ivory/40">
+              Near Modka Agar, MSH4, Kirtanwadi Tarf, Maharashtra 415703.
+            </span>
           </div>
 
-          <div className="flex items-center space-x-6">
-            <span className="flex items-center space-x-1">
-              <span>Run with</span>
-              <Heart className="w-3 h-3 text-chateau-terracotta fill-chateau-terracotta" />
-              <span>by majority-woman team</span>
-            </span>
+          <div className="flex items-center space-x-4">
+            <a href="#about" className="hover:text-hotel-gold transition-colors">About</a>
+            <a href="#rooms" className="hover:text-hotel-gold transition-colors">Rooms</a>
+            <a href="#contact" className="hover:text-hotel-gold transition-colors">Contact</a>
             <button
               onClick={scrollToTop}
-              className="p-2 rounded-full bg-white/5 hover:bg-chateau-gold hover:text-chateau-riverDark transition-colors"
-              title="Return to Top"
+              className="p-2 rounded-full bg-white/5 hover:bg-hotel-gold hover:text-hotel-forestDark transition-all text-hotel-ivory"
+              aria-label="Scroll to top"
             >
-              <ArrowUp className="w-4 h-4" />
+              <ArrowUp className="w-3.5 h-3.5" />
             </button>
           </div>
         </div>
