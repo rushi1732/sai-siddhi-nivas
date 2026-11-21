@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+  
+  ::selection {
+    background-color: #c59d5f;
+    color: #ffffff;
+  }
+}
+
+/* Custom luxury scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f7f4ed;
+}
+::-webkit-scrollbar-thumb {
+  background: #c59d5f;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #b28b4c;
+}
+
+/* Subtle image shimmer animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Heritage backdrop textures */
+.heritage-pattern {
+  background-color: #132c25;
+  background-image: radial-gradient(rgba(197, 157, 95, 0.12) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+.parchment-pattern {
+  background-color: #f7f4ed;
+  background-image: radial-gradient(rgba(19, 44, 37, 0.05) 1px, transparent 0);
+  background-size: 20px 20px;
+}
