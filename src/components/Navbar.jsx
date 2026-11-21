@@ -46,48 +46,48 @@ export default function Navbar({ onOpenBooking }) {
             : 'bg-gradient-to-b from-black/80 via-black/40 to-transparent py-5 text-white'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-6 xl:px-8">
           <div className="flex items-center justify-between">
             
-            {/* Brand Logo & Royal Crest */}
-            <a href="#" className="flex items-center space-x-3 group">
-              <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-gradient-to-br from-hotel-gold to-hotel-goldDark flex items-center justify-center p-0.5 shadow-md group-hover:scale-105 transition-transform shrink-0">
+            {/* Brand Logo & Royal Crest - Always Single Line & Sutsutit */}
+            <a href="#" className="flex items-center space-x-2.5 sm:space-x-3 group shrink-0 min-w-max mr-2 lg:mr-4 xl:mr-6">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 xl:w-11 xl:h-11 rounded-full bg-gradient-to-br from-hotel-gold to-hotel-goldDark flex items-center justify-center p-0.5 shadow-md group-hover:scale-105 transition-transform shrink-0">
                 <div className="w-full h-full rounded-full bg-hotel-forestDark flex items-center justify-center border border-hotel-goldLight/40">
-                  <span className="font-serif font-bold text-xs sm:text-sm tracking-wider text-hotel-goldLight">
+                  <span className="font-serif font-bold text-[11px] sm:text-xs xl:text-sm tracking-wider text-hotel-goldLight">
                     SSN
                   </span>
                 </div>
               </div>
 
-              <div className="flex flex-col text-left">
-                <span className="font-serif tracking-[0.18em] sm:tracking-[0.22em] text-lg sm:text-2xl font-medium text-white group-hover:text-hotel-gold transition-colors">
+              <div className="flex flex-col text-left shrink-0">
+                <span className="font-serif whitespace-nowrap tracking-[0.12em] xl:tracking-[0.18em] text-base sm:text-lg lg:text-xl xl:text-2xl font-semibold text-white group-hover:text-hotel-gold transition-colors block">
                   SAI SIDDHI NIVAS
                 </span>
-                <span className="font-sans text-[9px] sm:text-[10px] tracking-[0.22em] uppercase text-hotel-goldLight font-medium -mt-0.5">
+                <span className="font-sans whitespace-nowrap text-[8.5px] sm:text-[9px] xl:text-[10.5px] tracking-[0.14em] xl:tracking-[0.2em] uppercase text-hotel-goldLight font-medium mt-0.5 block">
                   Premium Hotel &bull; Kirtanwadi Tarf
                 </span>
               </div>
             </a>
 
             {/* Desktop Navigation Links - Spacious & Clean */}
-            <nav className="hidden lg:flex items-center space-x-6 xl:space-x-8">
+            <nav className="hidden lg:flex items-center space-x-2.5 lg:space-x-3 xl:space-x-5 2xl:space-x-6 shrink-0">
               {navLinks.map((link) => (
                 <a
                   key={link.label}
                   href={link.href}
                   onClick={(e) => handleLinkClick(e, link.href)}
-                  className="text-xs tracking-[0.16em] uppercase font-medium text-white/90 hover:text-hotel-gold transition-colors py-1 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1.5px] after:bg-hotel-gold hover:after:w-full after:transition-all after:duration-300"
+                  className="text-[10.5px] xl:text-xs tracking-[0.1em] xl:tracking-[0.15em] uppercase font-medium text-white/90 hover:text-hotel-gold transition-colors py-1 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1.5px] after:bg-hotel-gold hover:after:w-full after:transition-all after:duration-300"
                 >
                   {link.label}
                 </a>
               ))}
             </nav>
 
-            {/* Booking CTA Button (Clean, no phone number clutter as requested) */}
-            <div className="hidden sm:flex items-center">
+            {/* Booking CTA Button - Clearly separated with distinct margin & luxury divider */}
+            <div className="hidden sm:flex items-center ml-3 lg:ml-5 xl:ml-8 pl-3 lg:pl-5 border-l border-white/25 shrink-0">
               <button
                 onClick={() => onOpenBooking()}
-                className="bg-gradient-to-r from-hotel-gold to-hotel-goldDark hover:from-hotel-goldHover hover:to-hotel-gold text-hotel-forestDark px-6 py-2.5 rounded-full text-xs tracking-widest uppercase font-bold transition-all shadow-md hover:shadow-xl hover:scale-105 active:scale-95 border border-hotel-goldLight/40 flex items-center space-x-2"
+                className="bg-gradient-to-r from-hotel-gold to-hotel-goldDark hover:from-hotel-goldHover hover:to-hotel-gold text-hotel-forestDark px-3.5 xl:px-5 py-2 xl:py-2.5 rounded-full text-[10.5px] xl:text-xs tracking-wider uppercase font-bold transition-all shadow-md hover:shadow-xl hover:scale-105 active:scale-95 border border-hotel-goldLight/40 flex items-center space-x-1.5 xl:space-x-2 whitespace-nowrap"
               >
                 <Calendar className="w-3.5 h-3.5" />
                 <span>Book Your Stay</span>
@@ -116,9 +116,9 @@ export default function Navbar({ onOpenBooking }) {
                   <span className="font-serif font-bold text-xs text-hotel-goldLight">SSN</span>
                 </div>
               </div>
-              <div>
-                <span className="font-serif text-xl text-white tracking-wider block font-semibold">SAI SIDDHI NIVAS</span>
-                <span className="text-[10px] uppercase tracking-widest text-hotel-goldLight">Near Modka Agar, MSH4, Kirtanwadi Tarf</span>
+              <div className="shrink-0 min-w-0">
+                <span className="font-serif text-lg sm:text-xl text-white tracking-wider whitespace-nowrap block font-semibold">SAI SIDDHI NIVAS</span>
+                <span className="text-[10px] sm:text-xs uppercase tracking-widest text-hotel-goldLight whitespace-nowrap block mt-0.5">Premium Hotel &bull; Kirtanwadi Tarf</span>
               </div>
             </div>
 
