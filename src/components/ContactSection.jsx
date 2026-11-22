@@ -75,10 +75,10 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="py-20 lg:py-28 bg-white text-hotel-charcoal relative">
+    <section id="contact" className="py-20 lg:py-28 bg-[#faf9f6] text-hotel-charcoal relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Section Header */}
+        {/* Section Header: Matching Homepage One&Only Luxury Aesthetic */}
         <AnimateIn direction="up">
           <div className="text-center max-w-4xl mx-auto mb-14 lg:mb-20">
             <span className="text-xs sm:text-sm tracking-[0.32em] uppercase font-semibold text-hotel-goldDark mb-3 block">
@@ -89,121 +89,173 @@ export default function ContactSection() {
             </h2>
             <div className="w-16 h-[2px] bg-hotel-gold mx-auto mb-8" />
             <p className="font-sans font-light text-base sm:text-lg text-neutral-600 leading-relaxed max-w-3xl mx-auto">
-              Send your booking enquiry directly to our reservation desk or connect immediately on WhatsApp and phone for instant room confirmation.
+              Send your booking enquiry directly to our reservation desk or connect immediately on WhatsApp and phone for instant room confirmation and personalized Konkan hospitality.
             </p>
           </div>
         </AnimateIn>
 
-        {/* Contact & Form Grid */}
+        {/* Contact & Reservation Grid: Symmetrical Luxury Split */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
           
-          {/* Left Column: Direct Contact Info & Quick Actions */}
+          {/* Left Column: Atmospheric Property Showcase & Minimalist Concierge Details */}
           <div className="lg:col-span-5 space-y-6">
             
-            {/* Quick Action Box */}
+            {/* Cinematic Property Showcase Card */}
             <AnimateIn direction="right" delay={0.1}>
-              <div className="p-6 sm:p-8 bg-hotel-forestDark text-hotel-ivory rounded-2xl border border-hotel-gold/30 shadow-luxury">
-                <span className="text-[11px] uppercase tracking-widest text-hotel-gold font-semibold block mb-2">
-                  Fastest Response
-                </span>
-                <h3 className="font-serif text-2xl text-white font-normal mb-3">
-                  Immediate Booking Assistance
-                </h3>
-                <p className="text-xs sm:text-sm text-hotel-ivory/80 font-light leading-relaxed mb-6">
-                  Prefer immediate confirmation? Reach our front desk directly through WhatsApp or a quick phone call.
-                </p>
-
-                <div className="space-y-3">
-                  {/* WhatsApp Action Button */}
-                  <motion.button
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    type="button"
-                    onClick={handleWhatsAppBooking}
-                    className="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3.5 px-4 rounded-xl text-xs uppercase tracking-widest font-bold transition-all shadow-md flex items-center justify-center space-x-2.5 active:scale-95"
-                  >
-                    <MessageCircle className="w-4 h-4" />
-                    <span>WhatsApp Booking (+91 9764764359)</span>
-                  </motion.button>
-
-                  {/* Direct Call Button */}
-                  <motion.a
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    href={`tel:${hotelInfo.phoneRaw}`}
-                    className="w-full bg-hotel-gold hover:bg-hotel-goldHover text-hotel-forestDark py-3.5 px-4 rounded-xl text-xs uppercase tracking-widest font-bold transition-all shadow-md flex items-center justify-center space-x-2.5 active:scale-95"
-                  >
-                    <Phone className="w-4 h-4" />
-                    <span>Call Hotel ({hotelInfo.phone})</span>
-                  </motion.a>
-                </div>
-
-                {/* Operating hours note */}
-                <div className="mt-6 pt-4 border-t border-white/10 flex items-center space-x-2 text-xs text-hotel-ivory/70">
-                  <Clock className="w-4 h-4 text-hotel-gold shrink-0" />
-                  <span>Front Desk Desk Operates 24 Hours &bull; Instant Support</span>
+              <div className="relative w-full h-[240px] sm:h-[280px] overflow-hidden border border-neutral-200/90 shadow-md group">
+                <img
+                  src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=1200&auto=format&fit=crop"
+                  alt="Sai Siddhi Nivas Property & Concierge"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
+                <div className="absolute bottom-5 left-5 right-5 text-white">
+                  <span className="text-[9.5px] uppercase tracking-[0.28em] text-hotel-goldLight font-semibold block mb-1">
+                    NEAR MODKA AGAR &bull; MSH4 CORRIDOR
+                  </span>
+                  <p className="font-serif italic text-base sm:text-lg text-white font-light leading-snug">
+                    "A tranquil haven designed for restful stopovers, peaceful family stays, and genuine warmth."
+                  </p>
                 </div>
               </div>
             </AnimateIn>
 
-            {/* Address & Details Box */}
+            {/* Concierge Desk Information (Crisp Pure White Architecture) */}
             <AnimateIn direction="right" delay={0.2}>
-              <div className="p-6 bg-hotel-ivory rounded-2xl border border-hotel-border shadow-sm space-y-4">
-                <h4 className="font-serif text-lg text-hotel-forest font-semibold">
-                  Hotel Location & Address
-                </h4>
-                <div className="space-y-3 text-xs text-hotel-muted font-light leading-relaxed">
-                  <div className="flex items-start space-x-2.5">
-                    <MapPin className="w-4 h-4 text-hotel-goldDark shrink-0 mt-0.5" />
-                    <span>{hotelInfo.address}</span>
+              <div className="bg-white border border-neutral-200/90 shadow-[0_15px_40px_rgba(0,0,0,0.04)] p-6 sm:p-8 space-y-6">
+                <div>
+                  <span className="text-[10px] tracking-[0.24em] uppercase font-semibold text-hotel-goldDark block mb-1">
+                    DIRECT CONTACT & CONCIERGE
+                  </span>
+                  <h3 className="font-serif text-2xl text-hotel-charcoal font-normal">
+                    Personalized Stay Assistance
+                  </h3>
+                </div>
+
+                <div className="space-y-4 text-xs text-neutral-600 font-light divide-y divide-neutral-100">
+                  
+                  {/* Phone */}
+                  <div className="pt-2 flex items-center justify-between">
+                    <span className="text-[10px] uppercase tracking-wider text-neutral-400 font-medium">Front Desk Direct</span>
+                    <a 
+                      href={`tel:${hotelInfo.phoneRaw}`} 
+                      className="font-medium text-neutral-900 hover:text-hotel-gold transition-colors flex items-center space-x-1.5"
+                    >
+                      <Phone className="w-3.5 h-3.5 text-hotel-gold shrink-0" />
+                      <span>{hotelInfo.phone}</span>
+                    </a>
                   </div>
-                  <div className="flex items-center space-x-2.5">
-                    <span className="font-semibold text-hotel-forest">Plus Code:</span>
-                    <span className="font-mono bg-white px-2 py-0.5 rounded border border-hotel-border text-hotel-charcoal font-medium">
+
+                  {/* WhatsApp */}
+                  <div className="pt-3 flex items-center justify-between">
+                    <span className="text-[10px] uppercase tracking-wider text-neutral-400 font-medium">WhatsApp Concierge</span>
+                    <button 
+                      onClick={handleWhatsAppBooking}
+                      className="font-medium text-neutral-900 hover:text-emerald-700 transition-colors flex items-center space-x-1.5"
+                    >
+                      <MessageCircle className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                      <span>+91 9764764359</span>
+                    </button>
+                  </div>
+
+                  {/* Email */}
+                  <div className="pt-3 flex items-center justify-between">
+                    <span className="text-[10px] uppercase tracking-wider text-neutral-400 font-medium">Reservation Email</span>
+                    <a 
+                      href={`mailto:${hotelInfo.email}`} 
+                      className="font-medium text-neutral-900 hover:text-hotel-gold transition-colors flex items-center space-x-1.5"
+                    >
+                      <Mail className="w-3.5 h-3.5 text-hotel-gold shrink-0" />
+                      <span>{hotelInfo.email}</span>
+                    </a>
+                  </div>
+
+                  {/* Address */}
+                  <div className="pt-3 flex items-start justify-between">
+                    <span className="text-[10px] uppercase tracking-wider text-neutral-400 font-medium shrink-0 pt-0.5">Hotel Address</span>
+                    <div className="text-right pl-4">
+                      <div className="flex items-center justify-end space-x-1 text-neutral-900 font-medium">
+                        <MapPin className="w-3.5 h-3.5 text-hotel-gold shrink-0" />
+                        <span>Near Modka Agar, MSH4</span>
+                      </div>
+                      <span className="text-[11px] text-neutral-500 block mt-0.5">Kirtanwadi Tarf, Maharashtra 415703</span>
+                    </div>
+                  </div>
+
+                  {/* Plus Code */}
+                  <div className="pt-3 flex items-center justify-between">
+                    <span className="text-[10px] uppercase tracking-wider text-neutral-400 font-medium">Google Plus Code</span>
+                    <span className="font-mono bg-neutral-50 px-2 py-0.5 border border-neutral-200 text-hotel-forest font-semibold text-[11px]">
                       {hotelInfo.plusCode}
                     </span>
                   </div>
-                  <div className="flex items-center space-x-2.5">
-                    <Phone className="w-4 h-4 text-hotel-goldDark shrink-0" />
-                    <a href={`tel:${hotelInfo.phoneRaw}`} className="text-hotel-forest font-semibold hover:underline">
-                      {hotelInfo.phone}
-                    </a>
+
+                  {/* Operating Hours */}
+                  <div className="pt-3 flex items-center justify-between text-neutral-500">
+                    <span className="text-[10px] uppercase tracking-wider text-neutral-400 font-medium">Front Desk Hours</span>
+                    <div className="flex items-center space-x-1">
+                      <Clock className="w-3.5 h-3.5 text-hotel-gold shrink-0" />
+                      <span>24 Hours &bull; Instant Support</span>
+                    </div>
                   </div>
+
                 </div>
+
+                {/* Direct Action Buttons matching Hero style */}
+                <div className="pt-2 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <button
+                    type="button"
+                    onClick={handleWhatsAppBooking}
+                    className="w-full bg-[#133826] hover:bg-hotel-forestDark text-white py-3 px-4 text-xs font-semibold tracking-[0.18em] uppercase transition-all shadow-md active:scale-95 flex items-center justify-center space-x-2"
+                  >
+                    <MessageCircle className="w-3.5 h-3.5" />
+                    <span>WhatsApp Chat</span>
+                  </button>
+
+                  <a
+                    href={`tel:${hotelInfo.phoneRaw}`}
+                    className="w-full bg-white hover:bg-neutral-50 text-hotel-forestDark border border-neutral-300 py-3 px-4 text-xs font-semibold tracking-[0.18em] uppercase transition-all shadow-sm active:scale-95 flex items-center justify-center space-x-2 text-center"
+                  >
+                    <Phone className="w-3.5 h-3.5 text-hotel-gold" />
+                    <span>Call Front Desk</span>
+                  </a>
+                </div>
+
               </div>
             </AnimateIn>
 
           </div>
 
-          {/* Right Column: Booking Enquiry Form */}
+          {/* Right Column: Reservation Engine Styled Exactly Like Homepage Booking Bar */}
           <div className="lg:col-span-7">
             <AnimateIn direction="left" delay={0.15}>
-              <div className="bg-hotel-ivory p-6 sm:p-10 rounded-2xl border border-hotel-border shadow-luxury">
+              <div className="bg-white border border-neutral-200/90 shadow-[0_20px_50px_rgba(0,0,0,0.06)] p-6 sm:p-10">
                 
-                <div className="mb-6 pb-4 border-b border-hotel-border">
-                  <span className="text-[11px] uppercase tracking-widest text-hotel-goldDark font-semibold block">
-                    Reservation Enquiry Form
+                {/* Form Header Strip */}
+                <div className="mb-8 pb-5 border-b border-neutral-200">
+                  <span className="text-[10px] tracking-[0.24em] uppercase font-semibold text-hotel-goldDark block mb-1">
+                    RESERVATION ENQUIRY ENGINE
                   </span>
-                  <h3 className="font-serif text-2xl text-hotel-forest font-normal">
+                  <h3 className="font-serif text-2xl sm:text-3xl text-hotel-charcoal font-normal">
                     Tell Us About Your Stay Plans
                   </h3>
-                  <p className="text-xs text-hotel-muted font-light mt-1">
-                    Fill out the details below. Our team will verify room availability and contact you promptly.
+                  <p className="text-xs text-neutral-500 font-light mt-1.5 leading-relaxed">
+                    Submit your booking requirements below. Our team verifies real-time room availability and confirms your reservation immediately.
                   </p>
                 </div>
 
                 {status.submitted ? (
-                  <div className="p-8 text-center space-y-5 bg-white rounded-xl border border-emerald-300 shadow-sm animate-fade-in">
+                  <div className="p-8 text-center space-y-5 bg-neutral-50/70 border border-neutral-200 shadow-sm animate-fade-in">
                     <div className="w-14 h-14 bg-emerald-100 text-emerald-800 rounded-full flex items-center justify-center mx-auto">
                       <CheckCircle2 className="w-8 h-8" />
                     </div>
                     <h4 className="font-serif text-2xl text-hotel-forest">
                       Enquiry Received Successfully!
                     </h4>
-                    <p className="text-xs sm:text-sm text-hotel-muted max-w-md mx-auto leading-relaxed">
-                      Thank you, <strong className="text-hotel-charcoal">{formData.guestName}</strong>. Your enquiry for <strong className="text-hotel-charcoal">{formData.roomPreference}</strong> from <strong className="text-hotel-charcoal">{formData.checkInDate}</strong> to <strong className="text-hotel-charcoal">{formData.checkOutDate}</strong> has been received by Sai Siddhi Nivas. Our reservation team will reach out to <strong className="text-hotel-charcoal">{formData.mobileNumber}</strong> shortly to confirm availability and discuss tariff details.
+                    <p className="text-xs sm:text-sm text-neutral-600 max-w-md mx-auto leading-relaxed">
+                      Thank you, <strong className="text-neutral-900">{formData.guestName}</strong>. Your enquiry for <strong className="text-neutral-900">{formData.roomPreference}</strong> from <strong className="text-neutral-900">{formData.checkInDate}</strong> to <strong className="text-neutral-900">{formData.checkOutDate}</strong> has been transmitted directly to Sai Siddhi Nivas. Our reservation team will reach out to <strong className="text-neutral-900">{formData.mobileNumber}</strong> shortly to confirm availability and discuss tariff details.
                     </p>
-                    <div className="p-3 bg-hotel-ivory rounded-lg text-xs text-hotel-muted text-left border border-hotel-border">
+                    <div className="p-3 bg-white rounded border border-neutral-200 text-xs text-neutral-600 text-left">
                       <span className="font-semibold block text-hotel-forest mb-1">Status Note:</span>
                       Please note this is an enquiry submission. Rooms are guaranteed upon direct confirmation with hotel management.
                     </div>
@@ -212,7 +264,7 @@ export default function ContactSection() {
                       <button
                         type="button"
                         onClick={handleWhatsAppBooking}
-                        className="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2.5 rounded-lg text-xs uppercase tracking-wider font-bold flex items-center justify-center space-x-2 shadow"
+                        className="bg-[#133826] hover:bg-hotel-forestDark text-white px-6 py-3 text-xs uppercase tracking-wider font-semibold flex items-center justify-center space-x-2 shadow"
                       >
                         <MessageCircle className="w-4 h-4" />
                         <span>Send Message on WhatsApp</span>
@@ -220,186 +272,199 @@ export default function ContactSection() {
                       <button
                         type="button"
                         onClick={() => setStatus({ submitted: false, error: '' })}
-                        className="border border-hotel-border px-5 py-2.5 rounded-lg text-xs uppercase tracking-wider font-semibold text-hotel-charcoal hover:bg-white"
+                        className="border border-neutral-300 px-6 py-3 text-xs uppercase tracking-wider font-semibold text-neutral-700 hover:bg-neutral-100"
                       >
                         Submit Another Enquiry
                       </button>
                     </div>
                   </div>
                 ) : (
-                  <form onSubmit={handleSubmit} className="space-y-4">
+                  <form onSubmit={handleSubmit} className="space-y-5">
                     
                     {status.error && (
-                      <div className="p-3 bg-red-50 border border-red-200 text-red-700 rounded-lg text-xs flex items-center space-x-2">
+                      <div className="p-3 bg-red-50 border border-red-200 text-red-700 text-xs flex items-center space-x-2">
                         <AlertCircle className="w-4 h-4 shrink-0" />
                         <span>{status.error}</span>
                       </div>
                     )}
 
-                    {/* Name & Mobile Number */}
+                    {/* Row 1: Name & Mobile Number */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-xs uppercase tracking-wider text-hotel-forest font-semibold mb-1.5">
-                          Guest Name *
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] tracking-[0.22em] uppercase font-semibold text-neutral-500 block">
+                          GUEST FULL NAME *
                         </label>
-                        <input
-                          type="text"
-                          required
-                          placeholder="e.g. Rahul Sharma"
-                          value={formData.guestName}
-                          onChange={(e) => setFormData({ ...formData, guestName: e.target.value })}
-                          className="w-full bg-white border border-hotel-border rounded-lg px-3.5 py-2.5 text-sm text-hotel-charcoal focus:outline-none focus:border-hotel-gold transition-colors font-sans"
-                        />
+                        <div className="border border-gray-300 hover:border-gray-500 focus-within:border-hotel-forest transition-colors bg-gray-50/50 focus-within:bg-white p-2.5">
+                          <input
+                            type="text"
+                            required
+                            placeholder="e.g. Rahul Sharma"
+                            value={formData.guestName}
+                            onChange={(e) => setFormData({ ...formData, guestName: e.target.value })}
+                            className="w-full bg-transparent text-xs text-neutral-900 font-medium focus:outline-none"
+                          />
+                        </div>
                       </div>
 
-                      <div>
-                        <label className="block text-xs uppercase tracking-wider text-hotel-forest font-semibold mb-1.5">
-                          Mobile Number *
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] tracking-[0.22em] uppercase font-semibold text-neutral-500 block">
+                          MOBILE NUMBER (FOR CONFIRMATION) *
                         </label>
-                        <input
-                          type="tel"
-                          required
-                          placeholder="e.g. 9764764359"
-                          value={formData.mobileNumber}
-                          onChange={(e) => setFormData({ ...formData, mobileNumber: e.target.value })}
-                          className="w-full bg-white border border-hotel-border rounded-lg px-3.5 py-2.5 text-sm text-hotel-charcoal focus:outline-none focus:border-hotel-gold transition-colors font-sans"
-                        />
+                        <div className="border border-gray-300 hover:border-gray-500 focus-within:border-hotel-forest transition-colors bg-gray-50/50 focus-within:bg-white p-2.5">
+                          <input
+                            type="tel"
+                            required
+                            placeholder="e.g. 9764764359"
+                            value={formData.mobileNumber}
+                            onChange={(e) => setFormData({ ...formData, mobileNumber: e.target.value })}
+                            className="w-full bg-transparent text-xs text-neutral-900 font-medium focus:outline-none"
+                          />
+                        </div>
                       </div>
                     </div>
 
-                    {/* Dates: Check-in & Check-out */}
+                    {/* Row 2: Arrival & Departure Dates (Exact match with hero booking engine) */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-xs uppercase tracking-wider text-hotel-forest font-semibold mb-1.5">
-                          Check-in Date *
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] tracking-[0.22em] uppercase font-semibold text-neutral-500 block">
+                          CHECK-IN (ARRIVAL) *
                         </label>
-                        <input
-                          type="date"
-                          required
-                          min={today}
-                          value={formData.checkInDate}
-                          onChange={(e) => {
-                            const newIn = e.target.value;
-                            if (newIn && newIn < today) return;
-                            const updates = { checkInDate: newIn };
-                            if (formData.checkOutDate <= newIn) {
-                              const nextDate = new Date(newIn);
-                              nextDate.setDate(nextDate.getDate() + 1);
-                              updates.checkOutDate = getLocalDateString(nextDate);
-                            }
-                            setFormData({ ...formData, ...updates });
-                          }}
-                          className="w-full bg-white border border-hotel-border rounded-lg px-3.5 py-2.5 text-sm text-hotel-charcoal focus:outline-none focus:border-hotel-gold transition-colors font-sans"
-                        />
+                        <div className="border border-gray-300 hover:border-gray-500 focus-within:border-hotel-forest transition-colors bg-gray-50/50 focus-within:bg-white p-2.5">
+                          <input
+                            type="date"
+                            required
+                            min={today}
+                            value={formData.checkInDate}
+                            onChange={(e) => {
+                              const newIn = e.target.value;
+                              if (newIn && newIn < today) return;
+                              const updates = { checkInDate: newIn };
+                              if (formData.checkOutDate <= newIn) {
+                                const nextDate = new Date(newIn);
+                                nextDate.setDate(nextDate.getDate() + 1);
+                                updates.checkOutDate = getLocalDateString(nextDate);
+                              }
+                              setFormData({ ...formData, ...updates });
+                            }}
+                            className="w-full bg-transparent text-xs text-neutral-900 font-medium focus:outline-none cursor-pointer"
+                          />
+                        </div>
                       </div>
 
-                      <div>
-                        <label className="block text-xs uppercase tracking-wider text-hotel-forest font-semibold mb-1.5">
-                          Check-out Date *
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] tracking-[0.22em] uppercase font-semibold text-neutral-500 block">
+                          CHECK-OUT (DEPARTURE) *
                         </label>
-                        <input
-                          type="date"
-                          required
-                          min={formData.checkInDate || today}
-                          value={formData.checkOutDate}
-                          onChange={(e) => {
-                            const newOut = e.target.value;
-                            if (newOut && newOut < (formData.checkInDate || today)) return;
-                            setFormData({ ...formData, checkOutDate: newOut });
-                          }}
-                          className="w-full bg-white border border-hotel-border rounded-lg px-3.5 py-2.5 text-sm text-hotel-charcoal focus:outline-none focus:border-hotel-gold transition-colors font-sans"
-                        />
+                        <div className="border border-gray-300 hover:border-gray-500 focus-within:border-hotel-forest transition-colors bg-gray-50/50 focus-within:bg-white p-2.5">
+                          <input
+                            type="date"
+                            required
+                            min={formData.checkInDate || today}
+                            value={formData.checkOutDate}
+                            onChange={(e) => {
+                              const newOut = e.target.value;
+                              if (newOut && newOut < (formData.checkInDate || today)) return;
+                              setFormData({ ...formData, checkOutDate: newOut });
+                            }}
+                            className="w-full bg-transparent text-xs text-neutral-900 font-medium focus:outline-none cursor-pointer"
+                          />
+                        </div>
                       </div>
                     </div>
 
-                    {/* Number of Guests & Room Preference */}
+                    {/* Row 3: Number of Guests & Room Preference */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-xs uppercase tracking-wider text-hotel-forest font-semibold mb-1.5">
-                          Persons / Guests *
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] tracking-[0.22em] uppercase font-semibold text-neutral-500 block">
+                          PERSONS / GUESTS *
                         </label>
-                        <select
-                          value={formData.numberOfGuests}
-                          onChange={(e) => setFormData({ ...formData, numberOfGuests: e.target.value })}
-                          className="w-full bg-white border border-hotel-border rounded-lg px-3.5 py-2.5 text-sm text-hotel-charcoal focus:outline-none focus:border-hotel-gold transition-colors font-sans"
-                        >
-                          <option value="1 Person">1 Person</option>
-                          <option value="2 Persons">2 Persons</option>
-                          <option value="3 Persons">3 Persons</option>
-                          <option value="4 Persons">4 Persons</option>
-                          <option value="5+ Persons (Family)">5+ Persons (Family)</option>
-                        </select>
+                        <div className="h-[46px] border border-gray-300 hover:border-gray-500 focus-within:border-hotel-forest transition-colors bg-gray-50/50 focus-within:bg-white px-2.5 flex items-center">
+                          <select
+                            value={formData.numberOfGuests}
+                            onChange={(e) => setFormData({ ...formData, numberOfGuests: e.target.value })}
+                            className="w-full bg-transparent text-xs text-neutral-900 font-medium focus:outline-none cursor-pointer"
+                          >
+                            <option value="1 Person">1 Person</option>
+                            <option value="2 Persons">2 Persons</option>
+                            <option value="3 Persons">3 Persons</option>
+                            <option value="4 Persons">4 Persons</option>
+                            <option value="5+ Persons (Family)">5+ Persons (Family)</option>
+                          </select>
+                        </div>
                       </div>
 
-                      <div>
-                        <label className="block text-xs uppercase tracking-wider text-hotel-forest font-semibold mb-1.5">
-                          Room Preference *
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] tracking-[0.22em] uppercase font-semibold text-neutral-500 block">
+                          ROOM PREFERENCE *
                         </label>
-                        <select
-                          value={formData.roomPreference}
-                          onChange={(e) => setFormData({ ...formData, roomPreference: e.target.value })}
-                          className="w-full bg-white border border-hotel-border rounded-lg px-3.5 py-2.5 text-sm text-hotel-charcoal focus:outline-none focus:border-hotel-gold transition-colors font-sans"
-                        >
-                          {roomCategories.map((r) => (
-                            <option key={r.id} value={r.name}>
-                              {r.name}
-                            </option>
-                          ))}
-                        </select>
+                        <div className="h-[46px] border border-gray-300 hover:border-gray-500 focus-within:border-hotel-forest transition-colors bg-gray-50/50 focus-within:bg-white px-2.5 flex items-center">
+                          <select
+                            value={formData.roomPreference}
+                            onChange={(e) => setFormData({ ...formData, roomPreference: e.target.value })}
+                            className="w-full bg-transparent text-xs text-neutral-900 font-medium focus:outline-none cursor-pointer"
+                          >
+                            {roomCategories.map((r) => (
+                              <option key={r.id} value={r.name}>
+                                {r.name}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
                       </div>
                     </div>
 
-                    {/* Special Request */}
-                    <div>
-                      <label className="block text-xs uppercase tracking-wider text-hotel-forest font-semibold mb-1.5">
-                        Special Request / Notes (Optional)
+                    {/* Row 4: Special Request */}
+                    <div className="space-y-1.5">
+                      <label className="text-[10px] tracking-[0.22em] uppercase font-semibold text-neutral-500 block">
+                        SPECIAL REQUESTS / HIGHWAY ARRIVAL TIME (OPTIONAL)
                       </label>
-                      <textarea
-                        rows={3}
-                        placeholder="e.g. Ground floor preference, early arrival time, extra mattress, dining requests..."
-                        value={formData.specialRequest}
-                        onChange={(e) => setFormData({ ...formData, specialRequest: e.target.value })}
-                        className="w-full bg-white border border-hotel-border rounded-lg px-3.5 py-2.5 text-sm text-hotel-charcoal focus:outline-none focus:border-hotel-gold transition-colors font-sans"
-                      />
+                      <div className="border border-gray-300 hover:border-gray-500 focus-within:border-hotel-forest transition-colors bg-gray-50/50 focus-within:bg-white p-2.5">
+                        <textarea
+                          rows={3}
+                          placeholder="e.g. Ground floor preference, early arrival time, extra mattress, dining requests..."
+                          value={formData.specialRequest}
+                          onChange={(e) => setFormData({ ...formData, specialRequest: e.target.value })}
+                          className="w-full bg-transparent text-xs text-neutral-900 font-medium focus:outline-none"
+                        />
+                      </div>
                     </div>
 
-                    {/* Buttons: Submit Enquiry, WhatsApp Booking, Call Hotel */}
-                    <div className="pt-3 grid grid-cols-1 sm:grid-cols-3 gap-3">
-                      <motion.button
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
+                    {/* Submit & Quick Channel Actions: Matching One&Only Mandarina Aesthetic */}
+                    <div className="pt-2 space-y-3">
+                      <button
                         type="submit"
-                        className="bg-gradient-to-r from-hotel-forest to-hotel-forestDark hover:from-hotel-forestDark hover:to-hotel-forest text-hotel-goldLight py-3 px-4 rounded-xl text-xs uppercase tracking-widest font-bold transition-all shadow-md flex items-center justify-center space-x-2"
+                        className="w-full bg-hotel-forestDark hover:bg-hotel-gold text-white hover:text-hotel-forestDark py-4 px-6 text-xs font-semibold tracking-[0.22em] uppercase transition-all shadow-md active:scale-95 flex items-center justify-center space-x-2"
                       >
-                        <Send className="w-3.5 h-3.5 text-hotel-gold" />
-                        <span>Submit Enquiry</span>
-                      </motion.button>
+                        <Send className="w-3.5 h-3.5 text-hotel-goldLight" />
+                        <span>SUBMIT RESERVATION ENQUIRY</span>
+                      </button>
 
-                      <motion.button
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        type="button"
-                        onClick={handleWhatsAppBooking}
-                        className="bg-emerald-600 hover:bg-emerald-700 text-white py-3 px-4 rounded-xl text-xs uppercase tracking-widest font-bold transition-all shadow-md flex items-center justify-center space-x-2"
-                      >
-                        <MessageCircle className="w-3.5 h-3.5" />
-                        <span>WhatsApp Booking</span>
-                      </motion.button>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                        <button
+                          type="button"
+                          onClick={handleWhatsAppBooking}
+                          className="w-full bg-white hover:bg-neutral-50 text-emerald-800 border border-emerald-300/80 py-3 px-4 text-xs font-semibold tracking-[0.16em] uppercase transition-all shadow-sm flex items-center justify-center space-x-2"
+                        >
+                          <MessageCircle className="w-3.5 h-3.5 text-emerald-600" />
+                          <span>WhatsApp Desk</span>
+                        </button>
 
-                      <motion.a
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        href={`tel:${hotelInfo.phoneRaw}`}
-                        className="border border-hotel-goldDark text-hotel-forest hover:bg-hotel-forest hover:text-hotel-goldLight py-3 px-4 rounded-xl text-xs uppercase tracking-widest font-bold transition-all text-center flex items-center justify-center space-x-2"
-                      >
-                        <Phone className="w-3.5 h-3.5 text-hotel-gold" />
-                        <span>Call Hotel</span>
-                      </motion.a>
+                        <a
+                          href={`tel:${hotelInfo.phoneRaw}`}
+                          className="w-full bg-white hover:bg-neutral-50 text-neutral-800 border border-neutral-300 py-3 px-4 text-xs font-semibold tracking-[0.16em] uppercase transition-all shadow-sm flex items-center justify-center space-x-2 text-center"
+                        >
+                          <Phone className="w-3.5 h-3.5 text-hotel-gold" />
+                          <span>Call Front Desk</span>
+                        </a>
+                      </div>
                     </div>
 
-                    <p className="text-[11px] text-hotel-muted text-center pt-2">
-                      * Submission creates a formal reservation request. Our reservation desk will verify availability and reach out to confirm your booking.
-                    </p>
+                    {/* Trust Line matching Hero */}
+                    <div className="pt-2 text-center">
+                      <span className="text-[10px] text-neutral-400 font-light tracking-wider uppercase block">
+                        &bull; Best Direct Rates Guaranteed &bull; Instant WhatsApp Confirmation &bull; No Advance Booking Fees &bull;
+                      </span>
+                    </div>
 
                   </form>
                 )}
