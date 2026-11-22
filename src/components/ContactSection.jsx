@@ -21,12 +21,14 @@ export default function ContactSection() {
   const tomorrow = getLocalDateString(new Date(Date.now() + 86400000));
   const threeDaysLater = getLocalDateString(new Date(Date.now() + 86400000 * 3));
 
+  const [adults, setAdults] = useState(2);
+  const [children, setChildren] = useState(0);
+
   const [formData, setFormData] = useState({
     guestName: '',
     mobileNumber: '',
     checkInDate: tomorrow,
     checkOutDate: threeDaysLater,
-    numberOfGuests: '2 Persons',
     roomPreference: roomCategories[0].name,
     specialRequest: ''
   });
@@ -59,6 +61,7 @@ export default function ContactSection() {
   };
 
   const handleWhatsAppBooking = () => {
+    const totalGuestsText = `${adults} Adult${adults > 1 ? 's' : ''}${children > 0 ? `, ${children} Child${children > 1 ? 'ren' : ''}` : ''}`;
     const message = encodeURIComponent(
       `Hello Sai Siddhi Nivas!\n\n` +
       `I would like to enquire about room booking:\n` +
@@ -67,7 +70,9 @@ export default function ContactSection() {
       `• *Room Preference:* ${formData.roomPreference}\n` +
       `• *Check-in Date:* ${formData.checkInDate}\n` +
       `• *Check-out Date:* ${formData.checkOutDate}\n` +
-      `• *Persons / Guests:* ${formData.numberOfGuests}\n` +
+      `• *Adults:* ${adults}\n` +
+      `• *Children:* ${children}\n` +
+      `• *Total Guests:* ${totalGuestsText}\n` +
       `• *Special Requests:* ${formData.specialRequest || 'None'}\n\n` +
       `Please check availability and confirm tariffs.`
     );
@@ -253,7 +258,7 @@ export default function ContactSection() {
                       Enquiry Received Successfully!
                     </h4>
                     <p className="text-xs sm:text-sm text-neutral-600 max-w-md mx-auto leading-relaxed">
-                      Thank you, <strong className="text-neutral-900">{formData.guestName}</strong>. Your enquiry for <strong className="text-neutral-900">{formData.roomPreference}</strong> from <strong className="text-neutral-900">{formData.checkInDate}</strong> to <strong className="text-neutral-900">{formData.checkOutDate}</strong> has been transmitted directly to Sai Siddhi Nivas. Our reservation team will reach out to <strong className="text-neutral-900">{formData.mobileNumber}</strong> shortly to confirm availability and discuss tariff details.
+                      Thank you, <strong className="text-neutral-900">{formData.guestName}</strong>. Your enquiry for <strong className="text-neutral-900">{formData.roomPreference}</strong> from <strong className="text-neutral-900">{formData.checkInDate}</strong> to <strong className="text-neutral-900">{formData.checkOutDate}</strong> ({adults} Adult{adults > 1 ? 's' : ''}{children > 0 ? `, ${children} Child${children > 1 ? 'ren' : ''}` : ''}) has been transmitted directly to Sai Siddhi Nivas. Our reservation team will reach out to <strong className="text-neutral-900">{formData.mobileNumber}</strong> shortly to confirm availability and discuss tariff details.
                     </p>
                     <div className="p-3 bg-white rounded border border-neutral-200 text-xs text-neutral-600 text-left">
                       <span className="font-semibold block text-hotel-forest mb-1">Status Note:</span>
@@ -372,27 +377,66 @@ export default function ContactSection() {
                       </div>
                     </div>
 
-                    {/* Row 3: Number of Guests & Room Preference */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {/* Row 3: ADULTS, CHILDREN & ROOM PREFERENCE (Matching Homepage Hero Booking Engine) */}
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                      
+                      {/* Adults Counter Selector */}
                       <div className="space-y-1.5">
                         <label className="text-[10px] tracking-[0.22em] uppercase font-semibold text-neutral-500 block">
-                          PERSONS / GUESTS *
+                          ADULTS
                         </label>
-                        <div className="h-[46px] border border-gray-300 hover:border-gray-500 focus-within:border-hotel-forest transition-colors bg-gray-50/50 focus-within:bg-white px-2.5 flex items-center">
-                          <select
-                            value={formData.numberOfGuests}
-                            onChange={(e) => setFormData({ ...formData, numberOfGuests: e.target.value })}
-                            className="w-full bg-transparent text-xs text-neutral-900 font-medium focus:outline-none cursor-pointer"
+                        <div className="h-[46px] border border-gray-300 flex items-center justify-between px-2 bg-gray-50/50 hover:border-gray-500 transition-colors">
+                          <button
+                            type="button"
+                            onClick={() => setAdults((prev) => Math.max(1, prev - 1))}
+                            className="w-8 h-8 flex items-center justify-center text-neutral-600 hover:text-black hover:bg-gray-200 text-sm font-semibold transition-colors rounded-sm"
+                            aria-label="Decrease Adults"
                           >
-                            <option value="1 Person">1 Person</option>
-                            <option value="2 Persons">2 Persons</option>
-                            <option value="3 Persons">3 Persons</option>
-                            <option value="4 Persons">4 Persons</option>
-                            <option value="5+ Persons (Family)">5+ Persons (Family)</option>
-                          </select>
+                            &minus;
+                          </button>
+                          <span className="text-xs font-semibold text-neutral-900 tracking-wider">
+                            {adults}
+                          </span>
+                          <button
+                            type="button"
+                            onClick={() => setAdults((prev) => Math.min(10, prev + 1))}
+                            className="w-8 h-8 flex items-center justify-center text-neutral-600 hover:text-black hover:bg-gray-200 text-sm font-semibold transition-colors rounded-sm"
+                            aria-label="Increase Adults"
+                          >
+                            &#43;
+                          </button>
                         </div>
                       </div>
 
+                      {/* Children Counter Selector */}
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] tracking-[0.22em] uppercase font-semibold text-neutral-500 block">
+                          CHILDREN
+                        </label>
+                        <div className="h-[46px] border border-gray-300 flex items-center justify-between px-2 bg-gray-50/50 hover:border-gray-500 transition-colors">
+                          <button
+                            type="button"
+                            onClick={() => setChildren((prev) => Math.max(0, prev - 1))}
+                            className="w-8 h-8 flex items-center justify-center text-neutral-600 hover:text-black hover:bg-gray-200 text-sm font-semibold transition-colors rounded-sm"
+                            aria-label="Decrease Children"
+                          >
+                            &minus;
+                          </button>
+                          <span className="text-xs font-semibold text-neutral-900 tracking-wider">
+                            {children}
+                          </span>
+                          <button
+                            type="button"
+                            onClick={() => setChildren((prev) => Math.min(8, prev + 1))}
+                            className="w-8 h-8 flex items-center justify-center text-neutral-600 hover:text-black hover:bg-gray-200 text-sm font-semibold transition-colors rounded-sm"
+                            aria-label="Increase Children"
+                          >
+                            &#43;
+                          </button>
+                        </div>
+                      </div>
+
+                      {/* Room Preference Dropdown */}
                       <div className="space-y-1.5">
                         <label className="text-[10px] tracking-[0.22em] uppercase font-semibold text-neutral-500 block">
                           ROOM PREFERENCE *
@@ -411,6 +455,7 @@ export default function ContactSection() {
                           </select>
                         </div>
                       </div>
+
                     </div>
 
                     {/* Row 4: Special Request */}
