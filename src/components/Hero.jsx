@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { heroSlides, hotelInfo, roomCategories } from '../data/hotelData';
-import { 
-  Calendar, Users, Home, ChevronRight, ChevronLeft, 
+import {
+  Calendar, Users, Home, ChevronRight, ChevronLeft,
   Sparkles, Phone, ArrowRight
 } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -41,23 +41,22 @@ export default function Hero({ onOpenBooking }) {
   };
 
   return (
-    <section className="relative min-h-[94vh] lg:min-h-screen flex flex-col justify-center items-center pt-20 pb-8 sm:pt-24 sm:pb-8 overflow-hidden bg-hotel-forestDark">
+    <section className="relative min-h-screen flex flex-col justify-end items-center pt-28 pb-4 sm:pb-6 lg:pb-8 overflow-hidden bg-hotel-forestDark">
       {/* Background Images Crossfade - Full Screen Complete Coverage */}
       {heroSlides.map((slide, idx) => (
         <div
           key={idx}
-          className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-            idx === currentSlide ? 'opacity-100 scale-100' : 'opacity-0 scale-105'
-          } transition-transform duration-[8000ms]`}
+          className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${idx === currentSlide ? 'opacity-100 scale-100' : 'opacity-0 scale-105'
+            } transition-transform duration-[8000ms]`}
         >
           <img
             src={slide.image}
             alt={slide.title}
             className="w-full h-full object-cover object-center"
           />
-          {/* Subtle multi-layer luxury overlay for high contrast & legibility */}
-          <div className="absolute inset-0 bg-gradient-to-t from-hotel-forestDark via-hotel-forestDark/45 to-black/60" />
-          <div className="absolute inset-0 bg-hotel-forestDark/20 mix-blend-multiply" />
+          {/* Subtle multi-layer luxury overlay for high contrast & legibility at bottom */}
+          <div className="absolute inset-0 bg-gradient-to-t from-hotel-forestDark via-hotel-forestDark/70 via-45% to-black/35" />
+          <div className="absolute inset-0 bg-hotel-forestDark/15 mix-blend-multiply" />
         </div>
       ))}
 
@@ -78,21 +77,21 @@ export default function Hero({ onOpenBooking }) {
         <ChevronRight className="w-5 h-5" />
       </button>
 
-      {/* Hero Container: Compact, Refined Central Content + Quick Booking Bar */}
-      <div className="relative z-10 max-w-5xl w-full mx-auto px-4 sm:px-6 lg:px-8 text-center text-white flex flex-col items-center">
-        
-        {/* Main Heading (Refined & Compact, location badge removed as requested) */}
-        <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal tracking-wide text-white leading-tight mb-2 drop-shadow-md animate-fade-in">
+      {/* Hero Container: Docked cleanly at bottom (khali bottom la thev centre la nako) */}
+      <div className="relative z-10 max-w-5xl w-full mx-auto px-4 sm:px-6 lg:px-8 text-center text-white flex flex-col items-center mt-auto mb-2 sm:mb-4">
+
+        {/* Main Heading (Refined & Compact) */}
+        <h1 className="font-serif text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-normal tracking-wide text-white leading-tight mb-2 drop-shadow-md animate-fade-in">
           Experience Comfort. Discover Hospitality.
         </h1>
 
         {/* Subheading (Refined & Compact) */}
-        <p className="max-w-xl mx-auto font-sans font-light text-xs sm:text-sm lg:text-base text-hotel-ivory/95 tracking-wide leading-relaxed mb-4">
+        <p className="max-w-xl mx-auto font-sans font-light text-xs sm:text-sm lg:text-base text-hotel-ivory/95 tracking-wide leading-relaxed mb-3 drop-shadow">
           Welcome to Sai Siddhi Nivas – Your Perfect Stay Experience.
         </p>
 
         {/* 3 Compact & Sleek CTA Buttons */}
-        <div className="flex flex-wrap justify-center items-center gap-2.5 sm:gap-3 mb-4">
+        <div className="flex flex-wrap justify-center items-center gap-2.5 sm:gap-3 mb-3">
           <motion.button
             whileHover={{ scale: 1.05, y: -1.5 }}
             whileTap={{ scale: 0.96 }}
@@ -127,14 +126,13 @@ export default function Hero({ onOpenBooking }) {
         </div>
 
         {/* Slide Indicators */}
-        <div className="flex justify-center items-center space-x-2 mb-4">
+        <div className="flex justify-center items-center space-x-2 mb-3">
           {heroSlides.map((_, idx) => (
             <button
               key={idx}
               onClick={() => setCurrentSlide(idx)}
-              className={`h-1.5 rounded-full transition-all duration-300 ${
-                idx === currentSlide ? 'w-7 bg-hotel-gold' : 'w-2 bg-white/40 hover:bg-white/70'
-              }`}
+              className={`h-1.5 rounded-full transition-all duration-300 ${idx === currentSlide ? 'w-7 bg-hotel-gold' : 'w-2 bg-white/40 hover:bg-white/70'
+                }`}
               aria-label={`Go to slide ${idx + 1}`}
             />
           ))}
@@ -155,7 +153,7 @@ export default function Hero({ onOpenBooking }) {
 
             {/* 5-Column Grid with Persons/Guests selector */}
             <form onSubmit={handleQuickSearch} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2.5 items-end">
-              
+
               {/* 1. Check-In */}
               <div>
                 <label className="block text-[11px] uppercase tracking-widest text-hotel-ivory/80 font-medium mb-1 flex items-center space-x-1.5">

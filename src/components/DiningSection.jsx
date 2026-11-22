@@ -1,8 +1,8 @@
 import React from 'react';
 import { diningData, hotelInfo } from '../data/hotelData';
-import { 
-  Utensils, Coffee, ShieldCheck, BellRing, 
-  Sparkles, Clock, Check, Phone 
+import {
+  Utensils, Coffee, ShieldCheck, BellRing,
+  Sparkles, Clock, Check, Phone
 } from 'lucide-react';
 import AnimateIn from './AnimateIn';
 import { motion } from 'framer-motion';
@@ -18,7 +18,7 @@ export default function DiningSection({ onOpenBooking }) {
   return (
     <section id="dining" className="py-20 lg:py-28 bg-hotel-ivory text-hotel-charcoal parchment-pattern relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Section Header */}
         <AnimateIn direction="up">
           <div className="text-center max-w-3xl mx-auto mb-16">
@@ -40,7 +40,7 @@ export default function DiningSection({ onOpenBooking }) {
         <AnimateIn direction="up" delay={0.1}>
           <div className="relative rounded-2xl overflow-hidden shadow-luxury mb-16 bg-hotel-forestDark text-white">
             <div className="grid grid-cols-1 lg:grid-cols-12 items-center">
-              
+
               <div className="lg:col-span-7 h-[340px] sm:h-[440px] relative overflow-hidden group">
                 <img
                   src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=1200&auto=format&fit=crop"
@@ -60,7 +60,7 @@ export default function DiningSection({ onOpenBooking }) {
                 <p className="text-xs sm:text-sm text-hotel-ivory/80 font-light leading-relaxed">
                   Enjoy authentic Konkan delicacies, hot vegetarian thalis, fresh coastal preparations, and quick breakfast items prepared to order. We prioritize hygiene, pure ingredients, and home-style warmth.
                 </p>
-                
+
                 <div className="p-4 rounded-xl bg-white/5 border border-white/10 flex items-start space-x-3 text-xs text-hotel-ivory/90">
                   <Clock className="w-4 h-4 text-hotel-gold shrink-0 mt-0.5" />
                   <span>
@@ -89,7 +89,7 @@ export default function DiningSection({ onOpenBooking }) {
             const IconComp = iconComponents[feat.icon] || Utensils;
             return (
               <AnimateIn key={idx} direction="up" delay={0.08 * idx}>
-                <motion.div 
+                <motion.div
                   whileHover={{ y: -5, borderColor: '#c5a059' }}
                   transition={{ duration: 0.25 }}
                   className="bg-white p-6 rounded-2xl border border-hotel-border shadow-sm transition-all flex flex-col justify-between h-full"
