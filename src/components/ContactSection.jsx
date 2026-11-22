@@ -8,12 +8,24 @@ import {
 import AnimateIn from './AnimateIn';
 import { motion } from 'framer-motion';
 
+// Local date helper to avoid timezone issues
+const getLocalDateString = (d = new Date()) => {
+  const year = d.getFullYear();
+  const month = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
+
 export default function ContactSection() {
+  const today = getLocalDateString();
+  const tomorrow = getLocalDateString(new Date(Date.now() + 86400000));
+  const threeDaysLater = getLocalDateString(new Date(Date.now() + 86400000 * 3));
+
   const [formData, setFormData] = useState({
     guestName: '',
     mobileNumber: '',
-    checkInDate: new Date(Date.now() + 86400000).toISOString().split('T')[0],
-    checkOutDate: new Date(Date.now() + 86400000 * 3).toISOString().split('T')[0],
+    checkInDate: tomorrow,
+    checkOutDate: threeDaysLater,
     numberOfGuests: '2 Persons',
     roomPreference: roomCategories[0].name,
     specialRequest: ''
@@ -68,16 +80,15 @@ export default function ContactSection() {
         
         {/* Section Header */}
         <AnimateIn direction="up">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="inline-flex items-center space-x-2 text-hotel-goldDark text-xs font-semibold tracking-[0.25em] uppercase mb-3">
-              <Calendar className="w-3.5 h-3.5 text-hotel-gold" />
-              <span>Direct Reservations & Concierge</span>
-            </div>
-            <h2 className="font-serif text-3xl sm:text-5xl text-hotel-forest font-normal tracking-tight">
-              Book Your Stay & Contact Us
+          <div className="text-center max-w-4xl mx-auto mb-14 lg:mb-20">
+            <span className="text-xs sm:text-sm tracking-[0.32em] uppercase font-semibold text-hotel-goldDark mb-3 block">
+              DIRECT RESERVATIONS & CONCIERGE
+            </span>
+            <h2 className="font-serif text-3xl sm:text-5xl lg:text-[52px] text-hotel-charcoal font-normal uppercase tracking-[0.06em] leading-[1.15] mb-6">
+              CONNECT WITH OUR HOSPITALITY TEAM
             </h2>
-            <div className="w-20 h-0.5 bg-hotel-gold mx-auto mt-4 mb-6" />
-            <p className="text-hotel-muted font-light text-base sm:text-lg leading-relaxed">
+            <div className="w-16 h-[2px] bg-hotel-gold mx-auto mb-8" />
+            <p className="font-sans font-light text-base sm:text-lg text-neutral-600 leading-relaxed max-w-3xl mx-auto">
               Send your booking enquiry directly to our reservation desk or connect immediately on WhatsApp and phone for instant room confirmation.
             </p>
           </div>
@@ -265,8 +276,19 @@ export default function ContactSection() {
                         <input
                           type="date"
                           required
+                          min={today}
                           value={formData.checkInDate}
-                          onChange={(e) => setFormData({ ...formData, checkInDate: e.target.value })}
+                          onChange={(e) => {
+                            const newIn = e.target.value;
+                            if (newIn && newIn < today) return;
+                            const updates = { checkInDate: newIn };
+                            if (formData.checkOutDate <= newIn) {
+                              const nextDate = new Date(newIn);
+                              nextDate.setDate(nextDate.getDate() + 1);
+                              updates.checkOutDate = getLocalDateString(nextDate);
+                            }
+                            setFormData({ ...formData, ...updates });
+                          }}
                           className="w-full bg-white border border-hotel-border rounded-lg px-3.5 py-2.5 text-sm text-hotel-charcoal focus:outline-none focus:border-hotel-gold transition-colors font-sans"
                         />
                       </div>
@@ -278,8 +300,13 @@ export default function ContactSection() {
                         <input
                           type="date"
                           required
+                          min={formData.checkInDate || today}
                           value={formData.checkOutDate}
-                          onChange={(e) => setFormData({ ...formData, checkOutDate: e.target.value })}
+                          onChange={(e) => {
+                            const newOut = e.target.value;
+                            if (newOut && newOut < (formData.checkInDate || today)) return;
+                            setFormData({ ...formData, checkOutDate: newOut });
+                          }}
                           className="w-full bg-white border border-hotel-border rounded-lg px-3.5 py-2.5 text-sm text-hotel-charcoal focus:outline-none focus:border-hotel-gold transition-colors font-sans"
                         />
                       </div>

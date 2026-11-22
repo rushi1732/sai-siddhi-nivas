@@ -5,13 +5,25 @@ import {
   MessageCircle, Sparkles, Send, AlertCircle, Info 
 } from 'lucide-react';
 
+// Local date helper to avoid timezone issues
+const getLocalDateString = (d = new Date()) => {
+  const year = d.getFullYear();
+  const month = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
+
 export default function BookingModal({ isOpen, onClose, initialData = {} }) {
+  const today = getLocalDateString();
+  const tomorrow = getLocalDateString(new Date(Date.now() + 86400000));
+  const threeDaysLater = getLocalDateString(new Date(Date.now() + 86400000 * 3));
+
   const [formData, setFormData] = useState({
     guestName: '',
     mobileNumber: '',
     roomType: initialData.roomType || roomCategories[0].id,
-    checkIn: initialData.checkIn || new Date(Date.now() + 86400000).toISOString().split('T')[0],
-    checkOut: initialData.checkOut || new Date(Date.now() + 86400000 * 3).toISOString().split('T')[0],
+    checkIn: initialData.checkIn || tomorrow,
+    checkOut: initialData.checkOut || threeDaysLater,
     guests: initialData.guests || '2 Persons',
     specialRequests: ''
   });
@@ -214,8 +226,19 @@ export default function BookingModal({ isOpen, onClose, initialData = {} }) {
                 <input
                   type="date"
                   required
+                  min={today}
                   value={formData.checkIn}
-                  onChange={(e) => setFormData({ ...formData, checkIn: e.target.value })}
+                  onChange={(e) => {
+                    const newIn = e.target.value;
+                    if (newIn && newIn < today) return;
+                    const updates = { checkIn: newIn };
+                    if (formData.checkOut <= newIn) {
+                      const nextDate = new Date(newIn);
+                      nextDate.setDate(nextDate.getDate() + 1);
+                      updates.checkOut = getLocalDateString(nextDate);
+                    }
+                    setFormData({ ...formData, ...updates });
+                  }}
                   className="w-full bg-white border border-hotel-border rounded-lg px-3 py-2 text-sm text-hotel-charcoal focus:outline-none focus:border-hotel-gold transition-colors font-sans"
                 />
               </div>
@@ -227,8 +250,13 @@ export default function BookingModal({ isOpen, onClose, initialData = {} }) {
                 <input
                   type="date"
                   required
+                  min={formData.checkIn || today}
                   value={formData.checkOut}
-                  onChange={(e) => setFormData({ ...formData, checkOut: e.target.value })}
+                  onChange={(e) => {
+                    const newOut = e.target.value;
+                    if (newOut && newOut < (formData.checkIn || today)) return;
+                    setFormData({ ...formData, checkOut: newOut });
+                  }}
                   className="w-full bg-white border border-hotel-border rounded-lg px-3 py-2 text-sm text-hotel-charcoal focus:outline-none focus:border-hotel-gold transition-colors font-sans"
                 />
               </div>

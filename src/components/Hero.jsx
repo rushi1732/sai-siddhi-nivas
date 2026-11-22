@@ -1,10 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { heroSlides, hotelInfo, roomCategories } from '../data/hotelData';
-import { 
-  ChevronLeft, ChevronRight, Calendar, Users, 
+import {
+  ChevronLeft, ChevronRight, Calendar, Users,
   Tag, BedDouble, ArrowRight, ShieldCheck
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+
+// Helper function to format date in local timezone YYYY-MM-DD
+const getLocalDateString = (d = new Date()) => {
+  const year = d.getFullYear();
+  const month = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
 
 export default function Hero({ onOpenBooking }) {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -12,10 +20,13 @@ export default function Hero({ onOpenBooking }) {
   const [children, setChildren] = useState(0);
   const [roomType, setRoomType] = useState(roomCategories[0].id);
   const [promoCode, setPromoCode] = useState('');
-  
+
+  // Current today date string to strictly restrict past dates
+  const today = getLocalDateString();
+
   // Dates: tomorrow to 3 days later
-  const tomorrow = new Date(Date.now() + 86400000).toISOString().split('T')[0];
-  const threeDaysLater = new Date(Date.now() + 86400000 * 3).toISOString().split('T')[0];
+  const tomorrow = getLocalDateString(new Date(Date.now() + 86400000));
+  const threeDaysLater = getLocalDateString(new Date(Date.now() + 86400000 * 3));
   const [checkIn, setCheckIn] = useState(tomorrow);
   const [checkOut, setCheckOut] = useState(threeDaysLater);
 
@@ -52,14 +63,13 @@ export default function Hero({ onOpenBooking }) {
     <div className="relative w-full bg-white">
       {/* 1. CINEMATIC HERO SLIDER SECTION (75vh–85vh on desktop) */}
       <section className="relative w-full h-[76vh] min-h-[580px] lg:h-[82vh] max-h-[820px] overflow-hidden bg-hotel-forestDark">
-        
+
         {/* Background Image Slider with Cinematic Crossfade */}
         {heroSlides.map((slide, idx) => (
           <div
             key={idx}
-            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-              idx === currentSlide ? 'opacity-100 scale-100' : 'opacity-0 scale-105 pointer-events-none'
-            } transition-transform duration-[9000ms]`}
+            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${idx === currentSlide ? 'opacity-100 scale-100' : 'opacity-0 scale-105 pointer-events-none'
+              } transition-transform duration-[9000ms]`}
           >
             <img
               src={slide.image}
@@ -93,9 +103,9 @@ export default function Hero({ onOpenBooking }) {
         {/* 3. HERO CONTENT: Left-Aligned Editorial Text */}
         <div className="relative z-10 h-full max-w-[1500px] mx-auto px-4 sm:px-10 lg:px-16 flex flex-col justify-center text-left">
           <div className="max-w-xl lg:max-w-2xl pt-16 sm:pt-20">
-            
+
             {/* Main Heading in Elegant Serif Typography (All Caps) */}
-            <motion.h1 
+            <motion.h1
               key={`title-${currentSlide}`}
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
@@ -107,7 +117,7 @@ export default function Hero({ onOpenBooking }) {
             </motion.h1>
 
             {/* Description in Clean Modern Typography */}
-            <motion.p 
+            <motion.p
               key={`desc-${currentSlide}`}
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
@@ -125,11 +135,10 @@ export default function Hero({ onOpenBooking }) {
             <button
               key={idx}
               onClick={() => setCurrentSlide(idx)}
-              className={`rounded-full transition-all duration-300 ${
-                idx === currentSlide 
-                  ? 'w-7 h-1.5 bg-white' 
+              className={`rounded-full transition-all duration-300 ${idx === currentSlide
+                  ? 'w-7 h-1.5 bg-white'
                   : 'w-2 h-1.5 bg-white/45 hover:bg-white/80'
-              }`}
+                }`}
               aria-label={`Go to slide ${idx + 1}`}
             />
           ))}
@@ -140,9 +149,9 @@ export default function Hero({ onOpenBooking }) {
       {/* 4. FLOATING BOOKING ENGINE (Overlapping Bottom Edge of Hero Image) */}
       <div className="relative z-30 max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 -mt-10 sm:-mt-14 lg:-mt-16">
         <div className="bg-white rounded-none sm:rounded-sm shadow-[0_20px_50px_rgba(0,0,0,0.12)] border border-gray-200/90 p-4 sm:p-6 lg:p-7">
-          
+
           <form onSubmit={handleAvailabilitySubmit} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-4 lg:gap-5 items-end">
-            
+
             {/* Field 1: Check-in & Check-out Dates */}
             <div className="lg:col-span-4 space-y-1.5">
               <label className="text-[10px] tracking-[0.22em] uppercase font-semibold text-neutral-500 block">
@@ -154,7 +163,17 @@ export default function Hero({ onOpenBooking }) {
                   <input
                     type="date"
                     value={checkIn}
-                    onChange={(e) => setCheckIn(e.target.value)}
+                    min={today}
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      if (val && val < today) return;
+                      setCheckIn(val);
+                      if (checkOut <= val) {
+                        const nextDate = new Date(val);
+                        nextDate.setDate(nextDate.getDate() + 1);
+                        setCheckOut(getLocalDateString(nextDate));
+                      }
+                    }}
                     className="w-full bg-transparent text-xs text-neutral-900 font-medium focus:outline-none cursor-pointer"
                     required
                   />
@@ -164,8 +183,12 @@ export default function Hero({ onOpenBooking }) {
                   <input
                     type="date"
                     value={checkOut}
-                    min={checkIn}
-                    onChange={(e) => setCheckOut(e.target.value)}
+                    min={checkIn || today}
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      if (val && val < (checkIn || today)) return;
+                      setCheckOut(val);
+                    }}
                     className="w-full bg-transparent text-xs text-neutral-900 font-medium focus:outline-none cursor-pointer"
                     required
                   />
@@ -278,7 +301,7 @@ export default function Hero({ onOpenBooking }) {
                 className="border-b border-gray-300 focus:border-hotel-forest px-1.5 py-0.5 text-xs text-neutral-800 tracking-wider uppercase focus:outline-none w-24 bg-transparent"
               />
             </div>
-            
+
             <div className="hidden sm:flex items-center space-x-1.5 text-hotel-forest font-medium">
               <ShieldCheck className="w-3.5 h-3.5 text-hotel-gold shrink-0" />
               <span>Best Rates Guaranteed &bull; Instant Confirmation &bull; No Booking Fees</span>

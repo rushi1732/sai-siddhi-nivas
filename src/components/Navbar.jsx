@@ -48,59 +48,57 @@ export default function Navbar({ onOpenBooking }) {
       >
         <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8">
           
-          {/* Top Row: Utility Nav (Left) | Brand Logo (Center) | Book Now (Right) */}
-          <div className="flex items-center justify-between gap-2">
+          {/* Top Row: Utility Nav (Left) | Brand Logo (Center - ALWAYS Absolutely Centered) | Book Now (Right) */}
+          <div className="relative flex items-center justify-between min-h-[44px]">
             
-            {/* Left: Minimal Utility Navigation (desktop) */}
-            <div className="hidden lg:flex items-center space-x-5 text-[11px] tracking-[0.18em] uppercase text-white/85 font-light w-1/3">
-              <div className="flex items-center space-x-1 cursor-pointer hover:text-hotel-gold transition-colors">
-                <span>EN</span>
-                <ChevronDown className="w-3 h-3 text-hotel-gold" />
+            {/* Left: Minimal Utility Navigation (desktop) / Hamburger (mobile) */}
+            <div className="flex items-center justify-start z-10 w-1/3">
+              {/* Desktop Utility Items */}
+              <div className="hidden lg:flex items-center space-x-3 xl:space-x-4 text-[11px] tracking-[0.18em] uppercase text-white/85 font-light">
+                <div className="flex items-center space-x-1 cursor-pointer hover:text-hotel-gold transition-colors">
+                  <span>EN</span>
+                  <ChevronDown className="w-3 h-3 text-hotel-gold" />
+                </div>
+                <span className="text-white/30">&bull;</span>
+                <a 
+                  href={`tel:${hotelInfo.phoneRaw}`} 
+                  className="flex items-center space-x-1.5 hover:text-hotel-gold transition-colors"
+                  title="Call Sai Siddhi Nivas"
+                >
+                  <Phone className="w-3 h-3 text-hotel-gold" />
+                  <span>+91 9764764359</span>
+                </a>
+                <span className="text-white/30">&bull;</span>
+                <a 
+                  href={`mailto:${hotelInfo.email}`} 
+                  className="hidden 2xl:flex items-center space-x-1.5 hover:text-hotel-gold transition-colors"
+                  title="Email Reservations"
+                >
+                  <Mail className="w-3 h-3 text-hotel-gold" />
+                  <span>stay@saisiddhinivas.com</span>
+                </a>
               </div>
-              <span className="text-white/30">&bull;</span>
-              <a 
-                href={`tel:${hotelInfo.phoneRaw}`} 
-                className="flex items-center space-x-1.5 hover:text-hotel-gold transition-colors"
-                title="Call Sai Siddhi Nivas"
-              >
-                <Phone className="w-3 h-3 text-hotel-gold" />
-                <span>+91 9764764359</span>
-              </a>
-              <span className="text-white/30">&bull;</span>
-              <a 
-                href={`mailto:${hotelInfo.email}`} 
-                className="flex items-center space-x-1.5 hover:text-hotel-gold transition-colors"
-                title="Email Reservations"
-              >
-                <Mail className="w-3 h-3 text-hotel-gold" />
-                <span className="hidden xl:inline">stay@saisiddhinivas.com</span>
-                <span className="xl:hidden">Email</span>
-              </a>
-            </div>
 
-            {/* Mobile Hamburger / Quick Brand Icon */}
-            <div className="lg:hidden flex items-center shrink-0">
+              {/* Mobile Hamburger Button */}
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="p-1 text-white hover:text-hotel-gold focus:outline-none"
+                className="lg:hidden p-1 text-white hover:text-hotel-gold focus:outline-none"
                 aria-label="Toggle navigation menu"
               >
                 {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
               </button>
             </div>
 
-            {/* Center: Iconic One&Only-Style Hotel Logo */}
+            {/* Center: Iconic One&Only-Style Hotel Logo - Perfectly Centered At ALL Times via absolute */}
             <div 
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className={`cursor-pointer text-center group transition-all duration-300 shrink-0 ${
-                isScrolled ? 'lg:w-auto' : 'lg:w-1/3'
-              }`}
+              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex flex-col items-center cursor-pointer text-center group pointer-events-auto"
             >
               <div className="flex flex-col items-center">
                 <span className="font-serif italic text-xl sm:text-3xl lg:text-[32px] tracking-wide text-white group-hover:text-hotel-goldLight transition-colors font-normal leading-tight whitespace-nowrap">
                   Sai Siddhi
                 </span>
-                <span className="font-sans text-[8.5px] sm:text-[10px] tracking-[0.35em] uppercase text-hotel-goldLight font-medium -mt-0.5 whitespace-nowrap">
+                <span className="font-sans text-[8.5px] sm:text-[10px] tracking-[0.3em] sm:tracking-[0.35em] uppercase text-hotel-goldLight font-medium -mt-0.5 whitespace-nowrap">
                   NIVAS
                 </span>
                 {!isScrolled && (
@@ -112,10 +110,10 @@ export default function Navbar({ onOpenBooking }) {
             </div>
 
             {/* Right: Premium One&Only-Style Crisp "BOOK NOW" Button */}
-            <div className={`flex items-center justify-end shrink-0 ${isScrolled ? 'lg:w-auto' : 'lg:w-1/3'}`}>
+            <div className="flex items-center justify-end z-10 w-1/3">
               <button
                 onClick={() => onOpenBooking()}
-                className="bg-white hover:bg-hotel-gold text-hotel-forestDark hover:text-white px-2.5 sm:px-6 py-1.5 sm:py-2 text-[10px] sm:text-xs font-semibold tracking-wider sm:tracking-[0.22em] uppercase transition-all shadow-md active:scale-95 whitespace-nowrap"
+                className="bg-white hover:bg-hotel-gold text-hotel-forestDark hover:text-white px-3 sm:px-6 py-1.5 sm:py-2 text-[10px] sm:text-xs font-semibold tracking-wider sm:tracking-[0.22em] uppercase transition-all shadow-md active:scale-95 whitespace-nowrap"
               >
                 BOOK NOW
               </button>

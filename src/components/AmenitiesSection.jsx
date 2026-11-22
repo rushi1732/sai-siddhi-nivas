@@ -27,16 +27,15 @@ export default function AmenitiesSection({ onOpenBooking }) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center space-x-2 text-hotel-gold text-xs font-semibold tracking-[0.25em] uppercase mb-3">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Essential Comforts & Conveniences</span>
-          </div>
-          <h2 className="font-serif text-3xl sm:text-5xl text-white font-normal tracking-tight">
-            Hotel Amenities & Facilities
+        <div className="text-center max-w-4xl mx-auto mb-14 lg:mb-20">
+          <span className="text-xs sm:text-sm tracking-[0.32em] uppercase font-semibold text-hotel-goldLight mb-3 block">
+            ESSENTIAL COMFORTS & CONVENIENCES
+          </span>
+          <h2 className="font-serif text-3xl sm:text-5xl lg:text-[52px] text-white font-normal uppercase tracking-[0.06em] leading-[1.15] mb-6">
+            HOTEL AMENITIES & FACILITIES
           </h2>
-          <div className="w-20 h-0.5 bg-hotel-gold mx-auto mt-4 mb-6" />
-          <p className="text-hotel-ivory/80 font-light text-base sm:text-lg leading-relaxed">
+          <div className="w-16 h-[2px] bg-hotel-gold mx-auto mb-8" />
+          <p className="font-sans font-light text-base sm:text-lg text-hotel-ivory/85 leading-relaxed max-w-3xl mx-auto">
             Thoughtfully curated amenities designed to make your stay effortless, comfortable, and rejuvenating. All facilities are verified and confirmed on-site.
           </p>
         </div>

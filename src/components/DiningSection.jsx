@@ -21,16 +21,15 @@ export default function DiningSection({ onOpenBooking }) {
 
         {/* Section Header */}
         <AnimateIn direction="up">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="inline-flex items-center space-x-2 text-hotel-goldDark text-xs font-semibold tracking-[0.25em] uppercase mb-3">
-              <Utensils className="w-3.5 h-3.5 text-hotel-gold" />
-              <span>Nourishing Hospitality</span>
-            </div>
-            <h2 className="font-serif text-3xl sm:text-5xl text-hotel-forest font-normal tracking-tight">
-              {diningData.title}
+          <div className="text-center max-w-4xl mx-auto mb-14 lg:mb-20">
+            <span className="text-xs sm:text-sm tracking-[0.32em] uppercase font-semibold text-hotel-goldDark mb-3 block">
+              NOURISHING HOSPITALITY
+            </span>
+            <h2 className="font-serif text-3xl sm:text-5xl lg:text-[52px] text-hotel-charcoal font-normal uppercase tracking-[0.06em] leading-[1.15] mb-6">
+              AUTHENTIC FLAVORS & LOCAL DELICACIES
             </h2>
-            <div className="w-20 h-0.5 bg-hotel-gold mx-auto mt-4 mb-6" />
-            <p className="text-hotel-muted font-light text-base sm:text-lg leading-relaxed">
+            <div className="w-16 h-[2px] bg-hotel-gold mx-auto mb-8" />
+            <p className="font-sans font-light text-base sm:text-lg text-neutral-600 leading-relaxed max-w-3xl mx-auto">
               {diningData.description}
             </p>
           </div>

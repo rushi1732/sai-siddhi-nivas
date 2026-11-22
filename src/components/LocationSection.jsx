@@ -22,16 +22,15 @@ export default function LocationSection() {
         
         {/* Section Header */}
         <AnimateIn direction="up">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="inline-flex items-center space-x-2 text-hotel-goldDark text-xs font-semibold tracking-[0.25em] uppercase mb-3">
-              <MapPin className="w-3.5 h-3.5 text-hotel-gold" />
-              <span>Prime Highway Location</span>
-            </div>
-            <h2 className="font-serif text-3xl sm:text-5xl text-hotel-forest font-normal tracking-tight">
-              How to Reach Sai Siddhi Nivas
+          <div className="text-center max-w-4xl mx-auto mb-14 lg:mb-20">
+            <span className="text-xs sm:text-sm tracking-[0.32em] uppercase font-semibold text-hotel-goldDark mb-3 block">
+              STRATEGIC HIGHWAY CONNECTIVITY
+            </span>
+            <h2 className="font-serif text-3xl sm:text-5xl lg:text-[52px] text-hotel-charcoal font-normal uppercase tracking-[0.06em] leading-[1.15] mb-6">
+              HOW TO REACH SAI SIDDHI NIVAS
             </h2>
-            <div className="w-20 h-0.5 bg-hotel-gold mx-auto mt-4 mb-6" />
-            <p className="text-hotel-muted font-light text-base sm:text-lg leading-relaxed">
+            <div className="w-16 h-[2px] bg-hotel-gold mx-auto mb-8" />
+            <p className="font-sans font-light text-base sm:text-lg text-neutral-600 leading-relaxed max-w-3xl mx-auto">
               Conveniently situated along Maharashtra State Highway 4 (MSH4) near Modka Agar in Kirtanwadi Tarf. Smooth road access and strategic transit connectivity.
             </p>
           </div>

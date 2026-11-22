@@ -14,16 +14,15 @@ export default function ReviewsSection() {
         
         {/* Section Header */}
         <AnimateIn direction="up">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-hotel-gold/20 text-hotel-goldLight text-xs font-semibold tracking-[0.2em] uppercase mb-4 border border-hotel-gold/30">
-              <Award className="w-3.5 h-3.5 text-hotel-gold" />
-              <span>Guest Experience & Transparency</span>
-            </div>
-            <h2 className="font-serif text-3xl sm:text-5xl text-white font-normal tracking-tight">
-              Guest Experiences & Verified Reviews
+          <div className="text-center max-w-4xl mx-auto mb-14 lg:mb-20">
+            <span className="text-xs sm:text-sm tracking-[0.32em] uppercase font-semibold text-hotel-goldLight mb-3 block">
+              GUEST TESTIMONIALS & TRANSPARENCY
+            </span>
+            <h2 className="font-serif text-3xl sm:text-5xl lg:text-[52px] text-white font-normal uppercase tracking-[0.06em] leading-[1.15] mb-6">
+              AUTHENTIC TRAVELER EXPERIENCES
             </h2>
-            <div className="w-20 h-0.5 bg-hotel-gold mx-auto mt-4 mb-6" />
-            <p className="text-hotel-ivory/80 font-light text-base sm:text-lg leading-relaxed">
+            <div className="w-16 h-[2px] bg-hotel-gold mx-auto mb-8" />
+            <p className="font-sans font-light text-base sm:text-lg text-hotel-ivory/85 leading-relaxed max-w-3xl mx-auto">
               Honest reflections from travelers and families who have stayed with us at Sai Siddhi Nivas.
             </p>
           </div>
