@@ -4,6 +4,7 @@ import {
   X, Calendar, Users, CheckCircle2, Phone, 
   MessageCircle, Sparkles, Send, AlertCircle, Info 
 } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 // Local date helper to avoid timezone issues
 const getLocalDateString = (d = new Date()) => {
@@ -289,25 +290,29 @@ export default function BookingModal({ isOpen, onClose, initialData = {} }) {
                     ADULTS
                   </label>
                   <div className="h-[46px] border border-gray-300 flex items-center justify-between px-2 bg-gray-50/50 hover:border-gray-500 transition-colors">
-                    <button
+                    <motion.button
+                      whileHover={{ scale: 1.15 }}
+                      whileTap={{ scale: 0.85 }}
                       type="button"
                       onClick={() => setAdults((prev) => Math.max(1, prev - 1))}
                       className="w-8 h-8 flex items-center justify-center text-neutral-600 hover:text-black hover:bg-gray-200 text-sm font-semibold transition-colors rounded-sm"
                       aria-label="Decrease Adults"
                     >
                       &minus;
-                    </button>
+                    </motion.button>
                     <span className="text-xs font-semibold text-neutral-900 tracking-wider">
                       {adults}
                     </span>
-                    <button
+                    <motion.button
+                      whileHover={{ scale: 1.15 }}
+                      whileTap={{ scale: 0.85 }}
                       type="button"
                       onClick={() => setAdults((prev) => Math.min(10, prev + 1))}
                       className="w-8 h-8 flex items-center justify-center text-neutral-600 hover:text-black hover:bg-gray-200 text-sm font-semibold transition-colors rounded-sm"
                       aria-label="Increase Adults"
                     >
                       &#43;
-                    </button>
+                    </motion.button>
                   </div>
                 </div>
 
@@ -317,25 +322,29 @@ export default function BookingModal({ isOpen, onClose, initialData = {} }) {
                     CHILDREN
                   </label>
                   <div className="h-[46px] border border-gray-300 flex items-center justify-between px-2 bg-gray-50/50 hover:border-gray-500 transition-colors">
-                    <button
+                    <motion.button
+                      whileHover={{ scale: 1.15 }}
+                      whileTap={{ scale: 0.85 }}
                       type="button"
                       onClick={() => setChildren((prev) => Math.max(0, prev - 1))}
                       className="w-8 h-8 flex items-center justify-center text-neutral-600 hover:text-black hover:bg-gray-200 text-sm font-semibold transition-colors rounded-sm"
                       aria-label="Decrease Children"
                     >
                       &minus;
-                    </button>
+                    </motion.button>
                     <span className="text-xs font-semibold text-neutral-900 tracking-wider">
                       {children}
                     </span>
-                    <button
+                    <motion.button
+                      whileHover={{ scale: 1.15 }}
+                      whileTap={{ scale: 0.85 }}
                       type="button"
                       onClick={() => setChildren((prev) => Math.min(8, prev + 1))}
                       className="w-8 h-8 flex items-center justify-center text-neutral-600 hover:text-black hover:bg-gray-200 text-sm font-semibold transition-colors rounded-sm"
                       aria-label="Increase Children"
                     >
                       &#43;
-                    </button>
+                    </motion.button>
                   </div>
                 </div>
 

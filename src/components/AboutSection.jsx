@@ -4,6 +4,8 @@ import {
   Sparkles, HeartHandshake, MapPin, Users, ShieldCheck,
   Clock, ArrowRight, Award, Compass
 } from 'lucide-react';
+import { motion } from 'framer-motion';
+import AnimateIn from './AnimateIn';
 
 export default function AboutSection() {
   const iconComponents = {
@@ -18,29 +20,37 @@ export default function AboutSection() {
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* 5. INTRODUCTION SECTION: Clean White Header (One&Only Mandarina Aesthetic) */}
-        <div className="text-center max-w-4xl mx-auto mb-14 lg:mb-20">
-          
-          {/* Small Heading */}
-          <span className="text-xs sm:text-sm tracking-[0.32em] uppercase font-semibold text-hotel-goldDark mb-3 block">
-            WELCOME TO SAI SIDDHI NIVAS
-          </span>
+        <AnimateIn direction="up">
+          <div className="text-center max-w-4xl mx-auto mb-14 lg:mb-20">
+            
+            {/* Small Heading */}
+            <span className="text-xs sm:text-sm tracking-[0.32em] uppercase font-semibold text-hotel-goldDark mb-3 block">
+              WELCOME TO SAI SIDDHI NIVAS
+            </span>
 
-          {/* Main Heading in Grand Serif Typography */}
-          <h2 className="font-serif text-3xl sm:text-5xl lg:text-[54px] text-hotel-charcoal font-normal uppercase tracking-[0.06em] leading-[1.15] mb-6">
-            A PLACE TO RELAX AND FEEL AT HOME
-          </h2>
+            {/* Main Heading in Grand Serif Typography */}
+            <h2 className="font-serif text-3xl sm:text-5xl lg:text-[54px] text-hotel-charcoal font-normal uppercase tracking-[0.06em] leading-[1.15] mb-6">
+              A PLACE TO RELAX AND FEEL AT HOME
+            </h2>
 
-          {/* Minimalist Divider Accent */}
-          <div className="w-16 h-[2px] bg-hotel-gold mx-auto mb-8" />
+            {/* Minimalist Divider Accent */}
+            <div className="w-16 h-[2px] bg-hotel-gold mx-auto mb-8" />
 
-          {/* Beautiful Editorial Description */}
-          <p className="font-sans font-light text-base sm:text-lg lg:text-xl text-neutral-600 leading-relaxed max-w-3xl mx-auto">
-            Experience a relaxing stay at Sai Siddhi Nivas, where comfort, warmth and memorable hospitality come together. Nestled near Modka Agar along Maharashtra State Highway 4, our retreat offers an idyllic haven for voyagers, visiting families, and explorers seeking quiet elegance amidst the serene beauty of the Konkan corridor.
-          </p>
-        </div>
+            {/* Beautiful Editorial Description */}
+            <p className="font-sans font-light text-base sm:text-lg lg:text-xl text-neutral-600 leading-relaxed max-w-3xl mx-auto">
+              Experience a relaxing stay at Sai Siddhi Nivas, where comfort, warmth and memorable hospitality come together. Nestled near Modka Agar along Maharashtra State Highway 4, our retreat offers an idyllic haven for voyagers, visiting families, and explorers seeking quiet elegance amidst the serene beauty of the Konkan corridor.
+            </p>
+          </div>
+        </AnimateIn>
 
-        {/* Large Cinematic Property Showcase Photograph */}
-        <div className="relative w-full h-[380px] sm:h-[500px] lg:h-[600px] mb-20 overflow-hidden shadow-2xl border border-gray-100 group">
+        {/* Large Cinematic Property Showcase Photograph with Smooth Zoom Animation */}
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.96 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true, margin: '-50px' }}
+          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+          className="relative w-full h-[380px] sm:h-[500px] lg:h-[600px] mb-20 overflow-hidden shadow-2xl border border-gray-100 group"
+        >
           <img
             src="https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=1920&auto=format&fit=crop"
             alt="Sai Siddhi Nivas Property and Surroundings"
@@ -57,13 +67,19 @@ export default function AboutSection() {
               "A tranquil sanctuary designed for restful stopovers, peaceful family stays, and refreshing coastal journeys."
             </p>
           </div>
-        </div>
+        </motion.div>
 
         {/* Narrative & Hospitality Pillars Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           
           {/* Left Column: Authentic Hospitality Story */}
-          <div className="lg:col-span-5 space-y-6">
+          <motion.div 
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-40px' }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:col-span-5 space-y-6"
+          >
             <div className="space-y-4">
               <span className="text-xs tracking-[0.25em] uppercase text-hotel-goldDark font-semibold block">
                 OUR STORY & VALUES
@@ -96,35 +112,42 @@ export default function AboutSection() {
 
             {/* Quick Contact Direct */}
             <div className="pt-2 flex items-center space-x-4">
-              <a
+              <motion.a
+                whileHover={{ x: 3 }}
                 href={`tel:${hotelInfo.phoneRaw}`}
                 className="inline-flex items-center space-x-2 text-xs uppercase tracking-widest font-semibold text-hotel-forest hover:text-hotel-gold transition-colors"
               >
                 <span>Call Reservations</span>
                 <ArrowRight className="w-3.5 h-3.5" />
-              </a>
+              </motion.a>
               <span className="text-gray-300">|</span>
-              <a
+              <motion.a
+                whileHover={{ x: 3 }}
                 href="#rooms"
                 className="inline-flex items-center space-x-2 text-xs uppercase tracking-widest font-semibold text-hotel-forest hover:text-hotel-gold transition-colors"
               >
                 <span>Explore Accommodations</span>
                 <ArrowRight className="w-3.5 h-3.5" />
-              </a>
+              </motion.a>
             </div>
-          </div>
+          </motion.div>
 
-          {/* Right Column: 4 Pillars of Excellence */}
+          {/* Right Column: 4 Pillars of Excellence with Staggered Entrance */}
           <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-5">
             {aboutData.pillars.map((pillar, idx) => {
               const IconComp = iconComponents[pillar.icon] || Sparkles;
               return (
-                <div
+                <motion.div
                   key={idx}
-                  className="p-6 sm:p-7 bg-white border border-gray-200 hover:border-hotel-gold/70 shadow-sm hover:shadow-md transition-all group"
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-40px' }}
+                  transition={{ duration: 0.6, delay: idx * 0.12, ease: [0.22, 1, 0.36, 1] }}
+                  whileHover={{ y: -6, transition: { duration: 0.25 } }}
+                  className="p-6 sm:p-7 bg-white border border-gray-200 hover:border-hotel-gold/70 shadow-sm hover:shadow-xl transition-all group"
                 >
                   <div className="w-10 h-10 bg-hotel-forest/5 text-hotel-forest group-hover:bg-hotel-forest group-hover:text-hotel-gold transition-colors flex items-center justify-center mb-4">
-                    <IconComp className="w-5 h-5" />
+                    <IconComp className="w-5 h-5 transition-transform group-hover:scale-110" />
                   </div>
                   <h4 className="font-serif text-base sm:text-lg text-hotel-forest font-normal mb-2">
                     {pillar.title}
@@ -132,12 +155,18 @@ export default function AboutSection() {
                   <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed font-light">
                     {pillar.description}
                   </p>
-                </div>
+                </motion.div>
               );
             })}
 
             {/* Highway Corridor Highlight Banner */}
-            <div className="sm:col-span-2 p-6 border-l-4 border-hotel-gold bg-hotel-forest text-hotel-ivory shadow-lg">
+            <motion.div 
+              initial={{ opacity: 0, y: 25 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="sm:col-span-2 p-6 border-l-4 border-hotel-gold bg-hotel-forest text-hotel-ivory shadow-lg"
+            >
               <p className="font-serif italic text-sm sm:text-base text-hotel-ivory/95 leading-relaxed">
                 "Whether you arrive tired from hours of highway journey or seek a peaceful coastal sanctuary, our doors open with authentic Maharashtrian hospitality, delicious dining, and genuine care."
               </p>
@@ -149,7 +178,7 @@ export default function AboutSection() {
                   Direct Highway 4 Access &bull; Ample Free Parking
                 </span>
               </div>
-            </div>
+            </motion.div>
           </div>
 
         </div>

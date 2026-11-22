@@ -89,13 +89,13 @@ export default function DiningSection({ onOpenBooking }) {
             return (
               <AnimateIn key={idx} direction="up" delay={0.08 * idx}>
                 <motion.div
-                  whileHover={{ y: -5, borderColor: '#c5a059' }}
-                  transition={{ duration: 0.25 }}
-                  className="bg-white p-6 rounded-2xl border border-hotel-border shadow-sm transition-all flex flex-col justify-between h-full"
+                  whileHover={{ y: -8, scale: 1.02, borderColor: '#c5a059', boxShadow: '0 20px 40px -10px rgba(0,0,0,0.12)' }}
+                  transition={{ duration: 0.28 }}
+                  className="group bg-white p-6 rounded-2xl border border-hotel-border shadow-sm transition-all flex flex-col justify-between h-full"
                 >
                   <div>
-                    <div className="w-10 h-10 rounded-xl bg-hotel-forest/10 text-hotel-forest flex items-center justify-center mb-4">
-                      <IconComp className="w-5 h-5" />
+                    <div className="w-10 h-10 rounded-xl bg-hotel-forest/10 text-hotel-forest group-hover:bg-hotel-forest group-hover:text-hotel-gold transition-all duration-300 flex items-center justify-center mb-4 group-hover:scale-110">
+                      <IconComp className="w-5 h-5 transition-transform" />
                     </div>
                     <h4 className="font-serif text-lg text-hotel-forest font-medium mb-2">
                       {feat.title}

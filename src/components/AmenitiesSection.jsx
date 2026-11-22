@@ -5,6 +5,8 @@ import {
   Flame, Users, Zap, ShieldCheck, Sparkles, Compass,
   CheckCircle, CheckCircle2, Info, Phone
 } from 'lucide-react';
+import { motion } from 'framer-motion';
+import AnimateIn from './AnimateIn';
 
 export default function AmenitiesSection({ onOpenBooking }) {
   const iconMap = {
@@ -27,39 +29,48 @@ export default function AmenitiesSection({ onOpenBooking }) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Section Header */}
-        <div className="text-center max-w-4xl mx-auto mb-14 lg:mb-20">
-          <span className="text-xs sm:text-sm tracking-[0.32em] uppercase font-semibold text-hotel-goldLight mb-3 block">
-            ESSENTIAL COMFORTS & CONVENIENCES
-          </span>
-          <h2 className="font-serif text-3xl sm:text-5xl lg:text-[52px] text-white font-normal uppercase tracking-[0.06em] leading-[1.15] mb-6">
-            HOTEL AMENITIES & FACILITIES
-          </h2>
-          <div className="w-16 h-[2px] bg-hotel-gold mx-auto mb-8" />
-          <p className="font-sans font-light text-base sm:text-lg text-hotel-ivory/85 leading-relaxed max-w-3xl mx-auto">
-            Thoughtfully curated amenities designed to make your stay effortless, comfortable, and rejuvenating. All facilities are verified and confirmed on-site.
-          </p>
-        </div>
+        <AnimateIn direction="up">
+          <div className="text-center max-w-4xl mx-auto mb-14 lg:mb-20">
+            <span className="text-xs sm:text-sm tracking-[0.32em] uppercase font-semibold text-hotel-goldLight mb-3 block">
+              ESSENTIAL COMFORTS & CONVENIENCES
+            </span>
+            <h2 className="font-serif text-3xl sm:text-5xl lg:text-[52px] text-white font-normal uppercase tracking-[0.06em] leading-[1.15] mb-6">
+              HOTEL AMENITIES & FACILITIES
+            </h2>
+            <div className="w-16 h-[2px] bg-hotel-gold mx-auto mb-8" />
+            <p className="font-sans font-light text-base sm:text-lg text-hotel-ivory/85 leading-relaxed max-w-3xl mx-auto">
+              Thoughtfully curated amenities designed to make your stay effortless, comfortable, and rejuvenating. All facilities are verified and confirmed on-site.
+            </p>
+          </div>
+        </AnimateIn>
 
         {/* Confirmed Amenities Notice */}
-        <div className="max-w-4xl mx-auto mb-12 p-4 rounded-xl bg-hotel-forest/60 border border-hotel-gold/30 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-hotel-ivory/90">
-          <div className="flex items-center space-x-2">
-            <CheckCircle2 className="w-4 h-4 text-hotel-gold shrink-0" />
-            <span>
-              <strong>Verified Hotel Facilities:</strong> Only genuine, on-premise amenities confirmed by Sai Siddhi Nivas management are displayed below.
+        <AnimateIn direction="up" delay={0.1}>
+          <div className="max-w-4xl mx-auto mb-12 p-4 rounded-xl bg-hotel-forest/60 border border-hotel-gold/30 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-hotel-ivory/90 shadow-md">
+            <div className="flex items-center space-x-2">
+              <CheckCircle2 className="w-4 h-4 text-hotel-gold shrink-0" />
+              <span>
+                <strong>Verified Hotel Facilities:</strong> Only genuine, on-premise amenities confirmed by Sai Siddhi Nivas management are displayed below.
+              </span>
+            </div>
+            <span className="text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full bg-hotel-gold/20 text-hotel-goldLight border border-hotel-gold/30 font-semibold shrink-0">
+              Editable Inventory
             </span>
           </div>
-          <span className="text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full bg-hotel-gold/20 text-hotel-goldLight border border-hotel-gold/30 font-semibold shrink-0">
-            Editable Inventory
-          </span>
-        </div>
+        </AnimateIn>
 
-        {/* Amenities Icon Grid */}
+        {/* Amenities Icon Grid with Fluid Staggered Entrance */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {hotelAmenities.map((amenity) => {
+          {hotelAmenities.map((amenity, idx) => {
             const IconComponent = iconMap[amenity.icon] || CheckCircle;
             return (
-              <div
+              <motion.div
                 key={amenity.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-30px' }}
+                transition={{ duration: 0.5, delay: idx * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                whileHover={{ y: -8, scale: 1.02, transition: { duration: 0.25 } }}
                 className="group bg-hotel-forest/80 backdrop-blur-md p-6 rounded-2xl border border-hotel-gold/20 hover:border-hotel-gold hover:bg-hotel-forest transition-all duration-300 flex flex-col justify-between shadow-lg"
               >
                 <div>
@@ -89,13 +100,19 @@ export default function AmenitiesSection({ onOpenBooking }) {
                   </span>
                   <span className="text-[10px] text-hotel-ivory/50">24/7 Available</span>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
         </div>
 
         {/* Highway Assistance & Parking Callout */}
-        <div className="mt-14 p-6 sm:p-8 rounded-2xl bg-gradient-to-r from-hotel-forest to-hotel-forestDark border border-hotel-gold/40 shadow-2xl flex flex-col lg:flex-row items-center justify-between gap-6">
+        <motion.div 
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.65, delay: 0.2 }}
+          className="mt-14 p-6 sm:p-8 rounded-2xl bg-gradient-to-r from-hotel-forest to-hotel-forestDark border border-hotel-gold/40 shadow-2xl flex flex-col lg:flex-row items-center justify-between gap-6"
+        >
           <div className="space-y-2 text-center lg:text-left">
             <span className="text-xs uppercase tracking-widest text-hotel-gold font-semibold block">
               Vehicle Security & Highway Accessibility
@@ -123,7 +140,7 @@ export default function AmenitiesSection({ onOpenBooking }) {
               <span>Enquire for Group Stays</span>
             </button>
           </div>
-        </div>
+        </motion.div>
 
       </div>
     </section>

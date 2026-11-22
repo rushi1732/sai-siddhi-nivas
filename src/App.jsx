@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ScrollProgress from './components/ScrollProgress';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import AboutSection from './components/AboutSection';
@@ -48,6 +49,9 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-hotel-ivory text-hotel-charcoal font-sans selection:bg-hotel-gold selection:text-white relative">
+      {/* Luxury Golden Scroll Progress Indicator */}
+      <ScrollProgress />
+
       {/* Top Fixed Header with Luxury Monogram & Navigation */}
       <Navbar onOpenBooking={handleOpenBooking} />
 

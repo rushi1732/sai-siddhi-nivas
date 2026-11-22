@@ -147,8 +147,13 @@ export default function Hero({ onOpenBooking }) {
       </section>
 
       {/* 4. FLOATING BOOKING ENGINE (Overlapping Bottom Edge of Hero Image) */}
-      <div className="relative z-30 max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 -mt-10 sm:-mt-14 lg:-mt-16">
-        <div className="bg-white rounded-none sm:rounded-sm shadow-[0_20px_50px_rgba(0,0,0,0.12)] border border-gray-200/90 p-4 sm:p-6 lg:p-7">
+      <motion.div 
+        initial={{ opacity: 0, y: 35 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.9, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
+        className="relative z-30 max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 -mt-10 sm:-mt-14 lg:-mt-16"
+      >
+        <div className="bg-white rounded-none sm:rounded-sm shadow-[0_25px_60px_-15px_rgba(0,0,0,0.18)] border border-gray-200/90 p-4 sm:p-6 lg:p-7 transition-shadow hover:shadow-[0_30px_70px_-15px_rgba(0,0,0,0.22)]">
 
           <form onSubmit={handleAvailabilitySubmit} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-4 lg:gap-5 items-end">
 
@@ -202,25 +207,29 @@ export default function Hero({ onOpenBooking }) {
                 ADULTS
               </label>
               <div className="h-[46px] border border-gray-300 flex items-center justify-between px-2 bg-gray-50/50 hover:border-gray-500 transition-colors">
-                <button
+                <motion.button
+                  whileHover={{ scale: 1.15 }}
+                  whileTap={{ scale: 0.85 }}
                   type="button"
                   onClick={() => setAdults((prev) => Math.max(1, prev - 1))}
                   className="w-8 h-8 flex items-center justify-center text-neutral-600 hover:text-black hover:bg-gray-200 text-sm font-semibold transition-colors rounded-sm"
                   aria-label="Decrease Adults"
                 >
                   &minus;
-                </button>
+                </motion.button>
                 <span className="text-xs font-semibold text-neutral-900 tracking-wider">
                   {adults}
                 </span>
-                <button
+                <motion.button
+                  whileHover={{ scale: 1.15 }}
+                  whileTap={{ scale: 0.85 }}
                   type="button"
                   onClick={() => setAdults((prev) => Math.min(10, prev + 1))}
                   className="w-8 h-8 flex items-center justify-center text-neutral-600 hover:text-black hover:bg-gray-200 text-sm font-semibold transition-colors rounded-sm"
                   aria-label="Increase Adults"
                 >
                   &#43;
-                </button>
+                </motion.button>
               </div>
             </div>
 
@@ -230,25 +239,29 @@ export default function Hero({ onOpenBooking }) {
                 CHILDREN
               </label>
               <div className="h-[46px] border border-gray-300 flex items-center justify-between px-2 bg-gray-50/50 hover:border-gray-500 transition-colors">
-                <button
+                <motion.button
+                  whileHover={{ scale: 1.15 }}
+                  whileTap={{ scale: 0.85 }}
                   type="button"
                   onClick={() => setChildren((prev) => Math.max(0, prev - 1))}
                   className="w-8 h-8 flex items-center justify-center text-neutral-600 hover:text-black hover:bg-gray-200 text-sm font-semibold transition-colors rounded-sm"
                   aria-label="Decrease Children"
                 >
                   &minus;
-                </button>
+                </motion.button>
                 <span className="text-xs font-semibold text-neutral-900 tracking-wider">
                   {children}
                 </span>
-                <button
+                <motion.button
+                  whileHover={{ scale: 1.15 }}
+                  whileTap={{ scale: 0.85 }}
                   type="button"
                   onClick={() => setChildren((prev) => Math.min(8, prev + 1))}
                   className="w-8 h-8 flex items-center justify-center text-neutral-600 hover:text-black hover:bg-gray-200 text-sm font-semibold transition-colors rounded-sm"
                   aria-label="Increase Children"
                 >
                   &#43;
-                </button>
+                </motion.button>
               </div>
             </div>
 
@@ -276,12 +289,14 @@ export default function Hero({ onOpenBooking }) {
 
             {/* Field 5: CHECK AVAILABILITY Action Button */}
             <div className="lg:col-span-2">
-              <button
+              <motion.button
+                whileHover={{ scale: 1.03, boxShadow: '0 10px 25px -5px rgba(12,36,25,0.4)' }}
+                whileTap={{ scale: 0.97 }}
                 type="submit"
                 className="w-full h-[46px] bg-hotel-forest hover:bg-hotel-forestDark text-white text-xs tracking-[0.22em] uppercase font-semibold transition-all shadow-md active:scale-95 flex items-center justify-center space-x-2 border border-hotel-forest"
               >
                 <span>CHECK AVAILABILITY</span>
-              </button>
+              </motion.button>
             </div>
 
           </form>
@@ -309,7 +324,7 @@ export default function Hero({ onOpenBooking }) {
           </div>
 
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }

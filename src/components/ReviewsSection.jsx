@@ -54,11 +54,11 @@ export default function ReviewsSection() {
         {/* Reviews Grid with Staggered Animations */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {reviewSectionData.reviews.map((rev, idx) => (
-            <AnimateIn key={rev.id} direction="up" delay={0.1 * idx}>
+            <AnimateIn key={rev.id} direction="up" delay={0.12 * idx}>
               <motion.div 
-                whileHover={{ y: -6, borderColor: '#dfbe7e' }}
-                transition={{ duration: 0.25 }}
-                className="bg-hotel-forest/80 backdrop-blur-md p-8 rounded-2xl border border-hotel-gold/20 flex flex-col justify-between transition-all duration-300 shadow-xl h-full"
+                whileHover={{ y: -8, scale: 1.02, borderColor: '#dfbe7e', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.35)' }}
+                transition={{ duration: 0.28 }}
+                className="group bg-hotel-forest/80 backdrop-blur-md p-8 rounded-2xl border border-hotel-gold/20 flex flex-col justify-between transition-all duration-300 shadow-xl h-full"
               >
                 <div>
                   {/* 5-Star Rating Row */}
@@ -69,7 +69,7 @@ export default function ReviewsSection() {
                     <span className="ml-2 text-xs text-hotel-ivory/80 font-medium font-sans">5.0 / 5.0</span>
                   </div>
 
-                  <Quote className="w-8 h-8 text-hotel-gold/30 mb-3" />
+                  <Quote className="w-8 h-8 text-hotel-gold/30 group-hover:text-hotel-goldLight transition-colors mb-3 group-hover:scale-110 transition-transform duration-300" />
                   
                   <p className="font-serif italic text-white text-base leading-relaxed mb-6">
                     "{rev.comment}"
