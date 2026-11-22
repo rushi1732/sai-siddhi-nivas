@@ -1,246 +1,292 @@
 import React, { useState, useEffect } from 'react';
 import { heroSlides, hotelInfo, roomCategories } from '../data/hotelData';
-import {
-  Calendar, Users, Home, ChevronRight, ChevronLeft,
-  Sparkles, Phone, ArrowRight
+import { 
+  ChevronLeft, ChevronRight, Calendar, Users, 
+  Tag, BedDouble, ArrowRight, ShieldCheck
 } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Hero({ onOpenBooking }) {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [selectedRoom, setSelectedRoom] = useState(roomCategories[0].id);
-  const [guests, setGuests] = useState("2 Persons");
-  const [dates, setDates] = useState({
-    checkIn: new Date(Date.now() + 86400000).toISOString().split('T')[0],
-    checkOut: new Date(Date.now() + 86400000 * 3).toISOString().split('T')[0]
-  });
+  const [adults, setAdults] = useState(2);
+  const [children, setChildren] = useState(0);
+  const [roomType, setRoomType] = useState(roomCategories[0].id);
+  const [promoCode, setPromoCode] = useState('');
+  
+  // Dates: tomorrow to 3 days later
+  const tomorrow = new Date(Date.now() + 86400000).toISOString().split('T')[0];
+  const threeDaysLater = new Date(Date.now() + 86400000 * 3).toISOString().split('T')[0];
+  const [checkIn, setCheckIn] = useState(tomorrow);
+  const [checkOut, setCheckOut] = useState(threeDaysLater);
 
+  // Automatic slide rotation
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
-    }, 6000);
+    }, 6500);
     return () => clearInterval(timer);
   }, []);
 
-  const handleQuickSearch = (e) => {
+  const handlePrevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
+  };
+
+  const handleNextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+  };
+
+  const handleAvailabilitySubmit = (e) => {
     e.preventDefault();
     onOpenBooking({
-      roomType: selectedRoom,
-      checkIn: dates.checkIn,
-      checkOut: dates.checkOut,
-      guests
+      checkIn,
+      checkOut,
+      adults,
+      children,
+      guests: `${adults} Adult${adults > 1 ? 's' : ''}${children > 0 ? `, ${children} Child${children > 1 ? 'ren' : ''}` : ''}`,
+      roomType,
+      promoCode
     });
   };
 
-  const scrollToSection = (e, sectionId) => {
-    e.preventDefault();
-    const element = document.querySelector(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
-    <section className="relative min-h-screen flex flex-col justify-end items-center pt-28 pb-4 sm:pb-6 lg:pb-8 overflow-hidden bg-hotel-forestDark">
-      {/* Background Images Crossfade - Full Screen Complete Coverage */}
-      {heroSlides.map((slide, idx) => (
-        <div
-          key={idx}
-          className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${idx === currentSlide ? 'opacity-100 scale-100' : 'opacity-0 scale-105'
-            } transition-transform duration-[8000ms]`}
+    <div className="relative w-full bg-white">
+      {/* 1. CINEMATIC HERO SLIDER SECTION (75vh–85vh on desktop) */}
+      <section className="relative w-full h-[76vh] min-h-[580px] lg:h-[82vh] max-h-[820px] overflow-hidden bg-hotel-forestDark">
+        
+        {/* Background Image Slider with Cinematic Crossfade */}
+        {heroSlides.map((slide, idx) => (
+          <div
+            key={idx}
+            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+              idx === currentSlide ? 'opacity-100 scale-100' : 'opacity-0 scale-105 pointer-events-none'
+            } transition-transform duration-[9000ms]`}
+          >
+            <img
+              src={slide.image}
+              alt={slide.title}
+              className="w-full h-full object-cover object-center"
+            />
+            {/* Elegant Luxury Gradient Overlay for Contrast & Text Readability */}
+            <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/50 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/30" />
+            <div className="absolute inset-0 bg-hotel-forestDark/10 mix-blend-multiply" />
+          </div>
+        ))}
+
+        {/* Slider Navigation Arrows (Left & Right) */}
+        <button
+          onClick={handlePrevSlide}
+          className="absolute left-4 lg:left-8 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full border border-white/30 bg-black/25 hover:bg-white text-white hover:text-hotel-forestDark backdrop-blur-sm flex items-center justify-center transition-all duration-300 group"
+          aria-label="Previous Slide"
         >
-          <img
-            src={slide.image}
-            alt={slide.title}
-            className="w-full h-full object-cover object-center"
-          />
-          {/* Subtle multi-layer luxury overlay for high contrast & legibility at bottom */}
-          <div className="absolute inset-0 bg-gradient-to-t from-hotel-forestDark via-hotel-forestDark/70 via-45% to-black/35" />
-          <div className="absolute inset-0 bg-hotel-forestDark/15 mix-blend-multiply" />
-        </div>
-      ))}
+          <ChevronLeft className="w-5 h-5 transition-transform group-hover:-translate-x-0.5" />
+        </button>
 
-      {/* Slide Navigation Controls */}
-      <button
-        onClick={() => setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length)}
-        className="hidden md:flex absolute left-4 lg:left-8 top-1/2 -translate-y-1/2 z-20 w-10 h-10 items-center justify-center rounded-full bg-black/40 backdrop-blur-md text-hotel-ivory hover:bg-hotel-gold hover:text-hotel-forestDark border border-white/20 transition-all duration-300"
-        aria-label="Previous Slide"
-      >
-        <ChevronLeft className="w-5 h-5" />
-      </button>
+        <button
+          onClick={handleNextSlide}
+          className="absolute right-4 lg:right-8 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full border border-white/30 bg-black/25 hover:bg-white text-white hover:text-hotel-forestDark backdrop-blur-sm flex items-center justify-center transition-all duration-300 group"
+          aria-label="Next Slide"
+        >
+          <ChevronRight className="w-5 h-5 transition-transform group-hover:translate-x-0.5" />
+        </button>
 
-      <button
-        onClick={() => setCurrentSlide((prev) => (prev + 1) % heroSlides.length)}
-        className="hidden md:flex absolute right-4 lg:right-8 top-1/2 -translate-y-1/2 z-20 w-10 h-10 items-center justify-center rounded-full bg-black/40 backdrop-blur-md text-hotel-ivory hover:bg-hotel-gold hover:text-hotel-forestDark border border-white/20 transition-all duration-300"
-        aria-label="Next Slide"
-      >
-        <ChevronRight className="w-5 h-5" />
-      </button>
+        {/* 3. HERO CONTENT: Left-Aligned Editorial Text */}
+        <div className="relative z-10 h-full max-w-[1500px] mx-auto px-4 sm:px-10 lg:px-16 flex flex-col justify-center text-left">
+          <div className="max-w-xl lg:max-w-2xl pt-16 sm:pt-20">
+            
+            {/* Main Heading in Elegant Serif Typography (All Caps) */}
+            <motion.h1 
+              key={`title-${currentSlide}`}
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: 'easeOut' }}
+              className="font-serif text-[21px] sm:text-4xl lg:text-5xl xl:text-6xl text-white font-normal uppercase tracking-tight sm:tracking-[0.04em] leading-[1.18] drop-shadow-lg"
+            >
+              DISCOVER COMFORT.
+              <span className="block text-hotel-ivory">EXPERIENCE HOSPITALITY.</span>
+            </motion.h1>
 
-      {/* Hero Container: Docked cleanly at bottom (khali bottom la thev centre la nako) */}
-      <div className="relative z-10 max-w-5xl w-full mx-auto px-4 sm:px-6 lg:px-8 text-center text-white flex flex-col items-center mt-auto mb-2 sm:mb-4">
-
-        {/* Main Heading (Refined & Compact) */}
-        <h1 className="font-serif text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-normal tracking-wide text-white leading-tight mb-2 drop-shadow-md animate-fade-in">
-          Experience Comfort. Discover Hospitality.
-        </h1>
-
-        {/* Subheading (Refined & Compact) */}
-        <p className="max-w-xl mx-auto font-sans font-light text-xs sm:text-sm lg:text-base text-hotel-ivory/95 tracking-wide leading-relaxed mb-3 drop-shadow">
-          Welcome to Sai Siddhi Nivas – Your Perfect Stay Experience.
-        </p>
-
-        {/* 3 Compact & Sleek CTA Buttons */}
-        <div className="flex flex-wrap justify-center items-center gap-2.5 sm:gap-3 mb-3">
-          <motion.button
-            whileHover={{ scale: 1.05, y: -1.5 }}
-            whileTap={{ scale: 0.96 }}
-            onClick={() => onOpenBooking()}
-            className="px-5 py-2 sm:px-6 sm:py-2.5 rounded-full bg-gradient-to-r from-hotel-gold to-hotel-goldDark hover:from-hotel-goldHover hover:to-hotel-gold text-hotel-forestDark text-xs uppercase tracking-wider font-bold transition-all shadow-lg hover:shadow-xl border border-hotel-goldLight/40 flex items-center space-x-2"
-          >
-            <Calendar className="w-3.5 h-3.5" />
-            <span>Book Your Stay</span>
-          </motion.button>
-
-          <motion.a
-            whileHover={{ scale: 1.05, y: -1.5 }}
-            whileTap={{ scale: 0.96 }}
-            href="#rooms"
-            onClick={(e) => scrollToSection(e, '#rooms')}
-            className="px-5 py-2 sm:px-6 sm:py-2.5 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md text-white text-xs uppercase tracking-wider font-semibold transition-all border border-white/25 hover:border-hotel-gold hover:text-hotel-gold flex items-center space-x-1.5"
-          >
-            <span>Explore Rooms</span>
-            <ArrowRight className="w-3.5 h-3.5 text-hotel-gold" />
-          </motion.a>
-
-          <motion.a
-            whileHover={{ scale: 1.05, y: -1.5 }}
-            whileTap={{ scale: 0.96 }}
-            href="#contact"
-            onClick={(e) => scrollToSection(e, '#contact')}
-            className="px-5 py-2 sm:px-6 sm:py-2.5 rounded-full bg-hotel-forestDark/70 hover:bg-hotel-forestDark backdrop-blur-md text-hotel-ivory text-xs uppercase tracking-wider font-semibold transition-all border border-hotel-gold/30 hover:border-hotel-gold flex items-center space-x-1.5"
-          >
-            <Phone className="w-3.5 h-3.5 text-hotel-gold" />
-            <span>Contact Us</span>
-          </motion.a>
+            {/* Description in Clean Modern Typography */}
+            <motion.p 
+              key={`desc-${currentSlide}`}
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.15, ease: 'easeOut' }}
+              className="font-sans text-xs sm:text-base lg:text-lg text-hotel-ivory/90 font-light leading-relaxed max-w-xl mt-3 sm:mt-5 drop-shadow"
+            >
+              Experience a relaxing stay at Sai Siddhi Nivas, where comfort, warmth and memorable hospitality come together.
+            </motion.p>
+          </div>
         </div>
 
-        {/* Slide Indicators */}
-        <div className="flex justify-center items-center space-x-2 mb-3">
+        {/* Small Centered Pagination Dots at Bottom of Hero Image */}
+        <div className="absolute bottom-16 sm:bottom-20 lg:bottom-24 left-1/2 -translate-x-1/2 z-20 flex items-center space-x-2">
           {heroSlides.map((_, idx) => (
             <button
               key={idx}
               onClick={() => setCurrentSlide(idx)}
-              className={`h-1.5 rounded-full transition-all duration-300 ${idx === currentSlide ? 'w-7 bg-hotel-gold' : 'w-2 bg-white/40 hover:bg-white/70'
-                }`}
+              className={`rounded-full transition-all duration-300 ${
+                idx === currentSlide 
+                  ? 'w-7 h-1.5 bg-white' 
+                  : 'w-2 h-1.5 bg-white/45 hover:bg-white/80'
+              }`}
               aria-label={`Go to slide ${idx + 1}`}
             />
           ))}
         </div>
 
-        {/* Quick Booking Engine Bar with Persons / Guests Selector */}
-        <div className="w-full max-w-4xl">
-          <div className="bg-hotel-forestDark/95 backdrop-blur-xl border border-hotel-gold/35 rounded-2xl p-3.5 sm:p-4 shadow-2xl text-left">
-            <div className="mb-2.5 border-b border-white/10 pb-1.5 flex items-center justify-between">
-              <span className="text-[11px] uppercase tracking-widest text-hotel-gold font-semibold flex items-center space-x-1.5">
-                <Sparkles className="w-3.5 h-3.5" />
-                <span>Direct Booking & Immediate Enquiry</span>
-              </span>
-              <span className="text-[10px] uppercase tracking-wider text-hotel-ivory/60 hidden sm:inline font-sans">
-                Best Tariffs Guaranteed &bull; Instant WhatsApp Confirmation
-              </span>
+      </section>
+
+      {/* 4. FLOATING BOOKING ENGINE (Overlapping Bottom Edge of Hero Image) */}
+      <div className="relative z-30 max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 -mt-10 sm:-mt-14 lg:-mt-16">
+        <div className="bg-white rounded-none sm:rounded-sm shadow-[0_20px_50px_rgba(0,0,0,0.12)] border border-gray-200/90 p-4 sm:p-6 lg:p-7">
+          
+          <form onSubmit={handleAvailabilitySubmit} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-4 lg:gap-5 items-end">
+            
+            {/* Field 1: Check-in & Check-out Dates */}
+            <div className="lg:col-span-4 space-y-1.5">
+              <label className="text-[10px] tracking-[0.22em] uppercase font-semibold text-neutral-500 block">
+                CHECK-IN / CHECK-OUT
+              </label>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <div className="relative border border-gray-300 hover:border-gray-500 transition-colors p-2 flex flex-col justify-center bg-gray-50/50 focus-within:bg-white focus-within:border-hotel-forest">
+                  <span className="text-[9px] uppercase tracking-wider text-neutral-400 font-medium">Arrival</span>
+                  <input
+                    type="date"
+                    value={checkIn}
+                    onChange={(e) => setCheckIn(e.target.value)}
+                    className="w-full bg-transparent text-xs text-neutral-900 font-medium focus:outline-none cursor-pointer"
+                    required
+                  />
+                </div>
+                <div className="relative border border-gray-300 hover:border-gray-500 transition-colors p-2 flex flex-col justify-center bg-gray-50/50 focus-within:bg-white focus-within:border-hotel-forest">
+                  <span className="text-[9px] uppercase tracking-wider text-neutral-400 font-medium">Departure</span>
+                  <input
+                    type="date"
+                    value={checkOut}
+                    min={checkIn}
+                    onChange={(e) => setCheckOut(e.target.value)}
+                    className="w-full bg-transparent text-xs text-neutral-900 font-medium focus:outline-none cursor-pointer"
+                    required
+                  />
+                </div>
+              </div>
             </div>
 
-            {/* 5-Column Grid with Persons/Guests selector */}
-            <form onSubmit={handleQuickSearch} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2.5 items-end">
-
-              {/* 1. Check-In */}
-              <div>
-                <label className="block text-[11px] uppercase tracking-widest text-hotel-ivory/80 font-medium mb-1 flex items-center space-x-1.5">
-                  <Calendar className="w-3 h-3 text-hotel-gold" />
-                  <span>Check In</span>
-                </label>
-                <input
-                  type="date"
-                  value={dates.checkIn}
-                  onChange={(e) => setDates({ ...dates, checkIn: e.target.value })}
-                  className="w-full bg-hotel-forest/90 border border-white/20 rounded-lg px-2.5 py-2 text-xs text-hotel-ivory focus:outline-none focus:border-hotel-gold transition-colors font-sans"
-                  required
-                />
-              </div>
-
-              {/* 2. Check-Out */}
-              <div>
-                <label className="block text-[11px] uppercase tracking-widest text-hotel-ivory/80 font-medium mb-1 flex items-center space-x-1.5">
-                  <Calendar className="w-3 h-3 text-hotel-gold" />
-                  <span>Check Out</span>
-                </label>
-                <input
-                  type="date"
-                  value={dates.checkOut}
-                  onChange={(e) => setDates({ ...dates, checkOut: e.target.value })}
-                  className="w-full bg-hotel-forest/90 border border-white/20 rounded-lg px-2.5 py-2 text-xs text-hotel-ivory focus:outline-none focus:border-hotel-gold transition-colors font-sans"
-                  required
-                />
-              </div>
-
-              {/* 3. Persons / Guests Selector */}
-              <div>
-                <label className="block text-[11px] uppercase tracking-widest text-hotel-ivory/80 font-medium mb-1 flex items-center space-x-1.5">
-                  <Users className="w-3 h-3 text-hotel-gold" />
-                  <span>Persons / Guests</span>
-                </label>
-                <select
-                  value={guests}
-                  onChange={(e) => setGuests(e.target.value)}
-                  className="w-full bg-hotel-forest/90 border border-white/20 rounded-lg px-2.5 py-2 text-xs text-hotel-ivory focus:outline-none focus:border-hotel-gold transition-colors font-sans"
+            {/* Field 2: Adults Selector (- / + Counter) */}
+            <div className="lg:col-span-2 space-y-1.5">
+              <label className="text-[10px] tracking-[0.22em] uppercase font-semibold text-neutral-500 block">
+                ADULTS
+              </label>
+              <div className="h-[46px] border border-gray-300 flex items-center justify-between px-2 bg-gray-50/50 hover:border-gray-500 transition-colors">
+                <button
+                  type="button"
+                  onClick={() => setAdults((prev) => Math.max(1, prev - 1))}
+                  className="w-8 h-8 flex items-center justify-center text-neutral-600 hover:text-black hover:bg-gray-200 text-sm font-semibold transition-colors rounded-sm"
+                  aria-label="Decrease Adults"
                 >
-                  <option value="1 Person" className="bg-hotel-forestDark text-white">1 Person</option>
-                  <option value="2 Persons" className="bg-hotel-forestDark text-white">2 Persons</option>
-                  <option value="3 Persons" className="bg-hotel-forestDark text-white">3 Persons</option>
-                  <option value="4 Persons" className="bg-hotel-forestDark text-white">4 Persons</option>
-                  <option value="5+ Persons (Family)" className="bg-hotel-forestDark text-white">5+ Persons (Family)</option>
-                </select>
+                  &minus;
+                </button>
+                <span className="text-xs font-semibold text-neutral-900 tracking-wider">
+                  {adults}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => setAdults((prev) => Math.min(10, prev + 1))}
+                  className="w-8 h-8 flex items-center justify-center text-neutral-600 hover:text-black hover:bg-gray-200 text-sm font-semibold transition-colors rounded-sm"
+                  aria-label="Increase Adults"
+                >
+                  &#43;
+                </button>
               </div>
+            </div>
 
-              {/* 4. Room Category */}
-              <div>
-                <label className="block text-[11px] uppercase tracking-widest text-hotel-ivory/80 font-medium mb-1 flex items-center space-x-1.5">
-                  <Home className="w-3 h-3 text-hotel-gold" />
-                  <span>Room Type</span>
+            {/* Field 3: Children Selector (- / + Counter) */}
+            <div className="lg:col-span-2 space-y-1.5">
+              <label className="text-[10px] tracking-[0.22em] uppercase font-semibold text-neutral-500 block">
+                CHILDREN
+              </label>
+              <div className="h-[46px] border border-gray-300 flex items-center justify-between px-2 bg-gray-50/50 hover:border-gray-500 transition-colors">
+                <button
+                  type="button"
+                  onClick={() => setChildren((prev) => Math.max(0, prev - 1))}
+                  className="w-8 h-8 flex items-center justify-center text-neutral-600 hover:text-black hover:bg-gray-200 text-sm font-semibold transition-colors rounded-sm"
+                  aria-label="Decrease Children"
+                >
+                  &minus;
+                </button>
+                <span className="text-xs font-semibold text-neutral-900 tracking-wider">
+                  {children}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => setChildren((prev) => Math.min(8, prev + 1))}
+                  className="w-8 h-8 flex items-center justify-center text-neutral-600 hover:text-black hover:bg-gray-200 text-sm font-semibold transition-colors rounded-sm"
+                  aria-label="Increase Children"
+                >
+                  &#43;
+                </button>
+              </div>
+            </div>
+
+            {/* Field 4: Room Type & Promo Code */}
+            <div className="lg:col-span-2 space-y-1.5">
+              <div className="flex items-center justify-between">
+                <label className="text-[10px] tracking-[0.22em] uppercase font-semibold text-neutral-500 block">
+                  ROOM TYPE
                 </label>
+              </div>
+              <div className="h-[46px] border border-gray-300 flex items-center px-2 bg-gray-50/50 hover:border-gray-500 transition-colors">
                 <select
-                  value={selectedRoom}
-                  onChange={(e) => setSelectedRoom(e.target.value)}
-                  className="w-full bg-hotel-forest/90 border border-white/20 rounded-lg px-2.5 py-2 text-xs text-hotel-ivory focus:outline-none focus:border-hotel-gold transition-colors font-sans"
+                  value={roomType}
+                  onChange={(e) => setRoomType(e.target.value)}
+                  className="w-full bg-transparent text-xs text-neutral-900 font-medium focus:outline-none cursor-pointer"
                 >
                   {roomCategories.map((r) => (
-                    <option key={r.id} value={r.id} className="bg-hotel-forestDark text-white">
+                    <option key={r.id} value={r.id}>
                       {r.name}
                     </option>
                   ))}
                 </select>
               </div>
+            </div>
 
-              {/* 5. Check Availability CTA */}
-              <div>
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  type="submit"
-                  className="w-full bg-gradient-to-r from-hotel-gold to-hotel-goldDark hover:from-hotel-goldHover hover:to-hotel-gold text-hotel-forestDark py-2 px-3 rounded-lg text-xs uppercase tracking-widest font-bold transition-all shadow-md hover:shadow-lg flex items-center justify-center space-x-1.5"
-                >
-                  <Calendar className="w-3.5 h-3.5" />
-                  <span>Check Availability</span>
-                </motion.button>
-              </div>
+            {/* Field 5: CHECK AVAILABILITY Action Button */}
+            <div className="lg:col-span-2">
+              <button
+                type="submit"
+                className="w-full h-[46px] bg-hotel-forest hover:bg-hotel-forestDark text-white text-xs tracking-[0.22em] uppercase font-semibold transition-all shadow-md active:scale-95 flex items-center justify-center space-x-2 border border-hotel-forest"
+              >
+                <span>CHECK AVAILABILITY</span>
+              </button>
+            </div>
 
-            </form>
+          </form>
+
+          {/* Bottom Optional Promo Code & Best Tariff Guarantee Notice */}
+          <div className="mt-3.5 pt-3 border-t border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-[11px] text-neutral-500">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="flex items-center space-x-1.5">
+                <Tag className="w-3.5 h-3.5 text-hotel-gold shrink-0" />
+                <span>Promo / corporate code?</span>
+              </span>
+              <input
+                type="text"
+                placeholder="ENTER CODE"
+                value={promoCode}
+                onChange={(e) => setPromoCode(e.target.value.toUpperCase())}
+                className="border-b border-gray-300 focus:border-hotel-forest px-1.5 py-0.5 text-xs text-neutral-800 tracking-wider uppercase focus:outline-none w-24 bg-transparent"
+              />
+            </div>
+            
+            <div className="hidden sm:flex items-center space-x-1.5 text-hotel-forest font-medium">
+              <ShieldCheck className="w-3.5 h-3.5 text-hotel-gold shrink-0" />
+              <span>Best Rates Guaranteed &bull; Instant Confirmation &bull; No Booking Fees</span>
+            </div>
           </div>
+
         </div>
-
       </div>
-
-    </section>
+    </div>
   );
 }
