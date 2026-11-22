@@ -294,9 +294,9 @@ export default function ContactSection() {
                     )}
 
                     {/* Row 1: Name & Mobile Number */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div className="space-y-1.5">
-                        <label className="text-[10px] tracking-[0.22em] uppercase font-semibold text-neutral-500 block">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                      <div className="space-y-1">
+                        <label className="text-[9.5px] sm:text-[10px] tracking-[0.2em] uppercase font-semibold text-neutral-500 block">
                           GUEST FULL NAME *
                         </label>
                         <div className="border border-gray-300 hover:border-gray-500 focus-within:border-hotel-forest transition-colors bg-gray-50/50 focus-within:bg-white p-2.5">
@@ -306,13 +306,13 @@ export default function ContactSection() {
                             placeholder="e.g. Rahul Sharma"
                             value={formData.guestName}
                             onChange={(e) => setFormData({ ...formData, guestName: e.target.value })}
-                            className="w-full bg-transparent text-xs text-neutral-900 font-medium focus:outline-none"
+                            className="w-full bg-transparent text-base sm:text-xs text-neutral-900 font-medium focus:outline-none"
                           />
                         </div>
                       </div>
 
-                      <div className="space-y-1.5">
-                        <label className="text-[10px] tracking-[0.22em] uppercase font-semibold text-neutral-500 block">
+                      <div className="space-y-1">
+                        <label className="text-[9.5px] sm:text-[10px] tracking-[0.2em] uppercase font-semibold text-neutral-500 block">
                           MOBILE NUMBER (FOR CONFIRMATION) *
                         </label>
                         <div className="border border-gray-300 hover:border-gray-500 focus-within:border-hotel-forest transition-colors bg-gray-50/50 focus-within:bg-white p-2.5">
@@ -322,19 +322,19 @@ export default function ContactSection() {
                             placeholder="e.g. 9764764359"
                             value={formData.mobileNumber}
                             onChange={(e) => setFormData({ ...formData, mobileNumber: e.target.value })}
-                            className="w-full bg-transparent text-xs text-neutral-900 font-medium focus:outline-none"
+                            className="w-full bg-transparent text-base sm:text-xs text-neutral-900 font-medium focus:outline-none"
                           />
                         </div>
                       </div>
                     </div>
 
-                    {/* Row 2: Arrival & Departure Dates (Exact match with hero booking engine) */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div className="space-y-1.5">
-                        <label className="text-[10px] tracking-[0.22em] uppercase font-semibold text-neutral-500 block">
+                    {/* Row 2: Arrival & Departure Dates (2 cols on mobile) */}
+                    <div className="grid grid-cols-2 gap-2.5 sm:gap-4">
+                      <div className="space-y-1">
+                        <label className="text-[9.5px] sm:text-[10px] tracking-[0.18em] uppercase font-semibold text-neutral-500 block truncate">
                           CHECK-IN (ARRIVAL) *
                         </label>
-                        <div className="border border-gray-300 hover:border-gray-500 focus-within:border-hotel-forest transition-colors bg-gray-50/50 focus-within:bg-white p-2.5">
+                        <div className="border border-gray-300 hover:border-gray-500 focus-within:border-hotel-forest transition-colors bg-gray-50/50 focus-within:bg-white p-2 sm:p-2.5">
                           <input
                             type="date"
                             required
@@ -351,16 +351,16 @@ export default function ContactSection() {
                               }
                               setFormData({ ...formData, ...updates });
                             }}
-                            className="w-full bg-transparent text-xs text-neutral-900 font-medium focus:outline-none cursor-pointer"
+                            className="w-full bg-transparent text-sm sm:text-xs text-neutral-900 font-medium focus:outline-none cursor-pointer"
                           />
                         </div>
                       </div>
 
-                      <div className="space-y-1.5">
-                        <label className="text-[10px] tracking-[0.22em] uppercase font-semibold text-neutral-500 block">
+                      <div className="space-y-1">
+                        <label className="text-[9.5px] sm:text-[10px] tracking-[0.18em] uppercase font-semibold text-neutral-500 block truncate">
                           CHECK-OUT (DEPARTURE) *
                         </label>
-                        <div className="border border-gray-300 hover:border-gray-500 focus-within:border-hotel-forest transition-colors bg-gray-50/50 focus-within:bg-white p-2.5">
+                        <div className="border border-gray-300 hover:border-gray-500 focus-within:border-hotel-forest transition-colors bg-gray-50/50 focus-within:bg-white p-2 sm:p-2.5">
                           <input
                             type="date"
                             required
@@ -371,21 +371,21 @@ export default function ContactSection() {
                               if (newOut && newOut < (formData.checkInDate || today)) return;
                               setFormData({ ...formData, checkOutDate: newOut });
                             }}
-                            className="w-full bg-transparent text-xs text-neutral-900 font-medium focus:outline-none cursor-pointer"
+                            className="w-full bg-transparent text-sm sm:text-xs text-neutral-900 font-medium focus:outline-none cursor-pointer"
                           />
                         </div>
                       </div>
                     </div>
 
-                    {/* Row 3: ADULTS, CHILDREN & ROOM PREFERENCE (Matching Homepage Hero Booking Engine) */}
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    {/* Row 3: ADULTS, CHILDREN & ROOM PREFERENCE (2 cols on mobile, 3 cols on desktop) */}
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 sm:gap-4">
                       
                       {/* Adults Counter Selector */}
-                      <div className="space-y-1.5">
-                        <label className="text-[10px] tracking-[0.22em] uppercase font-semibold text-neutral-500 block">
+                      <div className="space-y-1">
+                        <label className="text-[9.5px] sm:text-[10px] tracking-[0.2em] uppercase font-semibold text-neutral-500 block">
                           ADULTS
                         </label>
-                        <div className="h-[46px] border border-gray-300 flex items-center justify-between px-2 bg-gray-50/50 hover:border-gray-500 transition-colors">
+                        <div className="h-[44px] sm:h-[46px] border border-gray-300 flex items-center justify-between px-2 bg-gray-50/50 hover:border-gray-500 transition-colors">
                           <motion.button
                             whileHover={{ scale: 1.15 }}
                             whileTap={{ scale: 0.85 }}
@@ -396,7 +396,7 @@ export default function ContactSection() {
                           >
                             &minus;
                           </motion.button>
-                          <span className="text-xs font-semibold text-neutral-900 tracking-wider">
+                          <span className="text-xs sm:text-sm font-semibold text-neutral-900 tracking-wider">
                             {adults}
                           </span>
                           <motion.button
@@ -413,11 +413,11 @@ export default function ContactSection() {
                       </div>
 
                       {/* Children Counter Selector */}
-                      <div className="space-y-1.5">
-                        <label className="text-[10px] tracking-[0.22em] uppercase font-semibold text-neutral-500 block">
+                      <div className="space-y-1">
+                        <label className="text-[9.5px] sm:text-[10px] tracking-[0.2em] uppercase font-semibold text-neutral-500 block">
                           CHILDREN
                         </label>
-                        <div className="h-[46px] border border-gray-300 flex items-center justify-between px-2 bg-gray-50/50 hover:border-gray-500 transition-colors">
+                        <div className="h-[44px] sm:h-[46px] border border-gray-300 flex items-center justify-between px-2 bg-gray-50/50 hover:border-gray-500 transition-colors">
                           <motion.button
                             whileHover={{ scale: 1.15 }}
                             whileTap={{ scale: 0.85 }}
@@ -428,7 +428,7 @@ export default function ContactSection() {
                           >
                             &minus;
                           </motion.button>
-                          <span className="text-xs font-semibold text-neutral-900 tracking-wider">
+                          <span className="text-xs sm:text-sm font-semibold text-neutral-900 tracking-wider">
                             {children}
                           </span>
                           <motion.button
@@ -445,15 +445,15 @@ export default function ContactSection() {
                       </div>
 
                       {/* Room Preference Dropdown */}
-                      <div className="space-y-1.5">
-                        <label className="text-[10px] tracking-[0.22em] uppercase font-semibold text-neutral-500 block">
+                      <div className="col-span-2 sm:col-span-1 space-y-1">
+                        <label className="text-[9.5px] sm:text-[10px] tracking-[0.2em] uppercase font-semibold text-neutral-500 block">
                           ROOM PREFERENCE *
                         </label>
-                        <div className="h-[46px] border border-gray-300 hover:border-gray-500 focus-within:border-hotel-forest transition-colors bg-gray-50/50 focus-within:bg-white px-2.5 flex items-center">
+                        <div className="h-[44px] sm:h-[46px] border border-gray-300 hover:border-gray-500 focus-within:border-hotel-forest transition-colors bg-gray-50/50 focus-within:bg-white px-2.5 flex items-center">
                           <select
                             value={formData.roomPreference}
                             onChange={(e) => setFormData({ ...formData, roomPreference: e.target.value })}
-                            className="w-full bg-transparent text-xs text-neutral-900 font-medium focus:outline-none cursor-pointer"
+                            className="w-full bg-transparent text-sm sm:text-xs text-neutral-900 font-medium focus:outline-none cursor-pointer"
                           >
                             {roomCategories.map((r) => (
                               <option key={r.id} value={r.name}>
@@ -467,17 +467,17 @@ export default function ContactSection() {
                     </div>
 
                     {/* Row 4: Special Request */}
-                    <div className="space-y-1.5">
-                      <label className="text-[10px] tracking-[0.22em] uppercase font-semibold text-neutral-500 block">
-                        SPECIAL REQUESTS / HIGHWAY ARRIVAL TIME (OPTIONAL)
+                    <div className="space-y-1">
+                      <label className="text-[9.5px] sm:text-[10px] tracking-[0.2em] uppercase font-semibold text-neutral-500 block">
+                        SPECIAL REQUESTS / ARRIVAL TIME (OPTIONAL)
                       </label>
                       <div className="border border-gray-300 hover:border-gray-500 focus-within:border-hotel-forest transition-colors bg-gray-50/50 focus-within:bg-white p-2.5">
                         <textarea
-                          rows={3}
+                          rows={2}
                           placeholder="e.g. Ground floor preference, early arrival time, extra mattress, dining requests..."
                           value={formData.specialRequest}
                           onChange={(e) => setFormData({ ...formData, specialRequest: e.target.value })}
-                          className="w-full bg-transparent text-xs text-neutral-900 font-medium focus:outline-none"
+                          className="w-full bg-transparent text-base sm:text-xs text-neutral-900 font-medium focus:outline-none resize-none"
                         />
                       </div>
                     </div>

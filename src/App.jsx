@@ -20,6 +20,25 @@ export default function App() {
   const [bookingInitialData, setBookingInitialData] = useState({});
   const [selectedRoomDetail, setSelectedRoomDetail] = useState(null);
 
+  // History tracking ref to ensure mobile back button closes open modals
+  const activeModalRef = React.useRef(null);
+
+  // Listen for browser popstate (mobile hardware back button / swipe back gesture)
+  React.useEffect(() => {
+    const handlePopState = () => {
+      if (activeModalRef.current === 'booking') {
+        activeModalRef.current = null;
+        setBookingModalOpen(false);
+      } else if (activeModalRef.current === 'roomDetail') {
+        activeModalRef.current = null;
+        setSelectedRoomDetail(null);
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
   React.useEffect(() => {
     if (window.location.hash) {
       setTimeout(() => {
@@ -32,19 +51,42 @@ export default function App() {
   const handleOpenBooking = (initialParams = {}) => {
     setBookingInitialData(initialParams);
     setBookingModalOpen(true);
+    activeModalRef.current = 'booking';
+    window.history.pushState({ modal: 'booking' }, '');
   };
 
   const handleCloseBooking = () => {
     setBookingModalOpen(false);
+    if (activeModalRef.current === 'booking') {
+      activeModalRef.current = null;
+      if (window.history.state?.modal === 'booking') {
+        window.history.back();
+      }
+    }
   };
 
   const handleSelectRoomDetail = (room) => {
     setSelectedRoomDetail(room);
+    activeModalRef.current = 'roomDetail';
+    window.history.pushState({ modal: 'roomDetail' }, '');
+  };
+
+  const handleCloseRoomDetail = () => {
+    setSelectedRoomDetail(null);
+    if (activeModalRef.current === 'roomDetail') {
+      activeModalRef.current = null;
+      if (window.history.state?.modal === 'roomDetail') {
+        window.history.back();
+      }
+    }
   };
 
   const handleBookFromDetail = (roomId) => {
     setSelectedRoomDetail(null);
-    handleOpenBooking({ roomType: roomId });
+    setBookingInitialData({ roomType: roomId });
+    setBookingModalOpen(true);
+    activeModalRef.current = 'booking';
+    window.history.replaceState({ modal: 'booking' }, '');
   };
 
   return (
@@ -104,7 +146,7 @@ export default function App() {
       {/* Room Full Details Modal */}
       <RoomDetailModal
         room={selectedRoomDetail}
-        onClose={() => setSelectedRoomDetail(null)}
+        onClose={handleCloseRoomDetail}
         onBookCategory={handleBookFromDetail}
       />
     </div>

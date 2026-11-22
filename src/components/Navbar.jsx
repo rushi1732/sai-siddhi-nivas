@@ -8,6 +8,7 @@ import {
 export default function Navbar({ onOpenBooking }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const isPoppingNavRef = React.useRef(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,6 +17,28 @@ export default function Navbar({ onOpenBooking }) {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // History management for mobile hamburger menu
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    window.history.pushState({ modal: 'mobileMenu' }, '');
+    const handlePop = () => {
+      isPoppingNavRef.current = true;
+      setMobileMenuOpen(false);
+    };
+    window.addEventListener('popstate', handlePop);
+    return () => {
+      window.removeEventListener('popstate', handlePop);
+    };
+  }, [mobileMenuOpen]);
+
+  const handleCloseMobileMenu = () => {
+    setMobileMenuOpen(false);
+    if (!isPoppingNavRef.current && window.history.state?.modal === 'mobileMenu') {
+      window.history.back();
+    }
+    isPoppingNavRef.current = false;
+  };
 
   // One&Only inspired luxury navigation hierarchy
   const navLinks = [
@@ -30,7 +53,7 @@ export default function Navbar({ onOpenBooking }) {
 
   const handleLinkClick = (e, href) => {
     e.preventDefault();
-    setMobileMenuOpen(false);
+    handleCloseMobileMenu();
     const target = document.querySelector(href);
     if (target) {
       target.scrollIntoView({ behavior: 'smooth' });
@@ -159,7 +182,7 @@ export default function Navbar({ onOpenBooking }) {
                 <span className="text-[10px] uppercase tracking-[0.3em] text-hotel-goldLight block -mt-0.5">NIVAS &bull; KIRTANWADI TARF</span>
               </div>
               <button 
-                onClick={() => setMobileMenuOpen(false)}
+                onClick={handleCloseMobileMenu}
                 className="p-2 text-hotel-ivory hover:text-hotel-gold"
                 aria-label="Close menu"
               >
@@ -199,7 +222,7 @@ export default function Navbar({ onOpenBooking }) {
           <div className="pt-6 border-t border-hotel-gold/20 flex flex-col space-y-3">
             <button
               onClick={() => {
-                setMobileMenuOpen(false);
+                handleCloseMobileMenu();
                 onOpenBooking();
               }}
               className="w-full bg-white hover:bg-hotel-gold text-hotel-forestDark hover:text-white py-3 text-xs tracking-[0.2em] uppercase font-bold text-center flex items-center justify-center space-x-2 shadow-lg transition-colors"

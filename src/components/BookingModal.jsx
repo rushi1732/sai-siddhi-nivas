@@ -95,26 +95,27 @@ export default function BookingModal({ isOpen, onClose, initialData = {} }) {
 
   return (
     <div 
-      className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-5 overflow-y-auto animate-fade-in"
+      className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex justify-center items-end sm:items-center p-0 sm:p-4 overflow-hidden animate-fade-in"
       onClick={onClose}
     >
       <div 
-        className="bg-white max-w-3xl w-full border border-neutral-200/90 shadow-2xl overflow-hidden my-4 sm:my-8 relative"
+        className="bg-white max-w-2xl w-full max-h-[92vh] sm:max-h-[88vh] flex flex-col rounded-t-2xl sm:rounded-none border border-neutral-200/90 shadow-2xl overflow-hidden relative"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Header Strip: One&Only Luxury Aesthetic */}
-        <div className="bg-hotel-forestDark px-6 sm:px-8 py-5 text-hotel-ivory flex items-center justify-between border-b border-hotel-gold/30">
+        {/* Header Strip: One&Only Luxury Aesthetic with Mobile Drag Indicator */}
+        <div className="shrink-0 bg-hotel-forestDark px-5 sm:px-8 py-3.5 sm:py-5 text-hotel-ivory flex items-center justify-between border-b border-hotel-gold/30">
           <div>
-            <span className="text-[10px] tracking-[0.28em] uppercase font-semibold text-hotel-gold block mb-1">
+            <div className="w-10 h-1 bg-white/30 rounded-full mx-auto mb-2 sm:hidden" />
+            <span className="text-[9px] sm:text-[10px] tracking-[0.26em] uppercase font-semibold text-hotel-gold block mb-0.5">
               SAI SIDDHI NIVAS &bull; KIRTANWADI TARF
             </span>
-            <h3 className="font-serif text-xl sm:text-2xl text-white font-normal">
+            <h3 className="font-serif text-lg sm:text-2xl text-white font-normal leading-tight">
               Book Your Stay &amp; Reservation Enquiry
             </h3>
           </div>
           <button
             onClick={onClose}
-            className="w-9 h-9 border border-white/20 hover:border-hotel-gold text-white/80 hover:text-white rounded-full flex items-center justify-center transition-colors hover:bg-white/10"
+            className="w-9 h-9 sm:w-10 sm:h-10 border border-white/20 hover:border-hotel-gold text-white/80 hover:text-white rounded-full flex items-center justify-center transition-colors hover:bg-white/10 shrink-0 ml-3"
             aria-label="Close Booking Modal"
           >
             <X className="w-5 h-5" />
@@ -122,7 +123,7 @@ export default function BookingModal({ isOpen, onClose, initialData = {} }) {
         </div>
 
         {status.submitted ? (
-          <div className="p-8 sm:p-12 text-center space-y-5 animate-fade-in bg-white">
+          <div className="flex-1 overflow-y-auto p-6 sm:p-12 text-center space-y-5 animate-fade-in bg-white overscroll-contain">
             <div className="w-16 h-16 bg-emerald-50 text-emerald-800 rounded-full flex items-center justify-center mx-auto border border-emerald-200">
               <CheckCircle2 className="w-9 h-9" />
             </div>
@@ -155,52 +156,52 @@ export default function BookingModal({ isOpen, onClose, initialData = {} }) {
             </div>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="p-6 sm:p-10 space-y-6 bg-white">
+          <form onSubmit={handleSubmit} className="flex-1 overflow-y-auto p-4 sm:p-8 space-y-4 sm:space-y-6 bg-white overscroll-contain">
             
             {status.error && (
-              <div className="p-3.5 bg-red-50 border border-red-200 text-red-700 text-xs flex items-center space-x-2">
+              <div className="p-3 bg-red-50 border border-red-200 text-red-700 text-xs flex items-center space-x-2">
                 <AlertCircle className="w-4 h-4 shrink-0" />
                 <span>{status.error}</span>
               </div>
             )}
 
             {/* Live Room Summary Strip - Clean Stylish Rupee & Number Typography */}
-            <div className="p-4 sm:p-5 bg-neutral-50/70 border border-neutral-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
-              <div>
-                <span className="text-[10px] uppercase tracking-[0.24em] text-hotel-goldDark font-semibold block mb-0.5">
+            <div className="p-3.5 sm:p-5 bg-neutral-50/80 border border-neutral-200 flex flex-row justify-between items-center gap-2">
+              <div className="min-w-0">
+                <span className="text-[9px] uppercase tracking-[0.22em] text-hotel-goldDark font-semibold block truncate">
                   SELECTED CATEGORY
                 </span>
-                <span className="font-serif text-xl sm:text-2xl text-hotel-forest font-semibold block">
+                <span className="font-serif text-lg sm:text-2xl text-hotel-forest font-semibold block truncate">
                   {selectedRoomObj.name}
                 </span>
-                <span className="text-xs text-neutral-500 block font-sans mt-0.5">
+                <span className="text-[11px] sm:text-xs text-neutral-500 block font-sans truncate">
                   {selectedRoomObj.capacity} &bull; {selectedRoomObj.size}
                 </span>
               </div>
               
               {/* Stylish Rupee Sign & Crisp Modern Numbers */}
-              <div className="text-left sm:text-right">
-                <span className="text-[10px] uppercase tracking-wider text-neutral-500 block font-sans font-medium">
-                  ESTIMATED TARIFF ({nights} NIGHT{nights > 1 ? 'S' : ''})
+              <div className="text-right shrink-0">
+                <span className="text-[9px] uppercase tracking-wider text-neutral-500 block font-sans font-medium">
+                  EST. TARIFF ({nights}N)
                 </span>
-                <div className="flex items-baseline justify-start sm:justify-end space-x-1 my-0.5">
-                  <span className="font-sans font-bold text-lg text-hotel-goldDark select-none">₹</span>
-                  <span className="font-sans text-2xl sm:text-3xl font-extrabold tracking-tight text-neutral-900">
+                <div className="flex items-baseline justify-end space-x-1 my-0.5">
+                  <span className="font-sans font-bold text-base sm:text-lg text-hotel-goldDark select-none">₹</span>
+                  <span className="font-sans text-xl sm:text-3xl font-extrabold tracking-tight text-neutral-900">
                     {estimatedTotal.toLocaleString('en-IN')}
                   </span>
                   <span className="font-sans text-xs text-neutral-400 font-normal">*</span>
                 </div>
-                <span className="text-[10px] text-neutral-400 block font-sans">*Seasonal rates confirmed on call</span>
+                <span className="text-[9px] text-neutral-400 block font-sans">*Confirmed on call</span>
               </div>
             </div>
 
             {/* Form Fields: Styled Exactly Like Homepage Floating Engine */}
-            <div className="space-y-4">
+            <div className="space-y-3.5 sm:space-y-4">
               
               {/* Row 1: Full Name & Mobile Number */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="space-y-1.5">
-                  <label className="text-[10px] tracking-[0.22em] uppercase font-semibold text-neutral-500 block">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                <div className="space-y-1">
+                  <label className="text-[9.5px] sm:text-[10px] tracking-[0.2em] uppercase font-semibold text-neutral-500 block">
                     FULL NAME *
                   </label>
                   <div className="border border-gray-300 hover:border-gray-500 focus-within:border-hotel-forest transition-colors bg-gray-50/50 focus-within:bg-white p-2.5">
@@ -210,14 +211,14 @@ export default function BookingModal({ isOpen, onClose, initialData = {} }) {
                       placeholder="e.g. Maya Iyer"
                       value={formData.guestName}
                       onChange={(e) => setFormData({ ...formData, guestName: e.target.value })}
-                      className="w-full bg-transparent text-xs text-neutral-900 font-medium focus:outline-none"
+                      className="w-full bg-transparent text-base sm:text-xs text-neutral-900 font-medium focus:outline-none"
                     />
                   </div>
                 </div>
 
-                <div className="space-y-1.5">
-                  <label className="text-[10px] tracking-[0.22em] uppercase font-semibold text-neutral-500 block">
-                    MOBILE NUMBER (FOR CONFIRMATION) *
+                <div className="space-y-1">
+                  <label className="text-[9.5px] sm:text-[10px] tracking-[0.2em] uppercase font-semibold text-neutral-500 block">
+                    MOBILE NUMBER (CONFIRMATION) *
                   </label>
                   <div className="border border-gray-300 hover:border-gray-500 focus-within:border-hotel-forest transition-colors bg-gray-50/50 focus-within:bg-white p-2.5">
                     <input
@@ -226,19 +227,19 @@ export default function BookingModal({ isOpen, onClose, initialData = {} }) {
                       placeholder="e.g. 9764764359"
                       value={formData.mobileNumber}
                       onChange={(e) => setFormData({ ...formData, mobileNumber: e.target.value })}
-                      className="w-full bg-transparent text-xs text-neutral-900 font-medium focus:outline-none"
+                      className="w-full bg-transparent text-base sm:text-xs text-neutral-900 font-medium focus:outline-none"
                     />
                   </div>
                 </div>
               </div>
 
-              {/* Row 2: Dates: Check In & Check Out */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="space-y-1.5">
-                  <label className="text-[10px] tracking-[0.22em] uppercase font-semibold text-neutral-500 block">
-                    CHECK-IN DATE (ARRIVAL) *
+              {/* Row 2: Dates: Check In & Check Out (2 columns on mobile) */}
+              <div className="grid grid-cols-2 gap-2.5 sm:gap-4">
+                <div className="space-y-1">
+                  <label className="text-[9.5px] sm:text-[10px] tracking-[0.18em] uppercase font-semibold text-neutral-500 block truncate">
+                    CHECK-IN (ARRIVAL) *
                   </label>
-                  <div className="border border-gray-300 hover:border-gray-500 focus-within:border-hotel-forest transition-colors bg-gray-50/50 focus-within:bg-white p-2.5">
+                  <div className="border border-gray-300 hover:border-gray-500 focus-within:border-hotel-forest transition-colors bg-gray-50/50 focus-within:bg-white p-2 sm:p-2.5">
                     <input
                       type="date"
                       required
@@ -255,16 +256,16 @@ export default function BookingModal({ isOpen, onClose, initialData = {} }) {
                         }
                         setFormData({ ...formData, ...updates });
                       }}
-                      className="w-full bg-transparent text-xs text-neutral-900 font-medium focus:outline-none cursor-pointer"
+                      className="w-full bg-transparent text-sm sm:text-xs text-neutral-900 font-medium focus:outline-none cursor-pointer"
                     />
                   </div>
                 </div>
 
-                <div className="space-y-1.5">
-                  <label className="text-[10px] tracking-[0.22em] uppercase font-semibold text-neutral-500 block">
-                    CHECK-OUT DATE (DEPARTURE) *
+                <div className="space-y-1">
+                  <label className="text-[9.5px] sm:text-[10px] tracking-[0.18em] uppercase font-semibold text-neutral-500 block truncate">
+                    CHECK-OUT (DEPARTURE) *
                   </label>
-                  <div className="border border-gray-300 hover:border-gray-500 focus-within:border-hotel-forest transition-colors bg-gray-50/50 focus-within:bg-white p-2.5">
+                  <div className="border border-gray-300 hover:border-gray-500 focus-within:border-hotel-forest transition-colors bg-gray-50/50 focus-within:bg-white p-2 sm:p-2.5">
                     <input
                       type="date"
                       required
@@ -275,21 +276,21 @@ export default function BookingModal({ isOpen, onClose, initialData = {} }) {
                         if (newOut && newOut < (formData.checkIn || today)) return;
                         setFormData({ ...formData, checkOut: newOut });
                       }}
-                      className="w-full bg-transparent text-xs text-neutral-900 font-medium focus:outline-none cursor-pointer"
+                      className="w-full bg-transparent text-sm sm:text-xs text-neutral-900 font-medium focus:outline-none cursor-pointer"
                     />
                   </div>
                 </div>
               </div>
 
-              {/* Row 3: ADULTS, CHILDREN & ROOM CATEGORY (Matching Homepage Hero Booking Engine) */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              {/* Row 3: ADULTS, CHILDREN & ROOM CATEGORY (2 cols on mobile, 3 cols on desktop) */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 sm:gap-4">
                 
                 {/* Adults Counter Selector */}
-                <div className="space-y-1.5">
-                  <label className="text-[10px] tracking-[0.22em] uppercase font-semibold text-neutral-500 block">
+                <div className="space-y-1">
+                  <label className="text-[9.5px] sm:text-[10px] tracking-[0.2em] uppercase font-semibold text-neutral-500 block">
                     ADULTS
                   </label>
-                  <div className="h-[46px] border border-gray-300 flex items-center justify-between px-2 bg-gray-50/50 hover:border-gray-500 transition-colors">
+                  <div className="h-[44px] sm:h-[46px] border border-gray-300 flex items-center justify-between px-2 bg-gray-50/50 hover:border-gray-500 transition-colors">
                     <motion.button
                       whileHover={{ scale: 1.15 }}
                       whileTap={{ scale: 0.85 }}
@@ -300,7 +301,7 @@ export default function BookingModal({ isOpen, onClose, initialData = {} }) {
                     >
                       &minus;
                     </motion.button>
-                    <span className="text-xs font-semibold text-neutral-900 tracking-wider">
+                    <span className="text-xs sm:text-sm font-semibold text-neutral-900 tracking-wider">
                       {adults}
                     </span>
                     <motion.button
@@ -317,11 +318,11 @@ export default function BookingModal({ isOpen, onClose, initialData = {} }) {
                 </div>
 
                 {/* Children Counter Selector */}
-                <div className="space-y-1.5">
-                  <label className="text-[10px] tracking-[0.22em] uppercase font-semibold text-neutral-500 block">
+                <div className="space-y-1">
+                  <label className="text-[9.5px] sm:text-[10px] tracking-[0.2em] uppercase font-semibold text-neutral-500 block">
                     CHILDREN
                   </label>
-                  <div className="h-[46px] border border-gray-300 flex items-center justify-between px-2 bg-gray-50/50 hover:border-gray-500 transition-colors">
+                  <div className="h-[44px] sm:h-[46px] border border-gray-300 flex items-center justify-between px-2 bg-gray-50/50 hover:border-gray-500 transition-colors">
                     <motion.button
                       whileHover={{ scale: 1.15 }}
                       whileTap={{ scale: 0.85 }}
@@ -332,7 +333,7 @@ export default function BookingModal({ isOpen, onClose, initialData = {} }) {
                     >
                       &minus;
                     </motion.button>
-                    <span className="text-xs font-semibold text-neutral-900 tracking-wider">
+                    <span className="text-xs sm:text-sm font-semibold text-neutral-900 tracking-wider">
                       {children}
                     </span>
                     <motion.button
@@ -349,15 +350,15 @@ export default function BookingModal({ isOpen, onClose, initialData = {} }) {
                 </div>
 
                 {/* Room Category Dropdown */}
-                <div className="space-y-1.5">
-                  <label className="text-[10px] tracking-[0.22em] uppercase font-semibold text-neutral-500 block">
+                <div className="col-span-2 sm:col-span-1 space-y-1">
+                  <label className="text-[9.5px] sm:text-[10px] tracking-[0.2em] uppercase font-semibold text-neutral-500 block">
                     ROOM CATEGORY *
                   </label>
-                  <div className="h-[46px] border border-gray-300 hover:border-gray-500 focus-within:border-hotel-forest transition-colors bg-gray-50/50 focus-within:bg-white px-2.5 flex items-center">
+                  <div className="h-[44px] sm:h-[46px] border border-gray-300 hover:border-gray-500 focus-within:border-hotel-forest transition-colors bg-gray-50/50 focus-within:bg-white px-2.5 flex items-center">
                     <select
                       value={formData.roomType}
                       onChange={(e) => setFormData({ ...formData, roomType: e.target.value })}
-                      className="w-full bg-transparent text-xs text-neutral-900 font-medium focus:outline-none cursor-pointer"
+                      className="w-full bg-transparent text-sm sm:text-xs text-neutral-900 font-medium focus:outline-none cursor-pointer"
                     >
                       {roomCategories.map((r) => (
                         <option key={r.id} value={r.id}>
@@ -371,9 +372,9 @@ export default function BookingModal({ isOpen, onClose, initialData = {} }) {
               </div>
 
               {/* Row 4: Special Request */}
-              <div className="space-y-1.5">
-                <label className="text-[10px] tracking-[0.22em] uppercase font-semibold text-neutral-500 block">
-                  SPECIAL REQUEST / HIGHWAY ARRIVAL TIME (OPTIONAL)
+              <div className="space-y-1">
+                <label className="text-[9.5px] sm:text-[10px] tracking-[0.2em] uppercase font-semibold text-neutral-500 block">
+                  SPECIAL REQUEST / ARRIVAL TIME (OPTIONAL)
                 </label>
                 <div className="border border-gray-300 hover:border-gray-500 focus-within:border-hotel-forest transition-colors bg-gray-50/50 focus-within:bg-white p-2.5">
                   <textarea
@@ -381,7 +382,7 @@ export default function BookingModal({ isOpen, onClose, initialData = {} }) {
                     placeholder="e.g. Late night check-in, ground floor room, extra pillow, dining requests..."
                     value={formData.specialRequests}
                     onChange={(e) => setFormData({ ...formData, specialRequests: e.target.value })}
-                    className="w-full bg-transparent text-xs text-neutral-900 font-medium focus:outline-none"
+                    className="w-full bg-transparent text-base sm:text-xs text-neutral-900 font-medium focus:outline-none resize-none"
                   />
                 </div>
               </div>
@@ -389,10 +390,10 @@ export default function BookingModal({ isOpen, onClose, initialData = {} }) {
             </div>
 
             {/* Action Buttons: Matching One&Only Luxury Aesthetic */}
-            <div className="pt-2 space-y-3">
+            <div className="pt-2 space-y-2.5">
               <button
                 type="submit"
-                className="w-full bg-hotel-forestDark hover:bg-hotel-gold text-white hover:text-hotel-forestDark py-4 px-6 text-xs font-semibold tracking-[0.22em] uppercase transition-all shadow-md active:scale-95 flex items-center justify-center space-x-2"
+                className="w-full min-h-[46px] bg-hotel-forestDark hover:bg-hotel-gold text-white hover:text-hotel-forestDark py-3.5 px-6 text-xs font-semibold tracking-[0.22em] uppercase transition-all shadow-md active:scale-95 flex items-center justify-center space-x-2"
               >
                 <Send className="w-3.5 h-3.5 text-hotel-goldLight" />
                 <span>SUBMIT RESERVATION ENQUIRY</span>
@@ -401,7 +402,7 @@ export default function BookingModal({ isOpen, onClose, initialData = {} }) {
               <button
                 type="button"
                 onClick={handleWhatsAppRedirect}
-                className="w-full bg-white hover:bg-neutral-50 text-emerald-800 border border-emerald-300/80 py-3 px-4 text-xs font-semibold tracking-[0.16em] uppercase transition-all shadow-sm flex items-center justify-center space-x-2"
+                className="w-full min-h-[44px] bg-white hover:bg-neutral-50 text-emerald-800 border border-emerald-300/80 py-3 px-4 text-xs font-semibold tracking-[0.16em] uppercase transition-all shadow-sm flex items-center justify-center space-x-2"
               >
                 <MessageCircle className="w-3.5 h-3.5 text-emerald-600" />
                 <span>INSTANT WHATSAPP CONFIRMATION</span>
@@ -409,9 +410,9 @@ export default function BookingModal({ isOpen, onClose, initialData = {} }) {
             </div>
 
             {/* Trust Assurance Strip */}
-            <div className="pt-1 text-center">
-              <span className="text-[10px] text-neutral-400 font-light tracking-wider uppercase block">
-                &bull; Best Direct Rates Guaranteed &bull; Instant WhatsApp Confirmation &bull; No Advance Booking Fees &bull;
+            <div className="pt-1 pb-6 sm:pb-2 text-center">
+              <span className="text-[9.5px] text-neutral-400 font-light tracking-wider uppercase block">
+                &bull; Best Direct Rates &bull; Instant WhatsApp Confirmation &bull; No Hidden Charges &bull;
               </span>
             </div>
 

@@ -24,6 +24,29 @@ export default function GallerySection() {
     ? galleryImages
     : galleryImages.filter(img => img.category === activeFilter);
 
+  const isPoppingGalleryRef = React.useRef(false);
+
+  React.useEffect(() => {
+    if (!selectedImage) return;
+    window.history.pushState({ modal: 'galleryLightbox' }, '');
+    const handlePop = () => {
+      isPoppingGalleryRef.current = true;
+      setSelectedImage(null);
+    };
+    window.addEventListener('popstate', handlePop);
+    return () => {
+      window.removeEventListener('popstate', handlePop);
+    };
+  }, [selectedImage]);
+
+  const handleCloseImage = () => {
+    setSelectedImage(null);
+    if (!isPoppingGalleryRef.current && window.history.state?.modal === 'galleryLightbox') {
+      window.history.back();
+    }
+    isPoppingGalleryRef.current = false;
+  };
+
   const handleNextImage = () => {
     if (!selectedImage) return;
     const currentIndex = filteredImages.findIndex(i => i.id === selectedImage.id);
@@ -131,11 +154,11 @@ export default function GallerySection() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex items-center justify-center p-4"
-            onClick={() => setSelectedImage(null)}
+            onClick={handleCloseImage}
           >
             {/* Close Button */}
             <button
-              onClick={() => setSelectedImage(null)}
+              onClick={handleCloseImage}
               className="absolute top-6 right-6 text-white hover:text-hotel-gold p-2 z-20 rounded-full bg-white/10 hover:bg-white/20 transition-all"
               aria-label="Close Lightbox"
             >

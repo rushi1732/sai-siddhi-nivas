@@ -155,14 +155,14 @@ export default function Hero({ onOpenBooking }) {
       >
         <div className="bg-white rounded-none sm:rounded-sm shadow-[0_25px_60px_-15px_rgba(0,0,0,0.18)] border border-gray-200/90 p-4 sm:p-6 lg:p-7 transition-shadow hover:shadow-[0_30px_70px_-15px_rgba(0,0,0,0.22)]">
 
-          <form onSubmit={handleAvailabilitySubmit} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-4 lg:gap-5 items-end">
+          <form onSubmit={handleAvailabilitySubmit} className="grid grid-cols-2 lg:grid-cols-12 gap-3 sm:gap-4 lg:gap-5 items-end">
 
-            {/* Field 1: Check-in & Check-out Dates */}
-            <div className="lg:col-span-4 space-y-1.5">
+            {/* Field 1: Check-in & Check-out Dates (Side-by-side on mobile and desktop) */}
+            <div className="col-span-2 lg:col-span-4 space-y-1.5">
               <label className="text-[10px] tracking-[0.22em] uppercase font-semibold text-neutral-500 block">
                 CHECK-IN / CHECK-OUT
               </label>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <div className="grid grid-cols-2 gap-2">
                 <div className="relative border border-gray-300 hover:border-gray-500 transition-colors p-2 flex flex-col justify-center bg-gray-50/50 focus-within:bg-white focus-within:border-hotel-forest">
                   <span className="text-[9px] uppercase tracking-wider text-neutral-400 font-medium">Arrival</span>
                   <input
@@ -202,7 +202,7 @@ export default function Hero({ onOpenBooking }) {
             </div>
 
             {/* Field 2: Adults Selector (- / + Counter) */}
-            <div className="lg:col-span-2 space-y-1.5">
+            <div className="col-span-1 lg:col-span-2 space-y-1.5">
               <label className="text-[10px] tracking-[0.22em] uppercase font-semibold text-neutral-500 block">
                 ADULTS
               </label>
@@ -234,7 +234,7 @@ export default function Hero({ onOpenBooking }) {
             </div>
 
             {/* Field 3: Children Selector (- / + Counter) */}
-            <div className="lg:col-span-2 space-y-1.5">
+            <div className="col-span-1 lg:col-span-2 space-y-1.5">
               <label className="text-[10px] tracking-[0.22em] uppercase font-semibold text-neutral-500 block">
                 CHILDREN
               </label>
@@ -266,7 +266,7 @@ export default function Hero({ onOpenBooking }) {
             </div>
 
             {/* Field 4: Room Type & Promo Code */}
-            <div className="lg:col-span-2 space-y-1.5">
+            <div className="col-span-2 lg:col-span-2 space-y-1.5">
               <div className="flex items-center justify-between">
                 <label className="text-[10px] tracking-[0.22em] uppercase font-semibold text-neutral-500 block">
                   ROOM TYPE
@@ -288,7 +288,7 @@ export default function Hero({ onOpenBooking }) {
             </div>
 
             {/* Field 5: CHECK AVAILABILITY Action Button */}
-            <div className="lg:col-span-2">
+            <div className="col-span-2 lg:col-span-2">
               <motion.button
                 whileHover={{ scale: 1.03, boxShadow: '0 10px 25px -5px rgba(12,36,25,0.4)' }}
                 whileTap={{ scale: 0.97 }}
