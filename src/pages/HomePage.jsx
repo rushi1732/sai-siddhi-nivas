@@ -11,14 +11,17 @@ import ContactSection from '../components/ContactSection';
 
 export default function HomePage({ onOpenBooking, onSelectRoomDetail }) {
   return (
-    <main className="relative bg-hotel-forestDark">
+    <main className="relative bg-white w-full">
       {/* 1. Full Screen Cinematic Hero Section - Sticky Parallax Locked Background */}
-      <div className="sticky top-0 h-screen w-full z-0 overflow-hidden">
+      <div 
+        className="sticky top-0 h-screen w-full z-0 overflow-hidden"
+        style={{ position: 'sticky', top: 0 }}
+      >
         <Hero onOpenBooking={onOpenBooking} />
       </div>
 
       {/* 2. Content Layer - Glides Smoothly UP and OVER the Locked Hero Photo */}
-      <div className="relative z-10 bg-white shadow-[0_-30px_60px_rgba(0,0,0,0.65)]">
+      <div className="relative z-10 bg-white shadow-[0_-30px_60px_rgba(0,0,0,0.85)]">
         {/* About Sai Siddhi Nivas */}
         <AboutSection />
 

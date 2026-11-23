@@ -31,18 +31,20 @@ export default function AmenitiesSection({ onOpenBooking }) {
       <div 
         className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat z-0 bg-fixed pointer-events-none"
         style={{ 
-          backgroundImage: `url('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=1920&auto=format&fit=crop')`,
-          backgroundAttachment: 'fixed'
+          backgroundImage: `url('https://images.unsplash.com/photo-1571896349842-33c89424de2d?q=80&w=1920&auto=format&fit=crop')`,
+          backgroundAttachment: 'fixed',
+          backgroundPosition: 'center',
+          backgroundSize: 'cover'
         }}
       />
 
-      {/* Luxury Dark Forest Overlay with Blur & Gradient */}
-      <div className="absolute inset-0 bg-hotel-forestDark/88 backdrop-blur-[1px] z-0 pointer-events-none" />
-      <div className="absolute inset-0 bg-gradient-to-b from-hotel-forestDark via-hotel-forestDark/80 to-hotel-forestDark z-0 pointer-events-none" />
+      {/* Luxury Translucent Dark Overlay - Leaves the resort photo clearly visible */}
+      <div className="absolute inset-0 bg-black/60 pointer-events-none z-0" />
+      <div className="absolute inset-0 bg-gradient-to-b from-hotel-forestDark/85 via-transparent to-hotel-forestDark/90 pointer-events-none z-0" />
       
       {/* Subtle Gold / Emerald Glow Accents */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full bg-hotel-gold/10 blur-3xl pointer-events-none z-0" />
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 rounded-full bg-emerald-500/10 blur-3xl pointer-events-none z-0" />
+      <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full bg-hotel-gold/15 blur-3xl pointer-events-none z-0" />
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 rounded-full bg-emerald-500/15 blur-3xl pointer-events-none z-0" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
