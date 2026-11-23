@@ -9,8 +9,27 @@ import { motion } from 'framer-motion';
 
 export default function ReviewsSection() {
   return (
-    <section id="reviews" className="py-20 lg:py-28 bg-hotel-forestDark text-hotel-ivory heritage-pattern relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="reviews" className="py-20 lg:py-28 text-hotel-ivory relative overflow-hidden bg-hotel-forestDark">
+      {/* Locked / Fixed Parallax Background Photo (Stays in place during scroll) */}
+      <div 
+        className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat z-0 bg-fixed pointer-events-none"
+        style={{ 
+          backgroundImage: `url('https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?q=80&w=1920&auto=format&fit=crop')`,
+          backgroundAttachment: 'fixed',
+          backgroundPosition: 'center',
+          backgroundSize: 'cover'
+        }}
+      />
+
+      {/* Luxury Translucent Dark Overlay - Leaves the resort photo clearly visible */}
+      <div className="absolute inset-0 bg-black/60 pointer-events-none z-0" />
+      <div className="absolute inset-0 bg-gradient-to-b from-hotel-forestDark/85 via-transparent to-hotel-forestDark/90 pointer-events-none z-0" />
+      
+      {/* Subtle Gold / Emerald Glow Accents */}
+      <div className="absolute top-0 right-1/4 w-96 h-96 rounded-full bg-hotel-gold/15 blur-3xl pointer-events-none z-0" />
+      <div className="absolute bottom-0 left-1/4 w-96 h-96 rounded-full bg-emerald-500/15 blur-3xl pointer-events-none z-0" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
         <AnimateIn direction="up">
