@@ -147,25 +147,25 @@ export default function Hero({ onOpenBooking }) {
             ))}
           </div>
 
-          {/* 4. FLOATING BOOKING ENGINE (Transparent Blur / Luxury Frosted Glass) */}
+          {/* 4. FLOATING BOOKING ENGINE (Transparent Frosted Glass / Glassmorphism) */}
           <motion.div 
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
             className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 pb-4 sm:pb-6 lg:pb-8 w-full"
           >
-            <div className="bg-white/80 sm:bg-white/75 backdrop-blur-xl rounded-none sm:rounded-sm shadow-[0_25px_60px_-15px_rgba(0,0,0,0.35)] border border-white/60 p-3.5 sm:p-5 lg:p-6 transition-all hover:bg-white/85">
+            <div className="bg-black/40 sm:bg-black/35 backdrop-blur-2xl rounded-sm sm:rounded-md shadow-[0_30px_70px_rgba(0,0,0,0.6)] border border-white/20 p-3.5 sm:p-5 lg:p-6 transition-all hover:bg-black/45 hover:border-white/30">
 
               <form onSubmit={handleAvailabilitySubmit} className="grid grid-cols-2 lg:grid-cols-12 gap-2.5 sm:gap-4 lg:gap-5 items-end">
 
-                {/* Field 1: Check-in & Check-out Dates (Side-by-side on mobile and desktop) */}
+                {/* Field 1: Check-in & Check-out Dates */}
                 <div className="col-span-2 lg:col-span-4 space-y-1">
-                  <label className="text-[10px] tracking-[0.22em] uppercase font-bold text-neutral-800 block">
+                  <label className="text-[10px] tracking-[0.22em] uppercase font-bold text-white/90 block">
                     CHECK-IN / CHECK-OUT
                   </label>
                   <div className="grid grid-cols-2 gap-2">
-                    <div className="relative border border-neutral-300/80 hover:border-hotel-forest transition-colors p-2 flex flex-col justify-center bg-white/75 hover:bg-white/95 focus-within:bg-white focus-within:border-hotel-forest backdrop-blur-sm">
-                      <span className="text-[9px] uppercase tracking-wider text-neutral-500 font-semibold">Arrival</span>
+                    <div className="relative border border-white/25 hover:border-hotel-gold/70 transition-colors p-2 flex flex-col justify-center bg-white/10 hover:bg-white/15 focus-within:bg-white/20 focus-within:border-hotel-gold backdrop-blur-md rounded-sm">
+                      <span className="text-[9px] uppercase tracking-wider text-white/70 font-semibold">Arrival</span>
                       <input
                         type="date"
                         value={checkIn}
@@ -180,12 +180,12 @@ export default function Hero({ onOpenBooking }) {
                             setCheckOut(getLocalDateString(nextDate));
                           }
                         }}
-                        className="w-full bg-transparent text-xs text-neutral-900 font-medium focus:outline-none cursor-pointer"
+                        className="w-full bg-transparent text-xs text-white font-medium focus:outline-none cursor-pointer [color-scheme:dark]"
                         required
                       />
                     </div>
-                    <div className="relative border border-neutral-300/80 hover:border-hotel-forest transition-colors p-2 flex flex-col justify-center bg-white/75 hover:bg-white/95 focus-within:bg-white focus-within:border-hotel-forest backdrop-blur-sm">
-                      <span className="text-[9px] uppercase tracking-wider text-neutral-500 font-semibold">Departure</span>
+                    <div className="relative border border-white/25 hover:border-hotel-gold/70 transition-colors p-2 flex flex-col justify-center bg-white/10 hover:bg-white/15 focus-within:bg-white/20 focus-within:border-hotel-gold backdrop-blur-md rounded-sm">
+                      <span className="text-[9px] uppercase tracking-wider text-white/70 font-semibold">Departure</span>
                       <input
                         type="date"
                         value={checkOut}
@@ -195,7 +195,7 @@ export default function Hero({ onOpenBooking }) {
                           if (val && val < (checkIn || today)) return;
                           setCheckOut(val);
                         }}
-                        className="w-full bg-transparent text-xs text-neutral-900 font-medium focus:outline-none cursor-pointer"
+                        className="w-full bg-transparent text-xs text-white font-medium focus:outline-none cursor-pointer [color-scheme:dark]"
                         required
                       />
                     </div>
@@ -204,21 +204,21 @@ export default function Hero({ onOpenBooking }) {
 
                 {/* Field 2: Adults Selector (- / + Counter) */}
                 <div className="col-span-1 lg:col-span-2 space-y-1">
-                  <label className="text-[10px] tracking-[0.22em] uppercase font-bold text-neutral-800 block">
+                  <label className="text-[10px] tracking-[0.22em] uppercase font-bold text-white/90 block">
                     ADULTS
                   </label>
-                  <div className="h-[46px] border border-neutral-300/80 flex items-center justify-between px-2 bg-white/75 hover:bg-white/95 focus-within:bg-white transition-colors backdrop-blur-sm">
+                  <div className="h-[46px] border border-white/25 hover:border-hotel-gold/70 flex items-center justify-between px-2 bg-white/10 hover:bg-white/15 focus-within:bg-white/20 transition-colors backdrop-blur-md rounded-sm">
                     <motion.button
                       whileHover={{ scale: 1.15 }}
                       whileTap={{ scale: 0.85 }}
                       type="button"
                       onClick={() => setAdults((prev) => Math.max(1, prev - 1))}
-                      className="w-8 h-8 flex items-center justify-center text-neutral-700 hover:text-black hover:bg-white/80 text-sm font-semibold transition-colors rounded-sm"
+                      className="w-8 h-8 flex items-center justify-center text-white/80 hover:text-white hover:bg-white/20 text-sm font-semibold transition-colors rounded-sm"
                       aria-label="Decrease Adults"
                     >
                       &minus;
                     </motion.button>
-                    <span className="text-xs font-semibold text-neutral-900 tracking-wider">
+                    <span className="text-xs font-bold text-white tracking-wider">
                       {adults}
                     </span>
                     <motion.button
@@ -226,7 +226,7 @@ export default function Hero({ onOpenBooking }) {
                       whileTap={{ scale: 0.85 }}
                       type="button"
                       onClick={() => setAdults((prev) => Math.min(10, prev + 1))}
-                      className="w-8 h-8 flex items-center justify-center text-neutral-700 hover:text-black hover:bg-white/80 text-sm font-semibold transition-colors rounded-sm"
+                      className="w-8 h-8 flex items-center justify-center text-white/80 hover:text-white hover:bg-white/20 text-sm font-semibold transition-colors rounded-sm"
                       aria-label="Increase Adults"
                     >
                       &#43;
@@ -236,21 +236,21 @@ export default function Hero({ onOpenBooking }) {
 
                 {/* Field 3: Children Selector (- / + Counter) */}
                 <div className="col-span-1 lg:col-span-2 space-y-1">
-                  <label className="text-[10px] tracking-[0.22em] uppercase font-bold text-neutral-800 block">
+                  <label className="text-[10px] tracking-[0.22em] uppercase font-bold text-white/90 block">
                     CHILDREN
                   </label>
-                  <div className="h-[46px] border border-neutral-300/80 flex items-center justify-between px-2 bg-white/75 hover:bg-white/95 focus-within:bg-white transition-colors backdrop-blur-sm">
+                  <div className="h-[46px] border border-white/25 hover:border-hotel-gold/70 flex items-center justify-between px-2 bg-white/10 hover:bg-white/15 focus-within:bg-white/20 transition-colors backdrop-blur-md rounded-sm">
                     <motion.button
                       whileHover={{ scale: 1.15 }}
                       whileTap={{ scale: 0.85 }}
                       type="button"
                       onClick={() => setChildren((prev) => Math.max(0, prev - 1))}
-                      className="w-8 h-8 flex items-center justify-center text-neutral-700 hover:text-black hover:bg-white/80 text-sm font-semibold transition-colors rounded-sm"
+                      className="w-8 h-8 flex items-center justify-center text-white/80 hover:text-white hover:bg-white/20 text-sm font-semibold transition-colors rounded-sm"
                       aria-label="Decrease Children"
                     >
                       &minus;
                     </motion.button>
-                    <span className="text-xs font-semibold text-neutral-900 tracking-wider">
+                    <span className="text-xs font-bold text-white tracking-wider">
                       {children}
                     </span>
                     <motion.button
@@ -258,7 +258,7 @@ export default function Hero({ onOpenBooking }) {
                       whileTap={{ scale: 0.85 }}
                       type="button"
                       onClick={() => setChildren((prev) => Math.min(8, prev + 1))}
-                      className="w-8 h-8 flex items-center justify-center text-neutral-700 hover:text-black hover:bg-white/80 text-sm font-semibold transition-colors rounded-sm"
+                      className="w-8 h-8 flex items-center justify-center text-white/80 hover:text-white hover:bg-white/20 text-sm font-semibold transition-colors rounded-sm"
                       aria-label="Increase Children"
                     >
                       &#43;
@@ -269,18 +269,18 @@ export default function Hero({ onOpenBooking }) {
                 {/* Field 4: Room Type */}
                 <div className="col-span-2 lg:col-span-2 space-y-1">
                   <div className="flex items-center justify-between">
-                    <label className="text-[10px] tracking-[0.22em] uppercase font-bold text-neutral-800 block">
+                    <label className="text-[10px] tracking-[0.22em] uppercase font-bold text-white/90 block">
                       ROOM TYPE
                     </label>
                   </div>
-                  <div className="h-[46px] border border-neutral-300/80 flex items-center px-2 bg-white/75 hover:bg-white/95 focus-within:bg-white transition-colors backdrop-blur-sm">
+                  <div className="h-[46px] border border-white/25 hover:border-hotel-gold/70 flex items-center px-2 bg-white/10 hover:bg-white/15 focus-within:bg-white/20 transition-colors backdrop-blur-md rounded-sm">
                     <select
                       value={roomType}
                       onChange={(e) => setRoomType(e.target.value)}
-                      className="w-full bg-transparent text-xs text-neutral-900 font-medium focus:outline-none cursor-pointer"
+                      className="w-full bg-transparent text-xs text-white font-medium focus:outline-none cursor-pointer [color-scheme:dark]"
                     >
                       {roomCategories.map((r) => (
-                        <option key={r.id} value={r.id}>
+                        <option key={r.id} value={r.id} className="bg-hotel-forestDark text-white py-1">
                           {r.name}
                         </option>
                       ))}
@@ -291,10 +291,10 @@ export default function Hero({ onOpenBooking }) {
                 {/* Field 5: CHECK AVAILABILITY Action Button */}
                 <div className="col-span-2 lg:col-span-2">
                   <motion.button
-                    whileHover={{ scale: 1.03, boxShadow: '0 10px 25px -5px rgba(12,36,25,0.4)' }}
+                    whileHover={{ scale: 1.03, boxShadow: '0 10px 25px -5px rgba(212,163,115,0.5)' }}
                     whileTap={{ scale: 0.97 }}
                     type="submit"
-                    className="w-full h-[46px] bg-hotel-forest hover:bg-hotel-forestDark text-white text-xs tracking-[0.22em] uppercase font-semibold transition-all shadow-md active:scale-95 flex items-center justify-center space-x-2 border border-hotel-forest"
+                    className="w-full h-[46px] bg-hotel-gold hover:bg-hotel-goldLight text-hotel-forestDark text-xs tracking-[0.22em] uppercase font-bold transition-all shadow-xl active:scale-95 flex items-center justify-center space-x-2 border border-hotel-gold"
                   >
                     <span>CHECK AVAILABILITY</span>
                   </motion.button>
@@ -303,22 +303,22 @@ export default function Hero({ onOpenBooking }) {
               </form>
 
               {/* Bottom Optional Promo Code & Best Tariff Guarantee Notice */}
-              <div className="mt-2.5 pt-2 border-t border-neutral-300/50 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-[11px] text-neutral-700">
+              <div className="mt-2.5 pt-2 border-t border-white/15 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-[11px] text-white/80">
                 <div className="flex flex-wrap items-center gap-2">
                   <span className="flex items-center space-x-1.5 font-medium">
                     <Tag className="w-3.5 h-3.5 text-hotel-gold shrink-0" />
-                    <span>Promo / corporate code?</span>
+                    <span className="text-white/80">Promo / corporate code?</span>
                   </span>
                   <input
                     type="text"
                     placeholder="ENTER CODE"
                     value={promoCode}
                     onChange={(e) => setPromoCode(e.target.value.toUpperCase())}
-                    className="border-b border-neutral-400 focus:border-hotel-forest px-1.5 py-0.5 text-xs text-neutral-900 font-medium tracking-wider uppercase focus:outline-none w-24 bg-transparent placeholder:text-neutral-500"
+                    className="border-b border-white/40 focus:border-hotel-gold px-1.5 py-0.5 text-xs text-white font-medium tracking-wider uppercase focus:outline-none w-24 bg-transparent placeholder:text-white/50"
                   />
                 </div>
 
-                <div className="hidden sm:flex items-center space-x-1.5 text-hotel-forest font-semibold">
+                <div className="hidden sm:flex items-center space-x-1.5 text-hotel-goldLight font-semibold">
                   <ShieldCheck className="w-3.5 h-3.5 text-hotel-gold shrink-0" />
                   <span>Best Rates Guaranteed &bull; Instant Confirmation &bull; No Booking Fees</span>
                 </div>
