@@ -79,9 +79,9 @@ export default function AmenitiesSection({ onOpenBooking }) {
           </div>
         </AnimateIn>
 
-        {/* Amenities Icon Grid with Fluid Staggered Entrance */}
+        {/* Amenities Icon Grid (Curated Top 4 Flagship Amenities on Home Page) */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {hotelAmenities.map((amenity, idx) => {
+          {hotelAmenities.slice(0, 4).map((amenity, idx) => {
             const IconComponent = iconMap[amenity.icon] || CheckCircle;
             return (
               <motion.div
