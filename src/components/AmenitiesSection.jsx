@@ -1,9 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { hotelAmenities, hotelInfo } from '../data/hotelData';
 import {
   Car, Wifi, Utensils, Snowflake, BellRing,
   Flame, Users, Zap, ShieldCheck, Sparkles, Compass,
-  CheckCircle, CheckCircle2, Info, Phone
+  CheckCircle, CheckCircle2, Info, Phone, ArrowRight
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import AnimateIn from './AnimateIn';
@@ -103,6 +104,17 @@ export default function AmenitiesSection({ onOpenBooking }) {
               </motion.div>
             );
           })}
+        </div>
+
+        {/* Dedicated Page Link Button */}
+        <div className="mt-10 text-center">
+          <Link
+            to="/experiences"
+            className="inline-flex items-center space-x-2 bg-hotel-gold hover:bg-hotel-goldLight text-hotel-forestDark px-7 py-3 rounded text-xs uppercase tracking-[0.2em] font-bold transition-all shadow-md active:scale-95"
+          >
+            <span>EXPLORE ALL EXPERIENCES &amp; AMENITIES</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </Link>
         </div>
 
         {/* Highway Assistance & Parking Callout */}

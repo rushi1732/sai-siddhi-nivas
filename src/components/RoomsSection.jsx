@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { roomCategories, hotelInfo } from '../data/hotelData';
 import { 
   Bed, Maximize2, Users, Check, ChevronRight, 
-  Sparkles, Calendar, Info, Phone, ShieldCheck, Eye
+  Sparkles, Calendar, Info, Phone, ShieldCheck, Eye, ArrowRight
 } from 'lucide-react';
 import AnimateIn from './AnimateIn';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -202,6 +203,17 @@ export default function RoomsSection({ onOpenBooking, onSelectRoomDetail }) {
               </motion.div>
             ))}
         </AnimatePresence>
+
+        {/* Dedicated Page Link Button */}
+        <div className="mt-10 mb-6 text-center">
+          <Link
+            to="/accommodation"
+            className="inline-flex items-center space-x-2 bg-hotel-forest hover:bg-hotel-forestDark text-white px-8 py-3.5 rounded text-xs uppercase tracking-[0.2em] font-semibold transition-all shadow-md active:scale-95"
+          >
+            <span>VIEW ALL ROOMS, SUITES &amp; TARIFFS</span>
+            <ArrowRight className="w-3.5 h-3.5 text-hotel-goldLight" />
+          </Link>
+        </div>
 
         {/* Bottom Booking Guarantee */}
         <AnimateIn direction="up" delay={0.2}>

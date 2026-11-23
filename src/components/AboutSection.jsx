@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { aboutData, hotelInfo } from '../data/hotelData';
 import {
   Sparkles, HeartHandshake, MapPin, Users, ShieldCheck,
@@ -110,25 +111,22 @@ export default function AboutSection() {
               </div>
             </div>
 
-            {/* Quick Contact Direct */}
-            <div className="pt-2 flex items-center space-x-4">
-              <motion.a
-                whileHover={{ x: 3 }}
+            {/* Quick Contact & Dedicated Full Page Link */}
+            <div className="pt-3 flex flex-wrap items-center gap-4">
+              <Link
+                to="/about"
+                className="inline-flex items-center space-x-2 bg-hotel-forest hover:bg-hotel-forestDark text-white px-6 py-3 rounded text-xs uppercase tracking-[0.2em] font-semibold transition-all shadow-md active:scale-95"
+              >
+                <span>DISCOVER OUR FULL STORY</span>
+                <ArrowRight className="w-3.5 h-3.5 text-hotel-goldLight" />
+              </Link>
+              <a
                 href={`tel:${hotelInfo.phoneRaw}`}
-                className="inline-flex items-center space-x-2 text-xs uppercase tracking-widest font-semibold text-hotel-forest hover:text-hotel-gold transition-colors"
+                className="inline-flex items-center space-x-1.5 text-xs uppercase tracking-widest font-semibold text-hotel-forest hover:text-hotel-gold transition-colors py-2"
               >
                 <span>Call Reservations</span>
                 <ArrowRight className="w-3.5 h-3.5" />
-              </motion.a>
-              <span className="text-gray-300">|</span>
-              <motion.a
-                whileHover={{ x: 3 }}
-                href="#rooms"
-                className="inline-flex items-center space-x-2 text-xs uppercase tracking-widest font-semibold text-hotel-forest hover:text-hotel-gold transition-colors"
-              >
-                <span>Explore Accommodations</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </motion.a>
+              </a>
             </div>
           </motion.div>
 

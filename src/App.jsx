@@ -1,19 +1,22 @@
 import React, { useState } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import ScrollProgress from './components/ScrollProgress';
+import ScrollToTop from './components/ScrollToTop';
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import AboutSection from './components/AboutSection';
-import RoomsSection from './components/RoomsSection';
-import AmenitiesSection from './components/AmenitiesSection';
-import DiningSection from './components/DiningSection';
-import GallerySection from './components/GallerySection';
-import LocationSection from './components/LocationSection';
-import ReviewsSection from './components/ReviewsSection';
-import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
 import BookingModal from './components/BookingModal';
 import RoomDetailModal from './components/RoomDetailModal';
 import FloatingWhatsApp from './components/FloatingWhatsApp';
+
+// Pages
+import HomePage from './pages/HomePage';
+import AboutPage from './pages/AboutPage';
+import AccommodationPage from './pages/AccommodationPage';
+import DiningPage from './pages/DiningPage';
+import ExperiencesPage from './pages/ExperiencesPage';
+import GalleryPage from './pages/GalleryPage';
+import LocationPage from './pages/LocationPage';
+import ContactPage from './pages/ContactPage';
 
 export default function App() {
   const [bookingModalOpen, setBookingModalOpen] = useState(false);
@@ -37,15 +40,6 @@ export default function App() {
 
     window.addEventListener('popstate', handlePopState);
     return () => window.removeEventListener('popstate', handlePopState);
-  }, []);
-
-  React.useEffect(() => {
-    if (window.location.hash) {
-      setTimeout(() => {
-        const el = document.querySelector(window.location.hash);
-        if (el) el.scrollIntoView({ behavior: 'smooth' });
-      }, 300);
-    }
   }, []);
 
   const handleOpenBooking = (initialParams = {}) => {
@@ -91,44 +85,61 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-hotel-ivory text-hotel-charcoal font-sans selection:bg-hotel-gold selection:text-white relative">
+      {/* Scroll restoration helper */}
+      <ScrollToTop />
+
       {/* Luxury Golden Scroll Progress Indicator */}
       <ScrollProgress />
 
       {/* Top Fixed Header with Luxury Monogram & Navigation */}
       <Navbar onOpenBooking={handleOpenBooking} />
 
-      {/* Main Page Flow */}
-      <main>
-        {/* Full-screen Hero Section with Required Heading & 3 CTA buttons */}
-        <Hero onOpenBooking={handleOpenBooking} />
-
-        {/* About Sai Siddhi Nivas */}
-        <AboutSection />
-
-        {/* Rooms & Accommodations with Large Photos & Category Tabs */}
-        <RoomsSection 
-          onOpenBooking={handleOpenBooking}
-          onSelectRoomDetail={handleSelectRoomDetail}
+      {/* Routing between dedicated pages */}
+      <Routes>
+        <Route 
+          path="/" 
+          element={
+            <HomePage 
+              onOpenBooking={handleOpenBooking} 
+              onSelectRoomDetail={handleSelectRoomDetail} 
+            />
+          } 
         />
-
-        {/* Dedicated Hotel Amenities (Icon-based, confirmed on-site) */}
-        <AmenitiesSection onOpenBooking={handleOpenBooking} />
-
-        {/* Restaurant & Dining Section */}
-        <DiningSection onOpenBooking={handleOpenBooking} />
-
-        {/* Luxury Photo Gallery with Lightbox */}
-        <GallerySection />
-
-        {/* Prime Location along MSH4 with Plus Code & Get Directions */}
-        <LocationSection />
-
-        {/* Verified Guest Reviews & Rating Badges */}
-        <ReviewsSection />
-
-        {/* Direct Contact & Reservation Enquiry Form */}
-        <ContactSection />
-      </main>
+        <Route 
+          path="/about" 
+          element={<AboutPage onOpenBooking={handleOpenBooking} />} 
+        />
+        <Route 
+          path="/accommodation" 
+          element={
+            <AccommodationPage 
+              onOpenBooking={handleOpenBooking} 
+              onSelectRoomDetail={handleSelectRoomDetail} 
+            />
+          } 
+        />
+        <Route 
+          path="/dining" 
+          element={<DiningPage onOpenBooking={handleOpenBooking} />} 
+        />
+        <Route 
+          path="/experiences" 
+          element={<ExperiencesPage onOpenBooking={handleOpenBooking} />} 
+        />
+        <Route 
+          path="/gallery" 
+          element={<GalleryPage onOpenBooking={handleOpenBooking} />} 
+        />
+        <Route 
+          path="/location" 
+          element={<LocationPage onOpenBooking={handleOpenBooking} />} 
+        />
+        <Route 
+          path="/contact" 
+          element={<ContactPage onOpenBooking={handleOpenBooking} />} 
+        />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
 
       {/* Luxury Footer with Contact & Location */}
       <Footer onOpenBooking={handleOpenBooking} />

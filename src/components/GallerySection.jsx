@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { galleryImages } from '../data/hotelData';
 import { 
   ImageIcon, X, ChevronLeft, ChevronRight, Maximize2, 
-  Sparkles, CheckCircle2 
+  Sparkles, CheckCircle2, ArrowRight 
 } from 'lucide-react';
 import AnimateIn from './AnimateIn';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -143,6 +144,17 @@ export default function GallerySection() {
             ))}
           </AnimatePresence>
         </motion.div>
+
+        {/* Dedicated Page Link Button */}
+        <div className="mt-12 text-center">
+          <Link
+            to="/gallery"
+            className="inline-flex items-center space-x-2 bg-hotel-forest hover:bg-hotel-forestDark text-white px-8 py-3.5 rounded text-xs uppercase tracking-[0.2em] font-semibold transition-all shadow-md active:scale-95"
+          >
+            <span>VIEW COMPLETE PHOTO GALLERY</span>
+            <ArrowRight className="w-3.5 h-3.5 text-hotel-goldLight" />
+          </Link>
+        </div>
 
       </div>
 

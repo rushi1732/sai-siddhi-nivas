@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { hotelInfo } from '../data/hotelData';
 import { 
   Menu, X, Calendar, MapPin, Sparkles, MessageCircle, 
@@ -8,6 +9,7 @@ import {
 export default function Navbar({ onOpenBooking }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const location = useLocation();
   const isPoppingNavRef = React.useRef(false);
 
   useEffect(() => {
@@ -40,25 +42,16 @@ export default function Navbar({ onOpenBooking }) {
     isPoppingNavRef.current = false;
   };
 
-  // One&Only inspired luxury navigation hierarchy
+  // One&Only inspired luxury navigation hierarchy with dedicated routes
   const navLinks = [
-    { label: 'ABOUT', href: '#about' },
-    { label: 'ACCOMMODATION', href: '#rooms' },
-    { label: 'DINING', href: '#dining' },
-    { label: 'EXPERIENCES', href: '#amenities' },
-    { label: 'GALLERY', href: '#gallery' },
-    { label: 'LOCATION', href: '#location' },
-    { label: 'CONTACT', href: '#contact' },
+    { label: 'ABOUT', path: '/about' },
+    { label: 'ACCOMMODATION', path: '/accommodation' },
+    { label: 'DINING', path: '/dining' },
+    { label: 'EXPERIENCES', path: '/experiences' },
+    { label: 'GALLERY', path: '/gallery' },
+    { label: 'LOCATION', path: '/location' },
+    { label: 'CONTACT', path: '/contact' },
   ];
-
-  const handleLinkClick = (e, href) => {
-    e.preventDefault();
-    handleCloseMobileMenu();
-    const target = document.querySelector(href);
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
 
   return (
     <>
@@ -71,7 +64,7 @@ export default function Navbar({ onOpenBooking }) {
       >
         <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8">
           
-          {/* Top Row: Utility Nav (Left) | Brand Logo (Center - ALWAYS Absolutely Centered) | Book Now (Right) */}
+          {/* Top Row: Utility Nav (Left) | Brand Logo (Center - ALWAYS Centered) | Book Now (Right) */}
           <div className="relative flex items-center justify-between min-h-[44px]">
             
             {/* Left: Minimal Utility Navigation (desktop) / Hamburger (mobile) */}
@@ -112,10 +105,10 @@ export default function Navbar({ onOpenBooking }) {
               </button>
             </div>
 
-            {/* Center: Iconic One&Only-Style Hotel Logo - Perfectly Centered At ALL Times via absolute */}
-            <div 
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex flex-col items-center cursor-pointer text-center group pointer-events-auto"
+            {/* Center: Iconic Hotel Logo Linking to Home */}
+            <Link
+              to="/"
+              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex flex-col items-center text-center group pointer-events-auto"
             >
               <div className="flex flex-col items-center">
                 <span className="font-serif italic text-xl sm:text-3xl lg:text-[32px] tracking-wide text-white group-hover:text-hotel-goldLight transition-colors font-normal leading-tight whitespace-nowrap">
@@ -130,7 +123,7 @@ export default function Navbar({ onOpenBooking }) {
                   </span>
                 )}
               </div>
-            </div>
+            </Link>
 
             {/* Right: Premium One&Only-Style Crisp "BOOK NOW" Button */}
             <div className="flex items-center justify-end z-10 w-1/3">
@@ -151,20 +144,26 @@ export default function Navbar({ onOpenBooking }) {
                 : 'pt-3.5 mt-3 border-t border-white/15'
             }`}
           >
-            {navLinks.map((link, idx) => (
-              <React.Fragment key={link.label}>
-                <a
-                  href={link.href}
-                  onClick={(e) => handleLinkClick(e, link.href)}
-                  className="text-[11px] xl:text-xs tracking-[0.22em] uppercase font-light text-white/90 hover:text-hotel-gold transition-colors py-0.5 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-hotel-gold hover:after:w-full after:transition-all after:duration-300"
-                >
-                  {link.label}
-                </a>
-                {idx < navLinks.length - 1 && (
-                  <span className="text-white/30 text-[9px] select-none">&bull;</span>
-                )}
-              </React.Fragment>
-            ))}
+            {navLinks.map((link, idx) => {
+              const isActive = location.pathname === link.path;
+              return (
+                <React.Fragment key={link.label}>
+                  <Link
+                    to={link.path}
+                    className={`text-[11px] xl:text-xs tracking-[0.22em] uppercase font-light transition-colors py-0.5 relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:bg-hotel-gold after:transition-all after:duration-300 ${
+                      isActive 
+                        ? 'text-hotel-gold after:w-full font-medium' 
+                        : 'text-white/90 hover:text-hotel-gold after:w-0 hover:after:w-full'
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                  {idx < navLinks.length - 1 && (
+                    <span className="text-white/30 text-[9px] select-none">&bull;</span>
+                  )}
+                </React.Fragment>
+              );
+            })}
           </nav>
 
         </div>
@@ -177,10 +176,10 @@ export default function Navbar({ onOpenBooking }) {
             
             {/* Mobile Header Brand & Close */}
             <div className="border-b border-hotel-gold/25 pb-4 mb-2 flex items-center justify-between">
-              <div>
+              <Link to="/" onClick={handleCloseMobileMenu}>
                 <span className="font-serif italic text-2xl text-white block">Sai Siddhi</span>
                 <span className="text-[10px] uppercase tracking-[0.3em] text-hotel-goldLight block -mt-0.5">NIVAS &bull; KIRTANWADI TARF</span>
-              </div>
+              </Link>
               <button 
                 onClick={handleCloseMobileMenu}
                 className="p-2 text-hotel-ivory hover:text-hotel-gold"
@@ -192,17 +191,32 @@ export default function Navbar({ onOpenBooking }) {
 
             {/* Nav Links */}
             <div className="flex flex-col space-y-1">
-              {navLinks.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  onClick={(e) => handleLinkClick(e, link.href)}
-                  className="text-base font-serif tracking-wider text-hotel-ivory/90 hover:text-hotel-gold py-2.5 border-b border-white/10 flex items-center justify-between"
-                >
-                  <span>{link.label}</span>
-                  <span className="text-xs text-hotel-gold">&rarr;</span>
-                </a>
-              ))}
+              <Link
+                to="/"
+                onClick={handleCloseMobileMenu}
+                className={`text-base font-serif tracking-wider py-2.5 border-b border-white/10 flex items-center justify-between ${
+                  location.pathname === '/' ? 'text-hotel-gold font-semibold' : 'text-hotel-ivory/90 hover:text-hotel-gold'
+                }`}
+              >
+                <span>HOME</span>
+                <span className="text-xs text-hotel-gold">&rarr;</span>
+              </Link>
+              {navLinks.map((link) => {
+                const isActive = location.pathname === link.path;
+                return (
+                  <Link
+                    key={link.label}
+                    to={link.path}
+                    onClick={handleCloseMobileMenu}
+                    className={`text-base font-serif tracking-wider py-2.5 border-b border-white/10 flex items-center justify-between ${
+                      isActive ? 'text-hotel-gold font-semibold' : 'text-hotel-ivory/90 hover:text-hotel-gold'
+                    }`}
+                  >
+                    <span>{link.label}</span>
+                    <span className="text-xs text-hotel-gold">&rarr;</span>
+                  </Link>
+                );
+              })}
             </div>
 
             {/* Quick Contact Info */}

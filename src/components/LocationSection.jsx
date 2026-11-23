@@ -1,8 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { hotelInfo } from '../data/hotelData';
 import { 
   MapPin, Navigation, Bus, Compass, Train, Sun, 
-  Clock, Phone, Mail, CheckCircle2, ExternalLink 
+  Clock, Phone, Mail, CheckCircle2, ExternalLink, ArrowRight 
 } from 'lucide-react';
 import AnimateIn from './AnimateIn';
 import { motion } from 'framer-motion';
@@ -171,6 +172,17 @@ export default function LocationSection() {
               </div>
             </AnimateIn>
 
+          </div>
+
+          {/* Dedicated Page Link Button */}
+          <div className="mt-12 text-center">
+            <Link
+              to="/location"
+              className="inline-flex items-center space-x-2 bg-hotel-forest hover:bg-hotel-forestDark text-white px-8 py-3.5 rounded text-xs uppercase tracking-[0.2em] font-semibold transition-all shadow-md active:scale-95"
+            >
+              <span>VIEW DETAILED LOCATION, MAP &amp; ROUTE GUIDE</span>
+              <ArrowRight className="w-3.5 h-3.5 text-hotel-goldLight" />
+            </Link>
           </div>
 
         </div>

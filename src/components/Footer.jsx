@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { hotelInfo } from '../data/hotelData';
 import { 
   Phone, Mail, MapPin, Compass, ArrowUp, Send, 
@@ -61,14 +62,13 @@ export default function Footer({ onOpenBooking }) {
               Explore Hotel
             </h4>
             <ul className="space-y-2 text-xs text-hotel-ivory/80 font-light">
-              <li><a href="#about" className="hover:text-hotel-gold transition-colors">About Us</a></li>
-              <li><a href="#rooms" className="hover:text-hotel-gold transition-colors">Rooms & Suites</a></li>
-              <li><a href="#amenities" className="hover:text-hotel-gold transition-colors">Hotel Amenities</a></li>
-              <li><a href="#dining" className="hover:text-hotel-gold transition-colors">Restaurant & Dining</a></li>
-              <li><a href="#gallery" className="hover:text-hotel-gold transition-colors">Photo Gallery</a></li>
-              <li><a href="#location" className="hover:text-hotel-gold transition-colors">Location & Route</a></li>
-              <li><a href="#reviews" className="hover:text-hotel-gold transition-colors">Guest Reviews</a></li>
-              <li><a href="#contact" className="hover:text-hotel-gold transition-colors">Contact & Booking</a></li>
+              <li><Link to="/about" className="hover:text-hotel-gold transition-colors">About Us</Link></li>
+              <li><Link to="/accommodation" className="hover:text-hotel-gold transition-colors">Rooms & Suites</Link></li>
+              <li><Link to="/experiences" className="hover:text-hotel-gold transition-colors">Experiences & Amenities</Link></li>
+              <li><Link to="/dining" className="hover:text-hotel-gold transition-colors">Restaurant & Dining</Link></li>
+              <li><Link to="/gallery" className="hover:text-hotel-gold transition-colors">Photo Gallery</Link></li>
+              <li><Link to="/location" className="hover:text-hotel-gold transition-colors">Location & Route</Link></li>
+              <li><Link to="/contact" className="hover:text-hotel-gold transition-colors">Contact & Booking</Link></li>
             </ul>
           </div>
 
@@ -155,9 +155,9 @@ export default function Footer({ onOpenBooking }) {
           </div>
 
           <div className="flex items-center space-x-4">
-            <a href="#about" className="hover:text-hotel-gold transition-colors">About</a>
-            <a href="#rooms" className="hover:text-hotel-gold transition-colors">Rooms</a>
-            <a href="#contact" className="hover:text-hotel-gold transition-colors">Contact</a>
+            <Link to="/about" className="hover:text-hotel-gold transition-colors">About</Link>
+            <Link to="/accommodation" className="hover:text-hotel-gold transition-colors">Rooms</Link>
+            <Link to="/contact" className="hover:text-hotel-gold transition-colors">Contact</Link>
             <button
               onClick={scrollToTop}
               className="p-2 rounded-full bg-white/5 hover:bg-hotel-gold hover:text-hotel-forestDark transition-all text-hotel-ivory"
