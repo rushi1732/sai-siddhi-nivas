@@ -38,20 +38,26 @@ export const hotelInfo = {
 export const heroSlides = [
   {
     image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=1920&auto=format&fit=crop",
-    title: "Experience Comfort. Discover Hospitality.",
-    subtitle: "Welcome to Sai Siddhi Nivas – Your Perfect Stay Experience in Kirtanwadi Tarf, Maharashtra.",
+    eyebrow: "PREMIUM BOUTIQUE HOSPITALITY • KIRTANWADI TARF",
+    headingLine1: "DISCOVER COMFORT.",
+    headingLine2: "EXPERIENCE HOSPITALITY.",
+    description: "Experience a relaxing stay at Sai Siddhi Nivas, where genuine Konkan warmth, modern convenience, and memorable hospitality come together.",
     badge: "Premium Stay • Modern Comfort • Pristine Surroundings"
   },
   {
     image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=1920&auto=format&fit=crop",
-    title: "Tranquil Konkan Serenity",
-    subtitle: "Nestled along MSH4 near Modka Agar, offering an oasis of calm, relaxation, and genuine hospitality.",
-    badge: "Direct Highway Connectivity • Ample Parking"
+    eyebrow: "STRATEGIC MSH4 HIGHWAY OASIS • NEAR MODKA AGAR",
+    headingLine1: "TRANQUIL SANCTUARY.",
+    headingLine2: "RESTFUL HIGHWAY RETREAT.",
+    description: "Nestled peacefully along Maharashtra State Highway 4, offering tired highway travelers and families an oasis of calm, spotless rooms, and round-the-clock comfort.",
+    badge: "Direct Highway Connectivity • Ample Free Parking"
   },
   {
     image: "https://images.unsplash.com/photo-1618773928121-c32242e63f39?q=80&w=1920&auto=format&fit=crop",
-    title: "Elegantly Appointed Rooms",
-    subtitle: "Spacious AC bedrooms with 24/7 hot water, high-speed Wi-Fi, and personalized guest service.",
+    eyebrow: "ELEGANTLY APPOINTED ROOMS & SUITES",
+    headingLine1: "TIMELESS ELEGANCE.",
+    headingLine2: "EFFORTLESS RELAXATION.",
+    description: "Retire into spotlessly sanitized air-conditioned rooms featuring crisp fresh linen, high-speed Wi-Fi, 24/7 hot water, and attentive personalized care.",
     badge: "Spotless Cleanliness • Sanitized Stays"
   }
 ];

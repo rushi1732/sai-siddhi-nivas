@@ -104,6 +104,20 @@ export default function Hero({ onOpenBooking }) {
         <div className="relative z-10 w-full max-w-[1500px] mx-auto px-4 sm:px-10 lg:px-16 pt-24 sm:pt-28 lg:pt-32 flex-1 flex flex-col justify-center text-left">
           <div className="max-w-xl lg:max-w-2xl py-4 sm:py-6">
 
+            {/* Eyebrow / Category Tag */}
+            <motion.div
+              key={`eyebrow-${currentSlide}`}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: 'easeOut' }}
+              className="inline-flex items-center space-x-2 mb-3"
+            >
+              <span className="w-6 h-[1.5px] bg-hotel-gold" />
+              <span className="text-[10px] sm:text-[11px] tracking-[0.25em] uppercase font-semibold text-hotel-goldLight drop-shadow">
+                {heroSlides[currentSlide].eyebrow}
+              </span>
+            </motion.div>
+
             {/* Main Heading in Elegant Serif Typography (All Caps) */}
             <motion.h1
               key={`title-${currentSlide}`}
@@ -112,8 +126,10 @@ export default function Hero({ onOpenBooking }) {
               transition={{ duration: 0.8, ease: 'easeOut' }}
               className="font-serif text-[22px] sm:text-4xl lg:text-5xl xl:text-6xl text-white font-normal uppercase tracking-tight sm:tracking-[0.04em] leading-[1.18] drop-shadow-lg"
             >
-              DISCOVER COMFORT.
-              <span className="block text-hotel-ivory">EXPERIENCE HOSPITALITY.</span>
+              {heroSlides[currentSlide].headingLine1}
+              <span className="block text-hotel-ivory">
+                {heroSlides[currentSlide].headingLine2}
+              </span>
             </motion.h1>
 
             {/* Description in Clean Modern Typography */}
@@ -124,7 +140,7 @@ export default function Hero({ onOpenBooking }) {
               transition={{ duration: 0.8, delay: 0.15, ease: 'easeOut' }}
               className="font-sans text-xs sm:text-base lg:text-lg text-hotel-ivory/90 font-light leading-relaxed max-w-xl mt-3 sm:mt-4 drop-shadow"
             >
-              Experience a relaxing stay at Sai Siddhi Nivas, where comfort, warmth and memorable hospitality come together.
+              {heroSlides[currentSlide].description}
             </motion.p>
           </div>
         </div>
