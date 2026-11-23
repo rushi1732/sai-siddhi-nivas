@@ -4,7 +4,7 @@ import {
   ChevronLeft, ChevronRight, Calendar, Users,
   Tag, BedDouble, ArrowRight, ShieldCheck
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 
 // Helper function to format date in local timezone YYYY-MM-DD
 const getLocalDateString = (d = new Date()) => {
@@ -20,6 +20,12 @@ export default function Hero({ onOpenBooking }) {
   const [children, setChildren] = useState(0);
   const [roomType, setRoomType] = useState(roomCategories[0].id);
   const [promoCode, setPromoCode] = useState('');
+
+  // Parallax scroll hooks for locked hero effect
+  const { scrollY } = useScroll();
+  const heroImageScale = useTransform(scrollY, [0, 900], [1, 1.08]);
+  const heroContentY = useTransform(scrollY, [0, 600], [0, 80]);
+  const heroContentOpacity = useTransform(scrollY, [0, 450], [1, 0.25]);
 
   // Current today date string to strictly restrict past dates
   const today = getLocalDateString();
@@ -60,27 +66,28 @@ export default function Hero({ onOpenBooking }) {
   };
 
   return (
-    <div className="relative w-full bg-hotel-forestDark">
+    <div className="relative w-full h-full bg-hotel-forestDark">
       {/* 1. CINEMATIC HERO SLIDER SECTION (100% Full Viewport Display) */}
-      <section className="relative w-full min-h-screen lg:h-screen flex flex-col justify-between overflow-hidden bg-hotel-forestDark">
+      <section className="relative w-full h-screen flex flex-col justify-between overflow-hidden bg-hotel-forestDark">
 
-        {/* Background Image Slider with Cinematic Crossfade */}
+        {/* Background Image Slider with Cinematic Crossfade and Locked Scale Parallax */}
         {heroSlides.map((slide, idx) => (
-          <div
+          <motion.div
             key={idx}
-            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${idx === currentSlide ? 'opacity-100 scale-100' : 'opacity-0 scale-105 pointer-events-none'
-              } transition-transform duration-[9000ms]`}
+            style={{ scale: heroImageScale }}
+            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${idx === currentSlide ? 'opacity-100' : 'opacity-0 pointer-events-none'
+              }`}
           >
             <img
               src={slide.image}
-              alt={slide.title}
+              alt={slide.title || 'Sai Siddhi Nivas'}
               className="w-full h-full object-cover object-center"
             />
             {/* Elegant Luxury Gradient Overlay for Contrast & Text Readability */}
             <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/50 to-transparent" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/35" />
             <div className="absolute inset-0 bg-hotel-forestDark/10 mix-blend-multiply" />
-          </div>
+          </motion.div>
         ))}
 
         {/* Slider Navigation Arrows (Left & Right) */}

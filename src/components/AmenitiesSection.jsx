@@ -26,8 +26,25 @@ export default function AmenitiesSection({ onOpenBooking }) {
   };
 
   return (
-    <section id="amenities" className="py-20 lg:py-28 bg-hotel-forestDark text-hotel-ivory heritage-pattern relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="amenities" className="py-20 lg:py-28 text-hotel-ivory relative overflow-hidden bg-hotel-forestDark">
+      {/* Locked / Fixed Parallax Background Photo (Stays in place during scroll) */}
+      <div 
+        className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat z-0 bg-fixed pointer-events-none"
+        style={{ 
+          backgroundImage: `url('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=1920&auto=format&fit=crop')`,
+          backgroundAttachment: 'fixed'
+        }}
+      />
+
+      {/* Luxury Dark Forest Overlay with Blur & Gradient */}
+      <div className="absolute inset-0 bg-hotel-forestDark/88 backdrop-blur-[1px] z-0 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-hotel-forestDark via-hotel-forestDark/80 to-hotel-forestDark z-0 pointer-events-none" />
+      
+      {/* Subtle Gold / Emerald Glow Accents */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full bg-hotel-gold/10 blur-3xl pointer-events-none z-0" />
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 rounded-full bg-emerald-500/10 blur-3xl pointer-events-none z-0" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
         {/* Section Header */}
         <AnimateIn direction="up">

@@ -11,36 +11,41 @@ import ContactSection from '../components/ContactSection';
 
 export default function HomePage({ onOpenBooking, onSelectRoomDetail }) {
   return (
-    <main>
-      {/* 1. Full Screen Cinematic Hero Section with Floating Frosted Glass Booking Engine */}
-      <Hero onOpenBooking={onOpenBooking} />
+    <main className="relative bg-hotel-forestDark">
+      {/* 1. Full Screen Cinematic Hero Section - Sticky Parallax Locked Background */}
+      <div className="sticky top-0 h-screen w-full z-0 overflow-hidden">
+        <Hero onOpenBooking={onOpenBooking} />
+      </div>
 
-      {/* 2. About Sai Siddhi Nivas (Curated Overview) */}
-      <AboutSection />
+      {/* 2. Content Layer - Glides Smoothly UP and OVER the Locked Hero Photo */}
+      <div className="relative z-10 bg-white shadow-[0_-30px_60px_rgba(0,0,0,0.65)]">
+        {/* About Sai Siddhi Nivas */}
+        <AboutSection />
 
-      {/* 3. Rooms & Accommodations Showcase */}
-      <RoomsSection 
-        onOpenBooking={onOpenBooking}
-        onSelectRoomDetail={onSelectRoomDetail}
-      />
+        {/* Rooms & Accommodations Showcase */}
+        <RoomsSection 
+          onOpenBooking={onOpenBooking}
+          onSelectRoomDetail={onSelectRoomDetail}
+        />
 
-      {/* 4. Hotel Amenities & Resort Comforts */}
-      <AmenitiesSection onOpenBooking={onOpenBooking} />
+        {/* Hotel Amenities & Resort Comforts (with Locked Parallax Background Photo) */}
+        <AmenitiesSection onOpenBooking={onOpenBooking} />
 
-      {/* 5. Restaurant & Dining Showcase */}
-      <DiningSection onOpenBooking={onOpenBooking} />
+        {/* Restaurant & Dining Showcase */}
+        <DiningSection onOpenBooking={onOpenBooking} />
 
-      {/* 6. Photo Gallery Showcase */}
-      <GallerySection />
+        {/* Photo Gallery Showcase */}
+        <GallerySection />
 
-      {/* 7. Prime Highway Location along MSH4 */}
-      <LocationSection />
+        {/* Prime Highway Location along MSH4 */}
+        <LocationSection />
 
-      {/* 8. Verified Guest Reviews & Ratings */}
-      <ReviewsSection />
+        {/* Verified Guest Reviews & Ratings */}
+        <ReviewsSection />
 
-      {/* 9. Direct Contact & Reservation Enquiry Form */}
-      <ContactSection />
+        {/* Direct Contact & Reservation Enquiry Form */}
+        <ContactSection />
+      </div>
     </main>
   );
 }
