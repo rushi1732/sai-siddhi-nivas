@@ -21,6 +21,10 @@ export default function Navbar({ onOpenBooking }) {
   const isPoppingNavRef = useRef(false);
   const utilityNavRef = useRef(null);
 
+  // On home page, header is hidden at top (scrollY <= 40) and reveals on scroll
+  const isHomePage = location.pathname === '/';
+  const isHeaderVisible = !isHomePage || isScrolled;
+
   // Available languages
   const languages = [
     { code: 'EN', name: 'English', native: 'English' },
@@ -139,8 +143,12 @@ export default function Navbar({ onOpenBooking }) {
       )}
 
       <header 
-        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${
-          isScrolled 
+        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ease-in-out transform ${
+          isHeaderVisible 
+            ? 'translate-y-0 opacity-100 pointer-events-auto' 
+            : '-translate-y-full opacity-0 pointer-events-none'
+        } ${
+          isScrolled || !isHomePage
             ? 'bg-hotel-forestDark/95 backdrop-blur-md shadow-2xl py-3 text-hotel-ivory border-b border-hotel-gold/25' 
             : 'bg-gradient-to-b from-black/85 via-black/45 to-transparent pt-4 pb-3 sm:pt-6 sm:pb-4 text-white'
         }`}
