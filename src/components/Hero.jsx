@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { heroSlides, hotelInfo } from '../data/hotelData';
-import { ChevronLeft, ChevronRight, ChevronDown, Sparkles } from 'lucide-react';
+import { heroSlides } from '../data/hotelData';
+import { ChevronLeft, ChevronRight, ChevronDown } from 'lucide-react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
 export default function Hero({ onOpenBooking }) {
@@ -9,8 +9,6 @@ export default function Hero({ onOpenBooking }) {
   // Parallax scroll hooks for locked hero effect
   const { scrollY } = useScroll();
   const heroImageScale = useTransform(scrollY, [0, 900], [1, 1.08]);
-  const heroCenterOpacity = useTransform(scrollY, [0, 350], [1, 0]);
-  const heroCenterY = useTransform(scrollY, [0, 350], [0, -40]);
 
   // Automatic slide rotation
   useEffect(() => {
@@ -48,8 +46,8 @@ export default function Hero({ onOpenBooking }) {
               className="w-full h-full object-cover object-center"
             />
             {/* Elegant Luxury Dark Transparent Gradient Overlay for Cinematic Atmosphere */}
-            <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/70" />
-            <div className="absolute inset-0 bg-hotel-forestDark/15 mix-blend-multiply" />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/75 via-transparent to-black/60" />
+            <div className="absolute inset-0 bg-hotel-forestDark/10 mix-blend-multiply" />
           </motion.div>
         ))}
 
@@ -70,49 +68,11 @@ export default function Hero({ onOpenBooking }) {
           <ChevronRight className="w-5 h-5 transition-transform group-hover:translate-x-0.5" />
         </button>
 
-        {/* Top Spacer to balance center alignment */}
-        <div className="h-16 sm:h-20" />
+        {/* Clean, open center area to showcase the full, unobstructed resort photography */}
+        <div className="flex-1" />
 
-        {/* 2. CENTER ICONIC BRAND PRESENTATION (Pure, Grand, Minimalist Luxury) */}
-        <motion.div 
-          style={{ opacity: heroCenterOpacity, y: heroCenterY }}
-          className="relative z-10 w-full max-w-4xl mx-auto px-4 flex flex-col items-center justify-center text-center my-auto"
-        >
-          <motion.div
-            initial={{ opacity: 0, y: 30, scale: 0.96 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-col items-center justify-center space-y-3 sm:space-y-4"
-          >
-            {/* Subtle Luxury Monogram Emblem */}
-            <div className="w-14 h-14 sm:w-18 sm:h-18 rounded-full border border-hotel-gold/60 bg-black/35 backdrop-blur-md flex items-center justify-center mb-1 shadow-[0_15px_35px_rgba(0,0,0,0.5)]">
-              <span className="font-serif italic font-semibold text-lg sm:text-2xl text-hotel-goldLight tracking-widest pl-1">
-                SS
-              </span>
-            </div>
-
-            {/* Grand Center Hotel Name */}
-            <div className="space-y-1 sm:space-y-2">
-              <h1 className="font-serif italic text-5xl sm:text-7xl md:text-8xl lg:text-9xl text-white font-normal tracking-wide drop-shadow-[0_12px_30px_rgba(0,0,0,0.9)]">
-                Sai Siddhi
-              </h1>
-              <span className="font-sans text-xs sm:text-sm md:text-base tracking-[0.45em] sm:tracking-[0.6em] uppercase text-hotel-goldLight font-medium block drop-shadow-lg -mt-1 sm:-mt-2">
-                NIVAS
-              </span>
-            </div>
-
-            {/* Delicate Golden Divider */}
-            <div className="w-20 sm:w-28 h-[1.5px] bg-gradient-to-r from-transparent via-hotel-gold to-transparent my-2" />
-
-            {/* Location & Heritage Tagline */}
-            <p className="font-sans text-[10px] sm:text-xs md:text-sm tracking-[0.32em] sm:tracking-[0.4em] uppercase text-white/85 font-light drop-shadow-md">
-              KIRTANWADI TARF &bull; MAHARASHTRA
-            </p>
-          </motion.div>
-        </motion.div>
-
-        {/* 3. BOTTOM SCROLL INDICATOR & SLIDER PAGINATION DOTS */}
-        <div className="relative z-20 pb-6 sm:pb-10 flex flex-col items-center space-y-3">
+        {/* 2. BOTTOM SCROLL INDICATOR & SLIDER PAGINATION DOTS */}
+        <div className="relative z-20 pb-6 sm:pb-8 flex flex-col items-center space-y-3">
           
           {/* Slider Pagination Dots */}
           <div className="flex items-center justify-center space-x-2">
