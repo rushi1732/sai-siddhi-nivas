@@ -21,6 +21,10 @@ export default function Navbar({ onOpenBooking }) {
   const isPoppingNavRef = useRef(false);
   const utilityNavRef = useRef(null);
 
+  // On home page, hide controls at top and reveal with smooth animation on scroll
+  const isHomePage = location.pathname === '/';
+  const shouldShowNavControls = isScrolled || !isHomePage;
+
   // Available languages
   const languages = [
     { code: 'EN', name: 'English', native: 'English' },
@@ -153,7 +157,11 @@ export default function Navbar({ onOpenBooking }) {
             {/* Left: Interactive Utility Navigation (desktop) / Hamburger (mobile) */}
             <div 
               ref={utilityNavRef}
-              className="flex items-center justify-start z-10 w-1/3"
+              className={`flex items-center justify-start z-10 w-1/3 transition-all duration-500 ease-out transform ${
+                shouldShowNavControls 
+                  ? 'opacity-100 translate-x-0 pointer-events-auto' 
+                  : 'opacity-0 -translate-x-6 pointer-events-none'
+              }`}
             >
               {/* Desktop Utility Items */}
               <div className="hidden lg:flex items-center space-x-2.5 xl:space-x-3.5 text-[11px] tracking-[0.18em] uppercase text-white/90 font-light relative select-none">
@@ -377,7 +385,13 @@ export default function Navbar({ onOpenBooking }) {
             </Link>
 
             {/* Right: Premium One&Only-Style Crisp "BOOK NOW" Button */}
-            <div className="flex items-center justify-end z-10 w-1/3">
+            <div 
+              className={`flex items-center justify-end z-10 w-1/3 transition-all duration-500 ease-out transform ${
+                shouldShowNavControls 
+                  ? 'opacity-100 translate-x-0 pointer-events-auto' 
+                  : 'opacity-0 translate-x-6 pointer-events-none'
+              }`}
+            >
               <button
                 onClick={() => onOpenBooking()}
                 className="bg-white hover:bg-hotel-gold text-hotel-forestDark hover:text-white px-3 sm:px-6 py-1.5 sm:py-2 text-[10px] sm:text-xs font-semibold tracking-wider sm:tracking-[0.22em] uppercase transition-all shadow-md active:scale-95 whitespace-nowrap"
@@ -389,10 +403,10 @@ export default function Navbar({ onOpenBooking }) {
 
           {/* Bottom Row: Main Navigation (Desktop) - Center Aligned With Dots */}
           <nav 
-            className={`hidden lg:flex items-center justify-center space-x-6 xl:space-x-8 transition-all duration-300 ${
-              isScrolled 
-                ? 'pt-2 mt-2 border-t border-white/10' 
-                : 'pt-3.5 mt-3 border-t border-white/15'
+            className={`hidden lg:flex items-center justify-center space-x-6 xl:space-x-8 transition-all duration-500 ease-out overflow-hidden transform ${
+              shouldShowNavControls 
+                ? 'opacity-100 max-h-12 translate-y-0 pt-2.5 mt-2 border-t border-white/10 pointer-events-auto' 
+                : 'opacity-0 max-h-0 -translate-y-2 pt-0 mt-0 border-t-0 pointer-events-none'
             }`}
           >
             {navLinks.map((link, idx) => {
